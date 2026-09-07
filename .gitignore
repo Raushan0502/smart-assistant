@@ -224,6 +224,10 @@ __marimo__/
 # Secrets. .env holds the mailbox app password and API keys.
 .env
 
+# Python (all Python lives under pkg/)
+pkg/.venv/
+pkg/**/__pycache__/
+
 # Java / Spring Boot
 backend/target/
 *.class
