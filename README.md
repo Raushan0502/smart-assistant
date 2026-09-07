@@ -16,9 +16,10 @@ Engineer** live project assignment.
 
 ## Status
 
-Phase 2 complete: corpus generator, ingestion + preprocessing, classification,
-field extraction, and the vision layer. **92 tests pass offline** with no API
-key required. Next is the Oracle schema, then Django and Angular. See
+Phases 0–3 complete: corpus generator, ingestion + preprocessing,
+classification, field extraction, vision layer, and the Oracle schema with a
+PL/SQL audit package running in Docker. **92 tests pass offline** with no API
+key required. Next is the Django API, then Angular. See
 [Build plan](#build-plan).
 
 ## The problem
@@ -174,6 +175,29 @@ classification, extraction and quote verification treat a scanned document
 exactly like a digital one. The page images are kept alongside — the transcript
 is derived, the image is the evidence.
 
+## Database: Oracle, with real PL/SQL
+
+Tables come from **Django migrations** so the ORM, admin and migration history
+stay consistent; the **PL/SQL package is applied separately** by
+`db/apply_plsql.py`. Writing raw DDL *and* Django models would create two
+competing sources of truth for the same tables.
+
+What is deliberately *in* the database rather than in Python:
+
+- **`SI_AUDIT.LOG_EVENT`** is `PRAGMA AUTONOMOUS_TRANSACTION`, so an audit row
+  survives a rollback of the work it describes. If a message fails and its
+  transaction is rolled back, the record that it was *attempted* still stands.
+- **`SI_REVIEW_ACTION_STAMP`** is a trigger guaranteeing every reviewer action
+  carries a timestamp, whatever inserts it. The brief requires that; a
+  database-level guarantee cannot be bypassed by application code that forgets.
+- **`SI_REVIEW_QUEUE`** assembles the review list — categories, completeness,
+  unverified-field count, review state — in one view, so the API does not issue
+  a query per message to build the same picture.
+
+Schema is applied by migration and PL/SQL by a re-runnable script, rather than
+by container init scripts, which only execute on first boot — iterating on a
+package would otherwise mean destroying the database each time.
+
 ## Two design commitments
 
 These shape the data model rather than sitting on top of it, so they are
@@ -214,7 +238,7 @@ Full per-service run instructions land as each phase completes.
 - [x] **Phase 2a** — Ingestion: mail parsing, PDF flavour detection, tables, metadata
 - [x] **Phase 2b** — Model layer: classification + field extraction with quote verification
 - [x] **Phase 2c** — Vision: OCR for scans, image description, summaries, article screening
-- [ ] **Phase 3** — Oracle schema + PL/SQL audit package
+- [x] **Phase 3** — Oracle schema (Django migrations) + PL/SQL audit package
 - [ ] **Phase 4** — Django: IMAP poller, queue, REST API
 - [ ] **Phase 5** — Angular reviewer screen
 - [ ] **Phase 6** — Batch run, timings, accuracy against ground truth
