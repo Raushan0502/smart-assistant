@@ -42,10 +42,10 @@ built to say so rather than forced to pick one.
 ## Architecture
 
 ```
-Angular  ──▶  Spring Boot  ──▶  Python AI service  ──▶  Oracle
+Angular  ──▶  Django + DRF  ──▶  Python AI service  ──▶  Oracle
 (reviewer UI)  (REST, orchestration,   (LLM / OCR /        (messages,
-               queue, persistence)      extraction)         extractions,
-                                                            audit log)
+                queue, persistence)     extraction)         extractions,
+                                        FastAPI, pkg/       audit log)
 ```
 
 Processing is queued rather than synchronous: OCR and LLM calls take seconds to
@@ -54,11 +54,35 @@ workers drain the queue.
 
 | Layer | Technology | Why |
 |---|---|---|
-| Frontend | Angular | Reviewer queue, document viewer, editable extracted fields |
-| Backend API | Spring Boot (Java) | REST, orchestration, queue, persistence |
-| AI services | Python (FastAPI), in `pkg/` | LLM and OCR work, exposed to the Java layer over REST |
-| Database | Oracle (PL/SQL) | Messages, extracted records, audit log |
+| Frontend | Angular | As specified — reviewer queue, document viewer, editable fields |
+| Backend API | **Django + DRF (Python)** | REST, orchestration, queue, persistence — *see deviation note below* |
+| AI services | Python (FastAPI), in `pkg/` | LLM and OCR work, a separate service behind REST |
+| Database | Oracle (PL/SQL) | As specified — messages, extracted records, audit log |
 | AI model | Gemini (vision-capable) | Scanned/handwritten pages and image description need vision; cheap with a usable free tier |
+
+### Deviation from the suggested stack: Django instead of Spring Boot
+
+The assignment suggests Spring Boot for the backend and permits deviation with
+justification. This project uses **Django + Django REST Framework**, for three
+reasons:
+
+1. **It is the team's production expertise.** The assignment ends in a live
+   walkthrough where the build has to be explained and defended under
+   questioning. A backend built in a less familiar stack would be weaker in
+   exactly the place the evaluation looks hardest.
+2. **The AI tier is Python regardless.** Extraction, OCR and LLM orchestration
+   have no Java equivalent worth the friction — which is the assignment's own
+   stated example of a good reason to deviate. A Python backend shares typing,
+   tooling and test infrastructure with the AI service instead of straddling
+   two ecosystems for one prototype.
+3. **The architecture the assignment actually asks for is preserved.** The
+   point of the suggested stack is *separation of concerns*, not Java itself.
+   The AI service remains a **separate process behind its own REST API**, not
+   library calls inside the web app, so the four-tier boundary the brief
+   describes is intact — only the language of the middle tier changed.
+
+Everything else follows the suggested stack: Angular frontend, Oracle with real
+PL/SQL, a queue rather than synchronous calls.
 
 Tech choices and their trade-offs are argued in full in the
 [write-up](docs/) once written.
@@ -79,9 +103,8 @@ confident wrong answer is worse than an honest gap in this domain.
 
 ## Setup
 
-Prerequisites: **JDK 21**, **Node 20+**, **Python 3.12**, and **Docker Desktop
-running**. Maven is not needed separately — the backend ships the Maven
-Wrapper (`mvnw`).
+Prerequisites: **Node 20+**, **Python 3.12**, and **Docker Desktop running**.
+No JDK is required — see the deviation note above.
 
 Each tier is self-contained and installs independently, so the three stacks
 never share state and can be built or run in any order.
@@ -92,7 +115,7 @@ docker compose up -d oracle   # database
 
 cd pkg      && python -m venv .venv && .venv/Scripts/pip install -r requirements.txt
 cd frontend && npm install
-cd backend  && ./mvnw verify
+cd backend  && python -m venv .venv && .venv/Scripts/pip install -r requirements.txt
 ```
 
 Full per-service run instructions land as each phase completes.
@@ -103,7 +126,7 @@ Full per-service run instructions land as each phase completes.
 - [ ] **Phase 1** — Synthetic corpus generator + ground-truth labels
 - [ ] **Phase 2** — Python AI service: PDF flavours, tables, images, classification, extraction
 - [ ] **Phase 3** — Oracle schema + PL/SQL audit package
-- [ ] **Phase 4** — Spring Boot: IMAP poller, queue, REST API
+- [ ] **Phase 4** — Django: IMAP poller, queue, REST API
 - [ ] **Phase 5** — Angular reviewer screen
 - [ ] **Phase 6** — Batch run, timings, accuracy against ground truth
 - [ ] **Phase 7** — Bonus: literature screening
@@ -113,7 +136,7 @@ Full per-service run instructions land as each phase completes.
 
 ```
 frontend/          Angular reviewer UI          -- npm, self-contained
-backend/           Spring Boot REST API         -- Maven, self-contained
+backend/           Django + DRF REST API        -- own venv, self-contained
 pkg/               Python: all AI features      -- own venv, self-contained
   ai_service/        FastAPI service: extraction, classification, OCR
   generator/         Synthetic corpus generator
