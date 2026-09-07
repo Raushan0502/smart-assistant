@@ -216,3 +216,33 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# ---------------------------------------------------------------------------
+# Smart Inbox Assistant -- project specific
+# ---------------------------------------------------------------------------
+
+# Secrets. .env holds the mailbox app password and API keys.
+.env
+
+# Java / Spring Boot
+backend/target/
+*.class
+*.jar
+!**/gradle/wrapper/gradle-wrapper.jar
+
+# Node / Angular
+frontend/node_modules/
+frontend/dist/
+frontend/.angular/
+
+# Generated synthetic corpus: reproducible from data/generator, so the
+# rendered PDFs and .eml files are not committed. Ground-truth labels ARE
+# committed, since they are the evaluation set.
+data/samples/**
+!data/samples/.gitkeep
+!data/samples/ground_truth.json
+
+# Per-run artifacts
+data/incoming/
+data/processed/
+logs/
