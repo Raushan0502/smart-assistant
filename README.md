@@ -16,9 +16,9 @@ Engineer** live project assignment.
 
 ## Status
 
-Phases 0–2a complete: the corpus generator and the full ingestion +
-preprocessing pipeline run offline with 33 passing tests. Next is the model
-layer (OCR, classification, field extraction). See
+Phases 0–2b complete: corpus generator, ingestion + preprocessing, and the
+classification / extraction model layer. **66 tests pass offline** with no API
+key required. Next is the vision layer (OCR for scans, image description). See
 [Build plan](#build-plan).
 
 ## The problem
@@ -121,6 +121,34 @@ untouched. There is a test asserting this holds across the entire corpus.
 with `processed=False` and a warning, so a reviewer can see something arrived
 that the pipeline chose not to read.
 
+## How hallucination is prevented
+
+Saying "unknown" instead of guessing is a scored requirement, and prompting
+alone does not achieve it — models are strongly biased toward filling a field,
+and will infer a plausible age from context while reporting high confidence. So
+there are three layers:
+
+1. **The prompt** states the rule, explains *why* it matters in this domain, and
+   gives worked examples of what must come back `Not stated`.
+2. **Post-validation** collapses every honest-gap spelling (`""`, `unknown`,
+   `N/A`, `none stated`) to the canonical `Not stated` with confidence forced
+   to `0.0`, so one consistent signal reaches the reviewer.
+3. **Quote verification** — every stated field must carry a verbatim quote, and
+   that quote is checked against the source text. A field whose quote cannot be
+   located has its confidence halved and is flagged for review.
+
+Layer 3 is the one that catches confident fabrication, and it costs nothing: a
+quote check is a substring search, not another model call. An invented page
+number is undetectable; an invented quote is not.
+
+**The offline stub is a first-class provider, not a test fixture.** With no API
+key the pipeline still runs end to end, returning schema-valid, deliberately
+low-confidence output marked `[offline stub]`. That keeps the test suite
+network-free, keeps development unblocked, and means a live demo cannot fail
+because a free-tier quota ran out. The stub extracts *nothing* — guessing from
+keywords would produce exactly the confident-but-wrong output this design
+exists to avoid.
+
 ## Two design commitments
 
 These shape the data model rather than sitting on top of it, so they are
@@ -159,7 +187,8 @@ Full per-service run instructions land as each phase completes.
 - [x] **Phase 0** — Repo scaffold, `.env.example`, Oracle compose file
 - [x] **Phase 1** — Synthetic corpus generator + ground-truth labels
 - [x] **Phase 2a** — Ingestion: mail parsing, PDF flavour detection, tables, metadata
-- [ ] **Phase 2b** — Model layer: OCR/vision, classification, field extraction
+- [x] **Phase 2b** — Model layer: classification + field extraction with quote verification
+- [ ] **Phase 2c** — Vision: OCR for scans, image description, PDF summaries
 - [ ] **Phase 3** — Oracle schema + PL/SQL audit package
 - [ ] **Phase 4** — Django: IMAP poller, queue, REST API
 - [ ] **Phase 5** — Angular reviewer screen
