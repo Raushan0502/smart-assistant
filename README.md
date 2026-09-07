@@ -16,9 +16,9 @@ Engineer** live project assignment.
 
 ## Status
 
-Phases 0–2b complete: corpus generator, ingestion + preprocessing, and the
-classification / extraction model layer. **66 tests pass offline** with no API
-key required. Next is the vision layer (OCR for scans, image description). See
+Phase 2 complete: corpus generator, ingestion + preprocessing, classification,
+field extraction, and the vision layer. **92 tests pass offline** with no API
+key required. Next is the Oracle schema, then Django and Angular. See
 [Build plan](#build-plan).
 
 ## The problem
@@ -149,6 +149,31 @@ because a free-tier quota ran out. The stub extracts *nothing* — guessing from
 keywords would produce exactly the confident-but-wrong output this design
 exists to avoid.
 
+## Reading pixels: scans, handwriting and images
+
+The brief asks for a vision-capable model on scanned or handwritten PDFs, and
+*"a confidence score since handwriting is uncertain"*. Both are implemented,
+with two deliberate positions:
+
+**Anything read from pixels is flagged for review regardless of confidence.**
+A vision model's self-reported confidence is an impression, not a measurement,
+and it is least reliable on exactly the hard cases — faint ink, cursive, a
+half-ticked box. The score is surfaced because the brief asks for it, but it
+never auto-approves. Genuine per-word confidence and bounding boxes need a
+purpose-built document-AI service; that trade-off is argued in the write-up.
+
+**A blank line is a finding, not a failed read.** An empty field on a
+handwritten form means the reporter did not answer, so it must come back
+`Not stated` rather than being filled with plausible ink. The OCR prompt says
+so explicitly, and the corpus contains a scanned form with a deliberately blank
+field to test it.
+
+**OCR output rejoins the normal document structure.** Transcribed text becomes
+ordinary text blocks carrying the same provenance the page image had, so
+classification, extraction and quote verification treat a scanned document
+exactly like a digital one. The page images are kept alongside — the transcript
+is derived, the image is the evidence.
+
 ## Two design commitments
 
 These shape the data model rather than sitting on top of it, so they are
@@ -188,7 +213,7 @@ Full per-service run instructions land as each phase completes.
 - [x] **Phase 1** — Synthetic corpus generator + ground-truth labels
 - [x] **Phase 2a** — Ingestion: mail parsing, PDF flavour detection, tables, metadata
 - [x] **Phase 2b** — Model layer: classification + field extraction with quote verification
-- [ ] **Phase 2c** — Vision: OCR for scans, image description, PDF summaries
+- [x] **Phase 2c** — Vision: OCR for scans, image description, summaries, article screening
 - [ ] **Phase 3** — Oracle schema + PL/SQL audit package
 - [ ] **Phase 4** — Django: IMAP poller, queue, REST API
 - [ ] **Phase 5** — Angular reviewer screen
