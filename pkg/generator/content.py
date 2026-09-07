@@ -57,7 +57,13 @@ class Case:
     body: str
     sender_name: str
     sender_email: str
+    # What the extractor should produce -- always English, because that is the
+    # working language of the review screen.
     expected_fields: dict[str, str] = field(default_factory=dict)
+    # What the source document literally says. Set only for non-English cases,
+    # where the document is in its own language and ``expected_fields`` is the
+    # post-translation target. Defaults to ``expected_fields`` when unset.
+    source_fields: dict[str, str] = field(default_factory=dict)
     # Set for cases that should also produce a PDF attachment.
     attachment_kind: str | None = None
     language: str = "en"
@@ -580,6 +586,23 @@ NON_ENGLISH_CASES: list[Case] = [
             outcome="Recovering",
             serious="Non-serious",
         ),
+        source_fields={
+            "patient_age": "61 Jahre",
+            "patient_sex": "Weiblich",
+            "patient_weight": "74 kg",
+            "patient_history": "Bluthochdruck seit vielen Jahren bekannt",
+            "reporter_name": "Dr Markus Hoffmann",
+            "reporter_role": "Arzt in eigener Praxis",
+            "reporter_country": "Deutschland",
+            "product_name": "Cardiozan",
+            "product_dose": "20 mg einmal taeglich",
+            "product_route": "Oral zum Einnehmen",
+            "product_start_date": "05. Februar 2026",
+            "reaction": "Starke Kopfschmerzen und Schwindel nach der Einnahme",
+            "reaction_onset": "19. Februar 2026",
+            "reaction_outcome": "Beschwerden sind zurueckgegangen",
+            "seriousness": "Nicht schwerwiegend, keine Aufnahme in das Krankenhaus",
+        },
         attachment_kind="non_english_pdf",
         notes="German. Fields are expected in English after translation.",
     ),
@@ -618,6 +641,23 @@ NON_ENGLISH_CASES: list[Case] = [
             outcome="Recovered",
             serious="Non-serious",
         ),
+        source_fields={
+            "patient_age": "38 anos",
+            "patient_sex": "Varon",
+            "patient_weight": "79 kg",
+            "patient_history": "Sin antecedentes relevantes conocidos",
+            "reporter_name": "Dra Carmen Ruiz",
+            "reporter_role": "Medico de la clinica",
+            "reporter_country": "Espana",
+            "product_name": "Pulmoflex",
+            "product_dose": "Dos inhalaciones al dia",
+            "product_route": "Via inhalatoria",
+            "product_start_date": "10 de enero de 2026",
+            "reaction": "Urticaria generalizada e hinchazon de los labios",
+            "reaction_onset": "24 de enero de 2026",
+            "reaction_outcome": "El paciente se ha recuperado por completo",
+            "seriousness": "No grave, no requirio ingreso hospitalario",
+        },
         attachment_kind="non_english_pdf",
         notes="Spanish. Fields are expected in English after translation.",
     ),

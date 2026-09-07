@@ -183,7 +183,9 @@ def render_digital_form(case: Case, path: Path, language: str = "en") -> None:
         author=case.sender_name,
         subject=case.subject,
     )
-    fields = case.expected_fields
+    # Non-English cases carry the document's own wording; English cases use the
+    # expected fields directly, since for them the two are the same.
+    fields = case.source_fields or case.expected_fields
     story = [
         Paragraph(labels["title"], styles["title"]),
         Paragraph(labels["subtitle"], styles["small"]),

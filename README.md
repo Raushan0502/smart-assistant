@@ -16,8 +16,10 @@ Engineer** live project assignment.
 
 ## Status
 
-Phase 0 — scaffolding. This README grows with each phase; see
-[Build plan](#build-plan) for what is done and what is next.
+Phases 0–2a complete: the corpus generator and the full ingestion +
+preprocessing pipeline run offline with 33 passing tests. Next is the model
+layer (OCR, classification, field extraction). See
+[Build plan](#build-plan).
 
 ## The problem
 
@@ -87,6 +89,38 @@ PL/SQL, a queue rather than synchronous calls.
 Tech choices and their trade-offs are argued in full in the
 [write-up](docs/) once written.
 
+## Ingestion pipeline
+
+```
+.eml ──▶ parse MIME ──▶ per attachment ──▶ detect flavour ──▶ extract ──▶ normalise
+          headers,        PDF or not?        digital        text blocks    prose only
+          body, parts                        scanned        tables         (tables and
+                                             article        images         images are
+                                             non-English    metadata        untouched)
+```
+
+**Flavour detection is evidence-based, not filename-based.** Real mail arrives
+as `scan0001.pdf` and `document.pdf`, so the signal comes from the page: a
+missing text layer plus a full-page image means scanned; stopword frequency
+identifies the language; structural markers (`abstract`, `references`,
+`discussion`) identify an article. Verified 14/14 against ground truth.
+
+**Tables are extracted as tables.** Rows and columns are recovered from the
+PDF's own cell geometry and kept as header + rows, then rendered to the model
+as Markdown. Flattening a lab panel into prose would destroy the link between a
+value, its unit and its reference range — which is the only thing that makes
+the value meaningful.
+
+**Preprocessing never touches tables or images.** Normalisation collapses
+whitespace, and whitespace inside a cell is load-bearing (`3.5 - 5.0`, `20 mg`).
+Prose gets Unicode normalisation, de-hyphenation, dot-leader and page-number
+stripping, and page-furniture removal; structured content is passed through
+untouched. There is a test asserting this holds across the entire corpus.
+
+**Non-PDF attachments are logged, not dropped.** They still produce a record
+with `processed=False` and a warning, so a reviewer can see something arrived
+that the pipeline chose not to read.
+
 ## Two design commitments
 
 These shape the data model rather than sitting on top of it, so they are
@@ -122,9 +156,10 @@ Full per-service run instructions land as each phase completes.
 
 ## Build plan
 
-- [x] **Phase 0** — Repo scaffold, `.env.example`, Oracle in Docker, end-to-end skeleton
-- [ ] **Phase 1** — Synthetic corpus generator + ground-truth labels
-- [ ] **Phase 2** — Python AI service: PDF flavours, tables, images, classification, extraction
+- [x] **Phase 0** — Repo scaffold, `.env.example`, Oracle compose file
+- [x] **Phase 1** — Synthetic corpus generator + ground-truth labels
+- [x] **Phase 2a** — Ingestion: mail parsing, PDF flavour detection, tables, metadata
+- [ ] **Phase 2b** — Model layer: OCR/vision, classification, field extraction
 - [ ] **Phase 3** — Oracle schema + PL/SQL audit package
 - [ ] **Phase 4** — Django: IMAP poller, queue, REST API
 - [ ] **Phase 5** — Angular reviewer screen
