@@ -136,6 +136,10 @@ MAILBOX = {
     "user": os.getenv("IMAP_USER", ""),
     "password": os.getenv("IMAP_PASSWORD", ""),
     "folder": os.getenv("IMAP_FOLDER", "INBOX"),
+    # IMAP search expression. Defaults (in inbox.mailbox) to matching only
+    # messages this project generated, so pointing at a mailbox containing real
+    # personal mail cannot ingest it.
+    "search": os.getenv("IMAP_SEARCH", ""),
     "poll_seconds": int(os.getenv("IMAP_POLL_SECONDS", "60")),
     # When true the poller is skipped and documents are read from data/samples,
     # so the whole system can be demonstrated with no mailbox at all.
