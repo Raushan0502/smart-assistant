@@ -195,14 +195,21 @@ def _extract_prose(
     if not table_regions:
         return page.extract_text() or ""
 
-    def keep(obj: dict) -> bool:
-        middle = (obj["top"] + obj["bottom"]) / 2
-        return not any(top <= middle <= bottom for top, bottom in table_regions)
+    def outside_every_table(obj: dict) -> bool:
+        """Whether a page object sits outside all detected table bands.
 
-    try:
-        return page.filter(keep).extract_text() or ""
-    except Exception:  # noqa: BLE001 -- filtering is best-effort, never fatal
-        return page.extract_text() or ""
+        ``page.filter`` is applied to every object type on the page, not just
+        characters, and not all of them carry geometry. Those are kept rather
+        than guessed at -- which makes this predicate total, so the filter
+        cannot raise and needs no exception handler around it.
+        """
+        top, bottom = obj.get("top"), obj.get("bottom")
+        if top is None or bottom is None:
+            return True
+        middle = (top + bottom) / 2
+        return not any(start <= middle <= end for start, end in table_regions)
+
+    return page.filter(outside_every_table).extract_text() or ""
 
 
 def _extract_images(
