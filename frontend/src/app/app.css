@@ -1,0 +1,210 @@
+/* Reviewer screen styling.
+
+   Dense by intent: a triage queue is scanned, not read, so information density
+   beats whitespace here. Colour carries meaning only -- confidence band,
+   category, and integrity warnings -- never decoration. */
+
+:host {
+  display: block;
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  color: #1a2233;
+  background: #f4f6fa;
+  min-height: 100vh;
+}
+
+/* ---- top bar ---- */
+.topbar {
+  display: flex; align-items: center; gap: 20px;
+  padding: 12px 20px; background: #12263f; color: #fff; flex-wrap: wrap;
+}
+.brand { display: flex; align-items: center; gap: 12px; flex: 1; min-width: 280px; }
+.mark {
+  width: 38px; height: 38px; border-radius: 9px; background: #2d7ff9;
+  display: grid; place-items: center; font-weight: 700; font-size: 15px;
+}
+.topbar h1 { font-size: 17px; margin: 0; font-weight: 600; }
+.topbar p { margin: 2px 0 0; font-size: 12px; opacity: 0.72; }
+.status { display: flex; gap: 6px; flex-wrap: wrap; }
+.actions { display: flex; gap: 8px; align-items: center; }
+.reviewer {
+  padding: 6px 10px; border: 1px solid #2f4a6d; border-radius: 6px;
+  background: #0d1c2e; color: #fff; font-size: 13px; width: 150px;
+}
+
+.chip {
+  font-size: 11.5px; padding: 4px 9px; border-radius: 99px;
+  background: #1e3a5c; border: 1px solid #2f4a6d;
+}
+.chip-warn { background: #7a5b12; border-color: #a97c1a; }
+.chip-bad { background: #7a1f22; border-color: #a92c30; }
+
+button {
+  font: inherit; cursor: pointer; border-radius: 6px; border: 1px solid #c3ccdb;
+  background: #fff; padding: 7px 13px; font-size: 13px;
+}
+button:disabled { opacity: 0.55; cursor: not-allowed; }
+button.primary { background: #2d7ff9; border-color: #2d7ff9; color: #fff; font-weight: 600; }
+button.link {
+  background: none; border: none; color: inherit;
+  text-decoration: underline; padding: 0 4px;
+}
+
+/* ---- banners ---- */
+.banner { padding: 10px 20px; font-size: 13px; }
+.banner-warn { background: #fff4d6; border-bottom: 1px solid #e8cf8a; color: #6b4e07; }
+.banner-bad { background: #ffe2e2; border-bottom: 1px solid #e7a8a8; color: #7d1d1d; }
+
+/* ---- layout ---- */
+.layout {
+  display: grid; grid-template-columns: 400px 1fr;
+  gap: 16px; padding: 16px; align-items: start;
+}
+@media (max-width: 1100px) {
+  .layout { grid-template-columns: 1fr; }
+}
+
+.queue, .detail { background: #fff; border: 1px solid #dfe4ec; border-radius: 10px; }
+.queue { padding: 14px; max-height: calc(100vh - 130px); overflow: auto; }
+.detail { padding: 18px; }
+.detail.empty { display: grid; place-items: center; min-height: 220px; }
+
+.queue-head h2, .detail-head h2 { margin: 0; font-size: 15px; }
+.filters { display: flex; gap: 6px; margin: 10px 0; }
+.filters select {
+  flex: 1; padding: 6px; font-size: 12.5px;
+  border: 1px solid #c9d2e0; border-radius: 6px; background: #fff;
+}
+
+/* ---- queue rows ---- */
+.rows { list-style: none; margin: 0; padding: 0; }
+.rows li {
+  padding: 10px; border: 1px solid #e6eaf1; border-radius: 8px;
+  margin-bottom: 7px; cursor: pointer;
+}
+.rows li:hover { border-color: #9dbdf0; background: #f8fbff; }
+.rows li.active { border-color: #2d7ff9; background: #eef5ff; }
+/* Left rule marks rows a reviewer should not skim past. */
+.rows li.attention { border-left: 3px solid #d98324; }
+.row-top { display: flex; justify-content: space-between; gap: 8px; }
+.subject { font-weight: 600; font-size: 13px; line-height: 1.3; }
+.ms { font-size: 11px; color: #7a869a; white-space: nowrap; }
+.row-sender { font-size: 11.5px; color: #7a869a; margin: 3px 0 6px; }
+.row-tags { display: flex; gap: 5px; align-items: center; flex-wrap: wrap; }
+.state { font-size: 10.5px; color: #7a869a; margin-left: auto; }
+
+/* ---- tags and confidence ---- */
+.tag {
+  font-size: 10.5px; padding: 2px 7px; border-radius: 4px;
+  background: #eef1f6; border: 1px solid #dde3ec;
+}
+.tag-ICSR { background: #fde8e8; border-color: #f5c2c2; color: #8c1c1c; }
+.tag-PQC { background: #fff1d9; border-color: #f0d59b; color: #7a5310; }
+.tag-MI { background: #e3f0fd; border-color: #b6d5f5; color: #14507f; }
+.tag-NOT_RELEVANT { background: #eef1f6; color: #6a7385; }
+.tag-none { background: #f6f7f9; color: #98a1b0; font-style: italic; }
+
+.conf { font-size: 10.5px; padding: 2px 6px; border-radius: 4px; font-weight: 600; }
+.conf-high { background: #dff5e3; color: #1c6b2e; }
+.conf-mid { background: #fff2d6; color: #7a5310; }
+.conf-low { background: #ffe3e3; color: #8c1c1c; }
+.conf-none { background: #eef1f6; color: #7a869a; }
+
+/* ---- detail ---- */
+.detail-head { display: flex; justify-content: space-between; gap: 14px; align-items: flex-start; }
+.muted { color: #7a869a; }
+.small { font-size: 12px; }
+.warnlist { margin: 6px 0 0 18px; padding: 0; font-size: 12px; }
+
+.categories {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 8px; margin: 14px 0;
+}
+.cat { border: 1px solid #e6eaf1; border-radius: 8px; padding: 8px 10px; }
+.catline { display: flex; align-items: center; gap: 7px; cursor: pointer; }
+.catname { font-size: 12.5px; color: #7a869a; }
+.catname.on { color: #12263f; font-weight: 600; }
+.reason { font-size: 11.5px; color: #7a869a; margin: 5px 0 0; line-height: 1.4; }
+
+.tabs { display: flex; gap: 4px; border-bottom: 1px solid #e6eaf1; margin: 14px 0; }
+.tabs button {
+  border: none; background: none; border-bottom: 2px solid transparent;
+  border-radius: 0; padding: 8px 12px; color: #7a869a;
+}
+.tabs button.on { color: #12263f; border-bottom-color: #2d7ff9; font-weight: 600; }
+
+/* ---- fields ---- */
+.extraction { margin-bottom: 22px; }
+.extraction h3 { font-size: 13.5px; margin: 0 0 6px; display: flex; gap: 8px; align-items: baseline; }
+.narrative {
+  font-size: 12.5px; background: #f7f9fc; border-left: 3px solid #c9d6e8;
+  padding: 8px 11px; margin: 0 0 10px; line-height: 1.45;
+}
+
+table { border-collapse: collapse; width: 100%; }
+.fields th {
+  text-align: left; font-size: 11px; text-transform: uppercase; letter-spacing: 0.4px;
+  color: #7a869a; border-bottom: 1px solid #e6eaf1; padding: 5px 6px;
+}
+.fields td { padding: 5px 6px; border-bottom: 1px solid #f0f3f8; vertical-align: top; font-size: 12.5px; }
+/* A field the source never stated is greyed, not hidden -- the gap is information. */
+.fields tr.unstated .fname, .fields tr.unstated .fvalue { color: #98a1b0; }
+/* A stated value whose quote could not be found in the source. */
+.fields tr.unverified { background: #fffaf0; }
+.fname { width: 150px; font-weight: 500; }
+.fvalue {
+  width: 100%; padding: 4px 6px; border: 1px solid #dde3ec;
+  border-radius: 5px; font: inherit; font-size: 12.5px;
+}
+.save {
+  margin-top: 4px; padding: 3px 9px; font-size: 11.5px;
+  background: #2d7ff9; border-color: #2d7ff9; color: #fff;
+}
+.src { width: 230px; font-size: 11px; color: #7a869a; }
+.srcdoc { font-family: ui-monospace, Consolas, monospace; }
+.quote { margin-top: 3px; font-style: italic; color: #5a6577; line-height: 1.35; }
+
+.badge-bad {
+  font-size: 10px; padding: 1px 6px; border-radius: 4px;
+  background: #ffe3e3; color: #8c1c1c; margin-left: 5px;
+}
+.badge-warn {
+  font-size: 10px; padding: 1px 6px; border-radius: 4px;
+  background: #fff2d6; color: #7a5310; margin-left: 5px;
+}
+
+/* ---- documents ---- */
+.doc { border: 1px solid #e6eaf1; border-radius: 8px; padding: 12px; margin-bottom: 12px; }
+.doc header { display: flex; align-items: center; gap: 7px; flex-wrap: wrap; margin-bottom: 7px; }
+.doc h3 { font-size: 13px; margin: 0; }
+.summary { font-size: 12.5px; line-height: 1.5; margin: 0 0 7px; }
+.tablewrap { overflow-x: auto; margin: 9px 0; }
+.datatable { font-size: 11.5px; border: 1px solid #dde3ec; }
+.datatable th { background: #f0f3f8; text-align: left; padding: 4px 7px; border: 1px solid #dde3ec; }
+.datatable td { padding: 4px 7px; border: 1px solid #e9edf4; }
+.imageblock { background: #f7f9fc; border-radius: 6px; padding: 8px 10px; margin: 8px 0; font-size: 12px; }
+pre {
+  background: #f7f9fc; padding: 10px; border-radius: 6px; font-size: 11.5px;
+  max-height: 280px; overflow: auto; white-space: pre-wrap;
+}
+details summary { cursor: pointer; font-size: 12px; color: #2d7ff9; }
+
+/* ---- audit ---- */
+.audit { font-size: 12px; margin-bottom: 16px; }
+.audit th {
+  text-align: left; padding: 5px 7px; border-bottom: 1px solid #e6eaf1;
+  font-size: 11px; text-transform: uppercase; color: #7a869a;
+}
+.audit td { padding: 5px 7px; border-bottom: 1px solid #f0f3f8; }
+.was { text-decoration: line-through; color: #98a1b0; }
+code {
+  font-family: ui-monospace, Consolas, monospace; background: #f0f3f8;
+  padding: 1px 4px; border-radius: 3px; font-size: 11.5px;
+}
+
+/* ---- literature screening (bonus) ---- */
+.screening { margin-top: 16px; padding-top: 14px; border-top: 1px solid #e6eaf1; }
+.screening h3 { font-size: 13px; margin: 0 0 4px; }
+.screen-result { margin-top: 10px; border: 1px solid #e6eaf1; border-radius: 8px; padding: 10px; }
+.verdict { font-weight: 600; font-size: 13px; display: flex; gap: 8px; align-items: center; }
+.verdict.yes { color: #1c6b2e; }
+.verdict.no { color: #8c1c1c; }

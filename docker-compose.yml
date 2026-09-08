@@ -1,0 +1,37 @@
+# Local development stack.
+#
+#   docker compose up -d oracle     # database only (what Phase 0 needs)
+#   docker compose logs -f oracle   # first start takes 1-3 minutes to init
+#
+# gvenzl/oracle-free is used rather than the official Oracle image: it is a
+# fraction of the size and needs no container-registry login.
+#
+# The schema is NOT created by init scripts. Tables come from Django migrations
+# (so the ORM, admin and migration history all stay consistent) and the PL/SQL
+# package is applied by db/apply_plsql.py. Both are re-runnable against an
+# existing container, whereas init scripts run only on first boot -- which
+# makes iterating on the schema mean destroying the database.
+services:
+  oracle:
+    image: gvenzl/oracle-free:23-slim
+    container_name: smartinbox-oracle
+    ports:
+      - "1521:1521"
+    environment:
+      # Password for SYS / SYSTEM inside the container.
+      ORACLE_PASSWORD: ${ORACLE_ADMIN_PASSWORD:-change_me_locally}
+      # gvenzl images create this application user in FREEPDB1 on first boot,
+      # so the app never connects as SYS.
+      APP_USER: ${ORACLE_USER:-smartinbox}
+      APP_USER_PASSWORD: ${ORACLE_PASSWORD:-change_me_locally}
+    volumes:
+      - oracle-data:/opt/oracle/oradata
+    healthcheck:
+      test: ["CMD", "healthcheck.sh"]
+      interval: 15s
+      timeout: 10s
+      retries: 20
+      start_period: 60s
+
+volumes:
+  oracle-data:

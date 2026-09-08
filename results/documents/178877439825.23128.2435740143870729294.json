@@ -1,0 +1,276 @@
+{
+  "id": 54,
+  "message_id": "178877439825.23128.2435740143870729294@clinevo-demo.example",
+  "subject": "Meldung einer Nebenwirkung - Cardiozan",
+  "sender": "Dr Markus Hoffmann <m.hoffmann@praxis-hoffmann.example>",
+  "recipient": "Pharmacovigilance Intake <pv-intake@clinevo-demo.example>",
+  "sent_at": "2026-03-18T09:00:00Z",
+  "received_at": "2026-09-08T03:35:38.004405Z",
+  "body_text": "Sehr geehrte Damen und Herren,\n\nhiermit melde ich eine unerwuenschte Arzneimittelwirkung.\n\nDie Patientin ist 61 Jahre alt, weiblich, 74 kg. Sie nimmt seit dem 05. Februar 2026 Cardiozan 20 mg einmal taeglich oral ein.\n\nAm 19. Februar 2026 entwickelte sie starke Kopfschmerzen und Schwindel. Sie wurde nicht stationaer aufgenommen. Das Praeparat wurde abgesetzt und die Beschwerden sind zurueckgegangen.\n\nMit freundlichen Gruessen\nDr Markus Hoffmann, Praxis Hoffmann, Muenchen, Deutschland",
+  "language": "de",
+  "processing_status": "READY",
+  "review_status": "PENDING",
+  "processing_ms": 104,
+  "error": "",
+  "warnings": [],
+  "headers": {
+    "Message-ID": "<178877439825.23128.2435740143870729294@clinevo-demo.example>",
+    "Date": "Wed, 18 Mar 2026 09:00:00 +0000",
+    "From": "Dr Markus Hoffmann <m.hoffmann@praxis-hoffmann.example>",
+    "To": "Pharmacovigilance Intake <pv-intake@clinevo-demo.example>",
+    "Subject": "Meldung einer Nebenwirkung - Cardiozan",
+    "X-Synthetic-Case-Id": "icsr_german",
+    "raw_byte_size": "5907",
+    "attachment_count": "1"
+  },
+  "categories": [
+    "NOT_RELEVANT"
+  ],
+  "documents": [
+    {
+      "document_id": "178877439825.23128.2435740143870729294@clinevo-demo.example::body",
+      "file_name": "(email body)",
+      "media_type": "text/plain",
+      "flavour": "email_body",
+      "language": "de",
+      "page_count": 0,
+      "processed": true,
+      "extracted_text": "Sehr geehrte Damen und Herren,\n\nhiermit melde ich eine unerwuenschte Arzneimittelwirkung.\n\nDie Patientin ist 61 Jahre alt, weiblich, 74 kg. Sie nimmt seit dem 05. Februar 2026 Cardiozan 20 mg einmal taeglich oral ein.\n\nAm 19. Februar 2026 entwickelte sie starke Kopfschmerzen und Schwindel. Sie wurde nicht stationaer aufgenommen. Das Praeparat wurde abgesetzt und die Beschwerden sind zurueckgegangen.\n\nMit freundlichen Gruessen\nDr Markus Hoffmann, Praxis Hoffmann, Muenchen, Deutschland",
+      "tables": [],
+      "images": [],
+      "doc_metadata": {
+        "char_count": "488"
+      },
+      "warnings": [],
+      "summary": "",
+      "looks_relevant": null,
+      "relevance_reason": "",
+      "summary_confidence": null,
+      "ocr_confidence": null
+    },
+    {
+      "document_id": "178877439825.23128.2435740143870729294@clinevo-demo.example::att0",
+      "file_name": "form_icsr_german.pdf",
+      "media_type": "application/pdf",
+      "flavour": "non_english",
+      "language": "de",
+      "page_count": 1,
+      "processed": true,
+      "extracted_text": "Meldeformular fuer unerwuenschte Arzneimittelwirkungen\nSYNTHETISCHES TESTDOKUMENT - keine echten Patientendaten\n1. Patientendaten\n2. Angaben zum Melder\n3. Verdaechtiges Arzneimittel\n4. Reaktion\n5. Relevante Laborwerte\nFormular SYN-AE-01 | Synthetisches Dokument, nur zu Testzwecken.",
+      "tables": [
+        {
+          "header": [
+            "Alter",
+            "61 Jahre"
+          ],
+          "rows": [
+            [
+              "Geschlecht",
+              "Weiblich"
+            ],
+            [
+              "Gewicht",
+              "74 kg"
+            ],
+            [
+              "Relevante Vorgeschichte",
+              "Bluthochdruck seit vielen Jahren bekannt"
+            ]
+          ],
+          "page": 1
+        },
+        {
+          "header": [
+            "Name des Melders",
+            "Dr Markus Hoffmann"
+          ],
+          "rows": [
+            [
+              "Funktion / Qualifikation",
+              "Arzt in eigener Praxis"
+            ],
+            [
+              "Land",
+              "Deutschland"
+            ]
+          ],
+          "page": 1
+        },
+        {
+          "header": [
+            "Arzneimittelname",
+            "Cardiozan"
+          ],
+          "rows": [
+            [
+              "Dosierung",
+              "20 mg einmal taeglich"
+            ],
+            [
+              "Art der Anwendung",
+              "Oral zum Einnehmen"
+            ],
+            [
+              "Therapiebeginn",
+              "05. Februar 2026"
+            ]
+          ],
+          "page": 1
+        },
+        {
+          "header": [
+            "Beschreibung der Reaktion",
+            "Starke Kopfschmerzen und Schwindel nach der Einnahme"
+          ],
+          "rows": [
+            [
+              "Datum des Auftretens",
+              "19. Februar 2026"
+            ],
+            [
+              "Ausgang",
+              "Beschwerden sind zurueckgegangen"
+            ],
+            [
+              "Schweregrad",
+              "Nicht schwerwiegend, keine Aufnahme in das Krankenhaus"
+            ]
+          ],
+          "page": 1
+        },
+        {
+          "header": [
+            "Test",
+            "Result",
+            "Unit",
+            "Reference range",
+            "Flag"
+          ],
+          "rows": [
+            [
+              "Haemoglobin",
+              "132",
+              "g/L",
+              "120 - 160",
+              "Normal"
+            ],
+            [
+              "White cell count",
+              "11.8",
+              "x10^9/L",
+              "4.0 - 11.0",
+              "HIGH"
+            ],
+            [
+              "Eosinophils",
+              "0.9",
+              "x10^9/L",
+              "0.0 - 0.4",
+              "HIGH"
+            ],
+            [
+              "C-reactive protein",
+              "24",
+              "mg/L",
+              "< 5",
+              "HIGH"
+            ],
+            [
+              "Platelets",
+              "268",
+              "x10^9/L",
+              "150 - 400",
+              "Normal"
+            ]
+          ],
+          "page": 1
+        }
+      ],
+      "images": [],
+      "doc_metadata": {
+        "Author": "Dr Markus Hoffmann",
+        "CreationDate": "D:20260907151638+05'00'",
+        "Creator": "(unspecified)",
+        "ModDate": "D:20260907151638+05'00'",
+        "Producer": "ReportLab PDF Library - (opensource)",
+        "Subject": "Meldung einer Nebenwirkung - Cardiozan",
+        "Title": "Meldeformular fuer unerwuenschte Arzneimittelwirkungen",
+        "Trapped": "False",
+        "byte_size": "3434"
+      },
+      "warnings": [],
+      "summary": "[offline stub] No model was available, so this document has not been summarised. It requires manual review.",
+      "looks_relevant": true,
+      "relevance_reason": "[offline stub] Relevance not assessed.",
+      "summary_confidence": 0.1,
+      "ocr_confidence": null
+    }
+  ],
+  "classifications": [
+    {
+      "category": "ICSR",
+      "applies": false,
+      "confidence": 0.15,
+      "reason": "[offline stub] 0 keyword signal(s) matched.",
+      "model_name": "offline-stub"
+    },
+    {
+      "category": "PQC",
+      "applies": false,
+      "confidence": 0.15,
+      "reason": "[offline stub] 0 keyword signal(s) matched.",
+      "model_name": "offline-stub"
+    },
+    {
+      "category": "MI",
+      "applies": false,
+      "confidence": 0.15,
+      "reason": "[offline stub] 0 keyword signal(s) matched.",
+      "model_name": "offline-stub"
+    },
+    {
+      "category": "NOT_RELEVANT",
+      "applies": true,
+      "confidence": 0.15,
+      "reason": "[offline stub] 0 keyword signal(s) matched.",
+      "model_name": "offline-stub"
+    }
+  ],
+  "extractions": [],
+  "review_actions": [],
+  "audit_events": [
+    {
+      "event_type": "SUMMARY",
+      "model_name": "offline-stub",
+      "is_stub": true,
+      "prompt_sha256": "",
+      "prompt_chars": 0,
+      "latency_ms": 0.1,
+      "succeeded": true,
+      "error": "",
+      "created_at": "2026-09-08T03:35:38.050837Z"
+    },
+    {
+      "event_type": "EXTRACT",
+      "model_name": "offline-stub",
+      "is_stub": true,
+      "prompt_sha256": "",
+      "prompt_chars": 2191,
+      "latency_ms": 0.0,
+      "succeeded": true,
+      "error": "",
+      "created_at": "2026-09-08T03:35:38.049718Z"
+    },
+    {
+      "event_type": "CLASSIFY",
+      "model_name": "offline-stub",
+      "is_stub": true,
+      "prompt_sha256": "a5f39b3e8cd871d6afde67c76f1df60339c1bb53ff6a56d95f6bed50798901b8",
+      "prompt_chars": 2191,
+      "latency_ms": 0.3,
+      "succeeded": true,
+      "error": "",
+      "created_at": "2026-09-08T03:35:38.048172Z"
+    }
+  ]
+}

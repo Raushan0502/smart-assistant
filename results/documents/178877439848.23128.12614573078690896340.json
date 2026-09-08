@@ -1,0 +1,137 @@
+{
+  "id": 62,
+  "message_id": "178877439848.23128.12614573078690896340@clinevo-demo.example",
+  "subject": "Interaction question about Neurolept-X",
+  "sender": "Fatima Al-Rashid <f.alrashid@cityhealth.example>",
+  "recipient": "Pharmacovigilance Intake <pv-intake@clinevo-demo.example>",
+  "sent_at": "2026-03-19T15:00:00Z",
+  "received_at": "2026-09-08T03:35:46.651756Z",
+  "body_text": "Hello,\n\nIs it safe to take Neurolept-X at the same time as a standard over-the-counter antihistamine? A patient asked me today and I would like to give an accurate answer. Also, should it be taken with food?\n\nThank you,\nFatima Al-Rashid, Pharmacist\nCity Health Pharmacy, Dubai, UAE",
+  "language": "en",
+  "processing_status": "READY",
+  "review_status": "PENDING",
+  "processing_ms": 4,
+  "error": "",
+  "warnings": [],
+  "headers": {
+    "Message-ID": "<178877439848.23128.12614573078690896340@clinevo-demo.example>",
+    "Date": "Thu, 19 Mar 2026 15:00:00 +0000",
+    "From": "Fatima Al-Rashid <f.alrashid@cityhealth.example>",
+    "To": "Pharmacovigilance Intake <pv-intake@clinevo-demo.example>",
+    "Subject": "Interaction question about Neurolept-X",
+    "X-Synthetic-Case-Id": "mi_interaction",
+    "raw_byte_size": "705",
+    "attachment_count": "0"
+  },
+  "categories": [
+    "MI"
+  ],
+  "documents": [
+    {
+      "document_id": "178877439848.23128.12614573078690896340@clinevo-demo.example::body",
+      "file_name": "(email body)",
+      "media_type": "text/plain",
+      "flavour": "email_body",
+      "language": "en",
+      "page_count": 0,
+      "processed": true,
+      "extracted_text": "Hello,\n\nIs it safe to take Neurolept-X at the same time as a standard over-the-counter antihistamine? A patient asked me today and I would like to give an accurate answer. Also, should it be taken with food?\n\nThank you,\nFatima Al-Rashid, Pharmacist\nCity Health Pharmacy, Dubai, UAE",
+      "tables": [],
+      "images": [],
+      "doc_metadata": {
+        "char_count": "281"
+      },
+      "warnings": [],
+      "summary": "",
+      "looks_relevant": null,
+      "relevance_reason": "",
+      "summary_confidence": null,
+      "ocr_confidence": null
+    }
+  ],
+  "classifications": [
+    {
+      "category": "MI",
+      "applies": true,
+      "confidence": 0.35,
+      "reason": "[offline stub] 4 keyword signal(s) matched.",
+      "model_name": "offline-stub"
+    },
+    {
+      "category": "ICSR",
+      "applies": false,
+      "confidence": 0.2,
+      "reason": "[offline stub] 1 keyword signal(s) matched.",
+      "model_name": "offline-stub"
+    },
+    {
+      "category": "PQC",
+      "applies": false,
+      "confidence": 0.15,
+      "reason": "[offline stub] 0 keyword signal(s) matched.",
+      "model_name": "offline-stub"
+    },
+    {
+      "category": "NOT_RELEVANT",
+      "applies": false,
+      "confidence": 0.15,
+      "reason": "[offline stub] 0 keyword signal(s) matched.",
+      "model_name": "offline-stub"
+    }
+  ],
+  "extractions": [
+    {
+      "category": "MI",
+      "narrative": "[offline stub] No model available; no narrative was generated.",
+      "completeness": 0.0,
+      "model_name": "offline-stub",
+      "fields_data": [
+        {
+          "name": "product_or_topic",
+          "value": "Not stated",
+          "confidence": 0.0,
+          "is_stated": false,
+          "source_document": "",
+          "source_page": null,
+          "source_quote": "",
+          "quote_verified": false
+        },
+        {
+          "name": "question",
+          "value": "Not stated",
+          "confidence": 0.0,
+          "is_stated": false,
+          "source_document": "",
+          "source_page": null,
+          "source_quote": "",
+          "quote_verified": false
+        }
+      ]
+    }
+  ],
+  "review_actions": [],
+  "audit_events": [
+    {
+      "event_type": "EXTRACT",
+      "model_name": "offline-stub",
+      "is_stub": true,
+      "prompt_sha256": "",
+      "prompt_chars": 432,
+      "latency_ms": 0.0,
+      "succeeded": true,
+      "error": "",
+      "created_at": "2026-09-08T03:35:46.704149Z"
+    },
+    {
+      "event_type": "CLASSIFY",
+      "model_name": "offline-stub",
+      "is_stub": true,
+      "prompt_sha256": "35f3f1c1702f4456bf5338661ea742089dfc3a50b017bab9badcdcc431733e73",
+      "prompt_chars": 432,
+      "latency_ms": 0.1,
+      "succeeded": true,
+      "error": "",
+      "created_at": "2026-09-08T03:35:46.703149Z"
+    }
+  ]
+}

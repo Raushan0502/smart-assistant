@@ -1,0 +1,435 @@
+{
+  "id": 56,
+  "message_id": "178877439825.23128.6511868724309390273@clinevo-demo.example",
+  "subject": "Notificacion de reaccion adversa - Pulmoflex",
+  "sender": "Dra Carmen Ruiz <c.ruiz@clinica-delmar.example>",
+  "recipient": "Pharmacovigilance Intake <pv-intake@clinevo-demo.example>",
+  "sent_at": "2026-03-18T15:00:00Z",
+  "received_at": "2026-09-08T03:35:40.262443Z",
+  "body_text": "Estimados senores:\n\nNotifico una reaccion adversa.\n\nPaciente varon de 38 anos, 79 kg, sin antecedentes relevantes. Utiliza Pulmoflex por via inhalatoria desde el 10 de enero de 2026.\n\nEl 24 de enero de 2026 presento urticaria generalizada e hinchazon de los labios. Acudio a urgencias y fue tratado con corticoides. No requirio ingreso hospitalario. El paciente se ha recuperado por completo.\n\nAtentamente,\nDra Carmen Ruiz, Clinica del Mar, Barcelona, Espana",
+  "language": "es",
+  "processing_status": "READY",
+  "review_status": "PENDING",
+  "processing_ms": 87,
+  "error": "",
+  "warnings": [],
+  "headers": {
+    "Message-ID": "<178877439825.23128.6511868724309390273@clinevo-demo.example>",
+    "Date": "Wed, 18 Mar 2026 15:00:00 +0000",
+    "From": "Dra Carmen Ruiz <c.ruiz@clinica-delmar.example>",
+    "To": "Pharmacovigilance Intake <pv-intake@clinevo-demo.example>",
+    "Subject": "Notificacion de reaccion adversa - Pulmoflex",
+    "X-Synthetic-Case-Id": "icsr_spanish",
+    "raw_byte_size": "5771",
+    "attachment_count": "1"
+  },
+  "categories": [
+    "ICSR"
+  ],
+  "documents": [
+    {
+      "document_id": "178877439825.23128.6511868724309390273@clinevo-demo.example::body",
+      "file_name": "(email body)",
+      "media_type": "text/plain",
+      "flavour": "email_body",
+      "language": "es",
+      "page_count": 0,
+      "processed": true,
+      "extracted_text": "Estimados senores:\n\nNotifico una reaccion adversa.\n\nPaciente varon de 38 anos, 79 kg, sin antecedentes relevantes. Utiliza Pulmoflex por via inhalatoria desde el 10 de enero de 2026.\n\nEl 24 de enero de 2026 presento urticaria generalizada e hinchazon de los labios. Acudio a urgencias y fue tratado con corticoides. No requirio ingreso hospitalario. El paciente se ha recuperado por completo.\n\nAtentamente,\nDra Carmen Ruiz, Clinica del Mar, Barcelona, Espana",
+      "tables": [],
+      "images": [],
+      "doc_metadata": {
+        "char_count": "458"
+      },
+      "warnings": [],
+      "summary": "",
+      "looks_relevant": null,
+      "relevance_reason": "",
+      "summary_confidence": null,
+      "ocr_confidence": null
+    },
+    {
+      "document_id": "178877439825.23128.6511868724309390273@clinevo-demo.example::att0",
+      "file_name": "form_icsr_spanish.pdf",
+      "media_type": "application/pdf",
+      "flavour": "non_english",
+      "language": "es",
+      "page_count": 1,
+      "processed": true,
+      "extracted_text": "Formulario de Notificacion de Reaccion Adversa\nDOCUMENTO SINTETICO DE PRUEBA - sin datos reales de pacientes\n1. Datos del paciente\n2. Datos del notificador\n3. Medicamento sospechoso\n4. Reaccion\n5. Resultados de laboratorio relevantes\nFormulario SYN-AE-01 | Documento sintetico solo para pruebas.",
+      "tables": [
+        {
+          "header": [
+            "Edad",
+            "38 anos"
+          ],
+          "rows": [
+            [
+              "Sexo",
+              "Varon"
+            ],
+            [
+              "Peso",
+              "79 kg"
+            ],
+            [
+              "Antecedentes relevantes",
+              "Sin antecedentes relevantes conocidos"
+            ]
+          ],
+          "page": 1
+        },
+        {
+          "header": [
+            "Nombre del notificador",
+            "Dra Carmen Ruiz"
+          ],
+          "rows": [
+            [
+              "Funcion / cualificacion",
+              "Medico de la clinica"
+            ],
+            [
+              "Pais",
+              "Espana"
+            ]
+          ],
+          "page": 1
+        },
+        {
+          "header": [
+            "Nombre del medicamento",
+            "Pulmoflex"
+          ],
+          "rows": [
+            [
+              "Dosis",
+              "Dos inhalaciones al dia"
+            ],
+            [
+              "Via de administracion",
+              "Via inhalatoria"
+            ],
+            [
+              "Inicio del tratamiento",
+              "10 de enero de 2026"
+            ]
+          ],
+          "page": 1
+        },
+        {
+          "header": [
+            "Descripcion de la reaccion",
+            "Urticaria generalizada e hinchazon de los labios"
+          ],
+          "rows": [
+            [
+              "Fecha de inicio",
+              "24 de enero de 2026"
+            ],
+            [
+              "Desenlace",
+              "El paciente se ha recuperado por completo"
+            ],
+            [
+              "Gravedad",
+              "No grave, no requirio ingreso hospitalario"
+            ]
+          ],
+          "page": 1
+        },
+        {
+          "header": [
+            "Test",
+            "Result",
+            "Unit",
+            "Reference range",
+            "Flag"
+          ],
+          "rows": [
+            [
+              "Haemoglobin",
+              "132",
+              "g/L",
+              "120 - 160",
+              "Normal"
+            ],
+            [
+              "White cell count",
+              "11.8",
+              "x10^9/L",
+              "4.0 - 11.0",
+              "HIGH"
+            ],
+            [
+              "Eosinophils",
+              "0.9",
+              "x10^9/L",
+              "0.0 - 0.4",
+              "HIGH"
+            ],
+            [
+              "C-reactive protein",
+              "24",
+              "mg/L",
+              "< 5",
+              "HIGH"
+            ],
+            [
+              "Platelets",
+              "268",
+              "x10^9/L",
+              "150 - 400",
+              "Normal"
+            ]
+          ],
+          "page": 1
+        }
+      ],
+      "images": [],
+      "doc_metadata": {
+        "Author": "Dra Carmen Ruiz",
+        "CreationDate": "D:20260907151638+05'00'",
+        "Creator": "(unspecified)",
+        "ModDate": "D:20260907151638+05'00'",
+        "Producer": "ReportLab PDF Library - (opensource)",
+        "Subject": "Notificacion de reaccion adversa - Pulmoflex",
+        "Title": "Formulario de Notificacion de Reaccion Adversa",
+        "Trapped": "False",
+        "byte_size": "3357"
+      },
+      "warnings": [],
+      "summary": "[offline stub] No model was available, so this document has not been summarised. It requires manual review.",
+      "looks_relevant": true,
+      "relevance_reason": "[offline stub] Relevance not assessed.",
+      "summary_confidence": 0.1,
+      "ocr_confidence": null
+    }
+  ],
+  "classifications": [
+    {
+      "category": "ICSR",
+      "applies": true,
+      "confidence": 0.25,
+      "reason": "[offline stub] 2 keyword signal(s) matched.",
+      "model_name": "offline-stub"
+    },
+    {
+      "category": "PQC",
+      "applies": false,
+      "confidence": 0.15,
+      "reason": "[offline stub] 0 keyword signal(s) matched.",
+      "model_name": "offline-stub"
+    },
+    {
+      "category": "MI",
+      "applies": false,
+      "confidence": 0.15,
+      "reason": "[offline stub] 0 keyword signal(s) matched.",
+      "model_name": "offline-stub"
+    },
+    {
+      "category": "NOT_RELEVANT",
+      "applies": false,
+      "confidence": 0.15,
+      "reason": "[offline stub] 0 keyword signal(s) matched.",
+      "model_name": "offline-stub"
+    }
+  ],
+  "extractions": [
+    {
+      "category": "ICSR",
+      "narrative": "[offline stub] No model available; no narrative was generated.",
+      "completeness": 0.0,
+      "model_name": "offline-stub",
+      "fields_data": [
+        {
+          "name": "patient_age",
+          "value": "Not stated",
+          "confidence": 0.0,
+          "is_stated": false,
+          "source_document": "",
+          "source_page": null,
+          "source_quote": "",
+          "quote_verified": false
+        },
+        {
+          "name": "patient_history",
+          "value": "Not stated",
+          "confidence": 0.0,
+          "is_stated": false,
+          "source_document": "",
+          "source_page": null,
+          "source_quote": "",
+          "quote_verified": false
+        },
+        {
+          "name": "patient_sex",
+          "value": "Not stated",
+          "confidence": 0.0,
+          "is_stated": false,
+          "source_document": "",
+          "source_page": null,
+          "source_quote": "",
+          "quote_verified": false
+        },
+        {
+          "name": "patient_weight",
+          "value": "Not stated",
+          "confidence": 0.0,
+          "is_stated": false,
+          "source_document": "",
+          "source_page": null,
+          "source_quote": "",
+          "quote_verified": false
+        },
+        {
+          "name": "product_dose",
+          "value": "Not stated",
+          "confidence": 0.0,
+          "is_stated": false,
+          "source_document": "",
+          "source_page": null,
+          "source_quote": "",
+          "quote_verified": false
+        },
+        {
+          "name": "product_name",
+          "value": "Not stated",
+          "confidence": 0.0,
+          "is_stated": false,
+          "source_document": "",
+          "source_page": null,
+          "source_quote": "",
+          "quote_verified": false
+        },
+        {
+          "name": "product_route",
+          "value": "Not stated",
+          "confidence": 0.0,
+          "is_stated": false,
+          "source_document": "",
+          "source_page": null,
+          "source_quote": "",
+          "quote_verified": false
+        },
+        {
+          "name": "product_start_date",
+          "value": "Not stated",
+          "confidence": 0.0,
+          "is_stated": false,
+          "source_document": "",
+          "source_page": null,
+          "source_quote": "",
+          "quote_verified": false
+        },
+        {
+          "name": "reaction",
+          "value": "Not stated",
+          "confidence": 0.0,
+          "is_stated": false,
+          "source_document": "",
+          "source_page": null,
+          "source_quote": "",
+          "quote_verified": false
+        },
+        {
+          "name": "reaction_onset",
+          "value": "Not stated",
+          "confidence": 0.0,
+          "is_stated": false,
+          "source_document": "",
+          "source_page": null,
+          "source_quote": "",
+          "quote_verified": false
+        },
+        {
+          "name": "reaction_outcome",
+          "value": "Not stated",
+          "confidence": 0.0,
+          "is_stated": false,
+          "source_document": "",
+          "source_page": null,
+          "source_quote": "",
+          "quote_verified": false
+        },
+        {
+          "name": "reporter_country",
+          "value": "Not stated",
+          "confidence": 0.0,
+          "is_stated": false,
+          "source_document": "",
+          "source_page": null,
+          "source_quote": "",
+          "quote_verified": false
+        },
+        {
+          "name": "reporter_name",
+          "value": "Not stated",
+          "confidence": 0.0,
+          "is_stated": false,
+          "source_document": "",
+          "source_page": null,
+          "source_quote": "",
+          "quote_verified": false
+        },
+        {
+          "name": "reporter_role",
+          "value": "Not stated",
+          "confidence": 0.0,
+          "is_stated": false,
+          "source_document": "",
+          "source_page": null,
+          "source_quote": "",
+          "quote_verified": false
+        },
+        {
+          "name": "seriousness",
+          "value": "Not stated",
+          "confidence": 0.0,
+          "is_stated": false,
+          "source_document": "",
+          "source_page": null,
+          "source_quote": "",
+          "quote_verified": false
+        }
+      ]
+    }
+  ],
+  "review_actions": [],
+  "audit_events": [
+    {
+      "event_type": "SUMMARY",
+      "model_name": "offline-stub",
+      "is_stub": true,
+      "prompt_sha256": "",
+      "prompt_chars": 0,
+      "latency_ms": 0.1,
+      "succeeded": true,
+      "error": "",
+      "created_at": "2026-09-08T03:35:40.374912Z"
+    },
+    {
+      "event_type": "CLASSIFY",
+      "model_name": "offline-stub",
+      "is_stub": true,
+      "prompt_sha256": "2b4c710cf20faf783de09aab6474c457f5ca91cc5a0c4ae585a699c144bb84df",
+      "prompt_chars": 2164,
+      "latency_ms": 0.3,
+      "succeeded": true,
+      "error": "",
+      "created_at": "2026-09-08T03:35:40.371894Z"
+    },
+    {
+      "event_type": "EXTRACT",
+      "model_name": "offline-stub",
+      "is_stub": true,
+      "prompt_sha256": "",
+      "prompt_chars": 2164,
+      "latency_ms": 0.2,
+      "succeeded": true,
+      "error": "",
+      "created_at": "2026-09-08T03:35:40.371894Z"
+    }
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "messages": 16,
+  "timings": {
+    "count": 16,
+    "mean_ms": 58,
+    "median_ms": 69.5,
+    "min_ms": 3,
+    "max_ms": 140,
+    "total_ms": 928
+  },
+  "accuracy": {
+    "scored": 16,
+    "exact_match": 0.812,
+    "any_overlap": 0.812,
+    "per_category": {
+      "ICSR": {
+        "precision": 1.0,
+        "recall": 0.7,
+        "f1": 0.824,
+        "tp": 7,
+        "fp": 0,
+        "fn": 3
+      },
+      "PQC": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "tp": 3,
+        "fp": 0,
+        "fn": 0
+      },
+      "MI": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "tp": 2,
+        "fp": 0,
+        "fn": 0
+      },
+      "NOT_RELEVANT": {
+        "precision": 0.4,
+        "recall": 1.0,
+        "f1": 0.571,
+        "tp": 2,
+        "fp": 3,
+        "fn": 0
+      }
+    }
+  },
+  "integrity": {
+    "fields": 121,
+    "stated": 0,
+    "not_stated": 121,
+    "stated_unverified": 0
+  }
+}

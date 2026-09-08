@@ -1,0 +1,108 @@
+{
+  "id": 60,
+  "message_id": "178877439848.23128.16348386517644151481@clinevo-demo.example",
+  "subject": "Boost your clinic's revenue by 40% this quarter!",
+  "sender": "GrowthPartners Marketing <offers@growthpartners.example>",
+  "recipient": "Pharmacovigilance Intake <pv-intake@clinevo-demo.example>",
+  "sent_at": "2026-03-19T21:00:00Z",
+  "received_at": "2026-09-08T03:35:44.563798Z",
+  "body_text": "Hi there,\n\nIs your practice leaving money on the table? Our proven patient acquisition system has helped over 3,000 clinics increase quarterly revenue by an average of 40%.\n\nBook a free 15-minute discovery call this week and receive our 'Practice Growth Playbook' at no charge.\n\nUnsubscribe | Manage preferences\nGrowthPartners Marketing Ltd",
+  "language": "en",
+  "processing_status": "READY",
+  "review_status": "PENDING",
+  "processing_ms": 4,
+  "error": "",
+  "warnings": [],
+  "headers": {
+    "Message-ID": "<178877439848.23128.16348386517644151481@clinevo-demo.example>",
+    "Date": "Thu, 19 Mar 2026 21:00:00 +0000",
+    "From": "GrowthPartners Marketing <offers@growthpartners.example>",
+    "To": "Pharmacovigilance Intake <pv-intake@clinevo-demo.example>",
+    "Subject": "Boost your clinic's revenue by 40% this quarter!",
+    "X-Synthetic-Case-Id": "irrelevant_marketing",
+    "raw_byte_size": "790",
+    "attachment_count": "0"
+  },
+  "categories": [
+    "NOT_RELEVANT"
+  ],
+  "documents": [
+    {
+      "document_id": "178877439848.23128.16348386517644151481@clinevo-demo.example::body",
+      "file_name": "(email body)",
+      "media_type": "text/plain",
+      "flavour": "email_body",
+      "language": "en",
+      "page_count": 0,
+      "processed": true,
+      "extracted_text": "Hi there,\n\nIs your practice leaving money on the table? Our proven patient acquisition system has helped over 3,000 clinics increase quarterly revenue by an average of 40%.\n\nBook a free 15-minute discovery call this week and receive our 'Practice Growth Playbook' at no charge.\n\nUnsubscribe | Manage preferences\nGrowthPartners Marketing Ltd",
+      "tables": [],
+      "images": [],
+      "doc_metadata": {
+        "char_count": "340"
+      },
+      "warnings": [],
+      "summary": "",
+      "looks_relevant": null,
+      "relevance_reason": "",
+      "summary_confidence": null,
+      "ocr_confidence": null
+    }
+  ],
+  "classifications": [
+    {
+      "category": "NOT_RELEVANT",
+      "applies": true,
+      "confidence": 0.35,
+      "reason": "[offline stub] 4 keyword signal(s) matched.",
+      "model_name": "offline-stub"
+    },
+    {
+      "category": "MI",
+      "applies": false,
+      "confidence": 0.2,
+      "reason": "[offline stub] 1 keyword signal(s) matched.",
+      "model_name": "offline-stub"
+    },
+    {
+      "category": "ICSR",
+      "applies": false,
+      "confidence": 0.15,
+      "reason": "[offline stub] 0 keyword signal(s) matched.",
+      "model_name": "offline-stub"
+    },
+    {
+      "category": "PQC",
+      "applies": false,
+      "confidence": 0.15,
+      "reason": "[offline stub] 0 keyword signal(s) matched.",
+      "model_name": "offline-stub"
+    }
+  ],
+  "extractions": [],
+  "review_actions": [],
+  "audit_events": [
+    {
+      "event_type": "EXTRACT",
+      "model_name": "offline-stub",
+      "is_stub": true,
+      "prompt_sha256": "",
+      "prompt_chars": 509,
+      "latency_ms": 0.0,
+      "succeeded": true,
+      "error": "",
+      "created_at": "2026-09-08T03:35:44.594062Z"
+    },
+    {
+      "event_type": "CLASSIFY",
+      "model_name": "offline-stub",
+      "is_stub": true,
+      "prompt_sha256": "5432c8f34ed4b77bd0db761d258fb6c7597ee9a1e84f0f06f3286619ef891e4c",
+      "prompt_chars": 509,
+      "latency_ms": 0.1,
+      "succeeded": true,
+      "error": "",
+      "created_at": "2026-09-08T03:35:44.591122Z"
+    }
+  ]
+}

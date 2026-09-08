@@ -1,0 +1,435 @@
+{
+  "id": 51,
+  "message_id": "178877439822.23128.4883898277093131154@clinevo-demo.example",
+  "subject": "Fatal outcome following Renalix therapy - urgent",
+  "sender": "Dr Sofia Marchetti <s.marchetti@ospedale-centrale.example>",
+  "recipient": "Pharmacovigilance Intake <pv-intake@clinevo-demo.example>",
+  "sent_at": "2026-03-17T15:00:00Z",
+  "received_at": "2026-09-08T03:35:35.620404Z",
+  "body_text": "Pharmacovigilance,\n\nI am reporting a fatal case. An 84-year-old male patient with chronic kidney disease stage 4 was started on Renalix 10 mg orally daily on 18 December 2025.\n\nOn 05 January 2026 he was admitted with severe hyperkalaemia and cardiac arrhythmia. Despite treatment he died on 07 January 2026. The treating team considers the event possibly related to Renalix.\n\nDr Sofia Marchetti\nOspedale Centrale, Milan, Italy",
+  "language": "en",
+  "processing_status": "READY",
+  "review_status": "PENDING",
+  "processing_ms": 61,
+  "error": "",
+  "warnings": [],
+  "headers": {
+    "Message-ID": "<178877439822.23128.4883898277093131154@clinevo-demo.example>",
+    "Date": "Tue, 17 Mar 2026 15:00:00 +0000",
+    "From": "Dr Sofia Marchetti <s.marchetti@ospedale-centrale.example>",
+    "To": "Pharmacovigilance Intake <pv-intake@clinevo-demo.example>",
+    "Subject": "Fatal outcome following Renalix therapy - urgent",
+    "X-Synthetic-Case-Id": "icsr_fatal_outcome",
+    "raw_byte_size": "5633",
+    "attachment_count": "1"
+  },
+  "categories": [
+    "ICSR"
+  ],
+  "documents": [
+    {
+      "document_id": "178877439822.23128.4883898277093131154@clinevo-demo.example::body",
+      "file_name": "(email body)",
+      "media_type": "text/plain",
+      "flavour": "email_body",
+      "language": "en",
+      "page_count": 0,
+      "processed": true,
+      "extracted_text": "Pharmacovigilance,\n\nI am reporting a fatal case. An 84-year-old male patient with chronic kidney disease stage 4 was started on Renalix 10 mg orally daily on 18 December 2025.\n\nOn 05 January 2026 he was admitted with severe hyperkalaemia and cardiac arrhythmia. Despite treatment he died on 07 January 2026. The treating team considers the event possibly related to Renalix.\n\nDr Sofia Marchetti\nOspedale Centrale, Milan, Italy",
+      "tables": [],
+      "images": [],
+      "doc_metadata": {
+        "char_count": "426"
+      },
+      "warnings": [],
+      "summary": "",
+      "looks_relevant": null,
+      "relevance_reason": "",
+      "summary_confidence": null,
+      "ocr_confidence": null
+    },
+    {
+      "document_id": "178877439822.23128.4883898277093131154@clinevo-demo.example::att0",
+      "file_name": "form_icsr_fatal_outcome.pdf",
+      "media_type": "application/pdf",
+      "flavour": "digital",
+      "language": "en",
+      "page_count": 1,
+      "processed": true,
+      "extracted_text": "Adverse Event Report Form\nSYNTHETIC TEST DOCUMENT - no real patient data\n1. Patient details\n2. Reporter details\n3. Suspect product\n4. Reaction\n5. Relevant laboratory results\nForm SYN-AE-01 | Synthetic document generated for testing purposes only.",
+      "tables": [
+        {
+          "header": [
+            "Age",
+            "84 years"
+          ],
+          "rows": [
+            [
+              "Sex",
+              "Male"
+            ],
+            [
+              "Weight",
+              "Not stated"
+            ],
+            [
+              "Relevant medical history",
+              "Chronic kidney disease stage 4"
+            ]
+          ],
+          "page": 1
+        },
+        {
+          "header": [
+            "Reporter name",
+            "Dr Sofia Marchetti"
+          ],
+          "rows": [
+            [
+              "Role / qualification",
+              "Physician"
+            ],
+            [
+              "Country",
+              "Italy"
+            ]
+          ],
+          "page": 1
+        },
+        {
+          "header": [
+            "Product name",
+            "Renalix"
+          ],
+          "rows": [
+            [
+              "Dose",
+              "10 mg daily"
+            ],
+            [
+              "Route of administration",
+              "Oral"
+            ],
+            [
+              "Therapy start date",
+              "18 December 2025"
+            ]
+          ],
+          "page": 1
+        },
+        {
+          "header": [
+            "Description of reaction",
+            "Severe hyperkalaemia and cardiac arrhythmia"
+          ],
+          "rows": [
+            [
+              "Date of onset",
+              "05 January 2026"
+            ],
+            [
+              "Outcome",
+              "Fatal"
+            ],
+            [
+              "Seriousness",
+              "Serious - death"
+            ]
+          ],
+          "page": 1
+        },
+        {
+          "header": [
+            "Test",
+            "Result",
+            "Unit",
+            "Reference range",
+            "Flag"
+          ],
+          "rows": [
+            [
+              "Serum potassium",
+              "6.8",
+              "mmol/L",
+              "3.5 - 5.0",
+              "HIGH"
+            ],
+            [
+              "Serum sodium",
+              "134",
+              "mmol/L",
+              "135 - 145",
+              "LOW"
+            ],
+            [
+              "Creatinine",
+              "212",
+              "umol/L",
+              "60 - 110",
+              "HIGH"
+            ],
+            [
+              "eGFR",
+              "28",
+              "mL/min",
+              "> 90",
+              "LOW"
+            ],
+            [
+              "Urea",
+              "18.4",
+              "mmol/L",
+              "2.5 - 7.8",
+              "HIGH"
+            ]
+          ],
+          "page": 1
+        }
+      ],
+      "images": [],
+      "doc_metadata": {
+        "Author": "Dr Sofia Marchetti",
+        "CreationDate": "D:20260907151638+05'00'",
+        "Creator": "(unspecified)",
+        "ModDate": "D:20260907151638+05'00'",
+        "Producer": "ReportLab PDF Library - (opensource)",
+        "Subject": "Fatal outcome following Renalix therapy - urgent",
+        "Title": "Adverse Event Report Form",
+        "Trapped": "False",
+        "byte_size": "3258"
+      },
+      "warnings": [],
+      "summary": "[offline stub] No model was available, so this document has not been summarised. It requires manual review.",
+      "looks_relevant": true,
+      "relevance_reason": "[offline stub] Relevance not assessed.",
+      "summary_confidence": 0.1,
+      "ocr_confidence": null
+    }
+  ],
+  "classifications": [
+    {
+      "category": "ICSR",
+      "applies": true,
+      "confidence": 0.4,
+      "reason": "[offline stub] 5 keyword signal(s) matched.",
+      "model_name": "offline-stub"
+    },
+    {
+      "category": "PQC",
+      "applies": false,
+      "confidence": 0.15,
+      "reason": "[offline stub] 0 keyword signal(s) matched.",
+      "model_name": "offline-stub"
+    },
+    {
+      "category": "MI",
+      "applies": false,
+      "confidence": 0.15,
+      "reason": "[offline stub] 0 keyword signal(s) matched.",
+      "model_name": "offline-stub"
+    },
+    {
+      "category": "NOT_RELEVANT",
+      "applies": false,
+      "confidence": 0.15,
+      "reason": "[offline stub] 0 keyword signal(s) matched.",
+      "model_name": "offline-stub"
+    }
+  ],
+  "extractions": [
+    {
+      "category": "ICSR",
+      "narrative": "[offline stub] No model available; no narrative was generated.",
+      "completeness": 0.0,
+      "model_name": "offline-stub",
+      "fields_data": [
+        {
+          "name": "patient_age",
+          "value": "Not stated",
+          "confidence": 0.0,
+          "is_stated": false,
+          "source_document": "",
+          "source_page": null,
+          "source_quote": "",
+          "quote_verified": false
+        },
+        {
+          "name": "patient_history",
+          "value": "Not stated",
+          "confidence": 0.0,
+          "is_stated": false,
+          "source_document": "",
+          "source_page": null,
+          "source_quote": "",
+          "quote_verified": false
+        },
+        {
+          "name": "patient_sex",
+          "value": "Not stated",
+          "confidence": 0.0,
+          "is_stated": false,
+          "source_document": "",
+          "source_page": null,
+          "source_quote": "",
+          "quote_verified": false
+        },
+        {
+          "name": "patient_weight",
+          "value": "Not stated",
+          "confidence": 0.0,
+          "is_stated": false,
+          "source_document": "",
+          "source_page": null,
+          "source_quote": "",
+          "quote_verified": false
+        },
+        {
+          "name": "product_dose",
+          "value": "Not stated",
+          "confidence": 0.0,
+          "is_stated": false,
+          "source_document": "",
+          "source_page": null,
+          "source_quote": "",
+          "quote_verified": false
+        },
+        {
+          "name": "product_name",
+          "value": "Not stated",
+          "confidence": 0.0,
+          "is_stated": false,
+          "source_document": "",
+          "source_page": null,
+          "source_quote": "",
+          "quote_verified": false
+        },
+        {
+          "name": "product_route",
+          "value": "Not stated",
+          "confidence": 0.0,
+          "is_stated": false,
+          "source_document": "",
+          "source_page": null,
+          "source_quote": "",
+          "quote_verified": false
+        },
+        {
+          "name": "product_start_date",
+          "value": "Not stated",
+          "confidence": 0.0,
+          "is_stated": false,
+          "source_document": "",
+          "source_page": null,
+          "source_quote": "",
+          "quote_verified": false
+        },
+        {
+          "name": "reaction",
+          "value": "Not stated",
+          "confidence": 0.0,
+          "is_stated": false,
+          "source_document": "",
+          "source_page": null,
+          "source_quote": "",
+          "quote_verified": false
+        },
+        {
+          "name": "reaction_onset",
+          "value": "Not stated",
+          "confidence": 0.0,
+          "is_stated": false,
+          "source_document": "",
+          "source_page": null,
+          "source_quote": "",
+          "quote_verified": false
+        },
+        {
+          "name": "reaction_outcome",
+          "value": "Not stated",
+          "confidence": 0.0,
+          "is_stated": false,
+          "source_document": "",
+          "source_page": null,
+          "source_quote": "",
+          "quote_verified": false
+        },
+        {
+          "name": "reporter_country",
+          "value": "Not stated",
+          "confidence": 0.0,
+          "is_stated": false,
+          "source_document": "",
+          "source_page": null,
+          "source_quote": "",
+          "quote_verified": false
+        },
+        {
+          "name": "reporter_name",
+          "value": "Not stated",
+          "confidence": 0.0,
+          "is_stated": false,
+          "source_document": "",
+          "source_page": null,
+          "source_quote": "",
+          "quote_verified": false
+        },
+        {
+          "name": "reporter_role",
+          "value": "Not stated",
+          "confidence": 0.0,
+          "is_stated": false,
+          "source_document": "",
+          "source_page": null,
+          "source_quote": "",
+          "quote_verified": false
+        },
+        {
+          "name": "seriousness",
+          "value": "Not stated",
+          "confidence": 0.0,
+          "is_stated": false,
+          "source_document": "",
+          "source_page": null,
+          "source_quote": "",
+          "quote_verified": false
+        }
+      ]
+    }
+  ],
+  "review_actions": [],
+  "audit_events": [
+    {
+      "event_type": "SUMMARY",
+      "model_name": "offline-stub",
+      "is_stub": true,
+      "prompt_sha256": "",
+      "prompt_chars": 0,
+      "latency_ms": 0.0,
+      "succeeded": true,
+      "error": "",
+      "created_at": "2026-09-08T03:35:35.745578Z"
+    },
+    {
+      "event_type": "EXTRACT",
+      "model_name": "offline-stub",
+      "is_stub": true,
+      "prompt_sha256": "",
+      "prompt_chars": 1979,
+      "latency_ms": 0.1,
+      "succeeded": true,
+      "error": "",
+      "created_at": "2026-09-08T03:35:35.743565Z"
+    },
+    {
+      "event_type": "CLASSIFY",
+      "model_name": "offline-stub",
+      "is_stub": true,
+      "prompt_sha256": "c956c5cdf9941988d6bc62f7c666a4f9af6abcb3d0e933e00fd00e795e8f0756",
+      "prompt_chars": 1979,
+      "latency_ms": 0.2,
+      "succeeded": true,
+      "error": "",
+      "created_at": "2026-09-08T03:35:35.742566Z"
+    }
+  ]
+}

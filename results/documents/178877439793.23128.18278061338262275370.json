@@ -1,0 +1,108 @@
+{
+  "id": 57,
+  "message_id": "178877439793.23128.18278061338262275370@clinevo-demo.example",
+  "subject": "Pulmoflex problem",
+  "sender": "Tomas Berg <tomas.berg@mailbox.example>",
+  "recipient": "Pharmacovigilance Intake <pv-intake@clinevo-demo.example>",
+  "sent_at": "2026-03-17T03:00:00Z",
+  "received_at": "2026-09-08T03:35:42.366964Z",
+  "body_text": "I started using the Pulmoflex inhaler two weeks ago and I have been getting short of breath and my heart races after each dose. I am 41. I have stopped using it.\n\nTomas",
+  "language": "en",
+  "processing_status": "READY",
+  "review_status": "PENDING",
+  "processing_ms": 3,
+  "error": "",
+  "warnings": [],
+  "headers": {
+    "Message-ID": "<178877439793.23128.18278061338262275370@clinevo-demo.example>",
+    "Date": "Tue, 17 Mar 2026 03:00:00 +0000",
+    "From": "Tomas Berg <tomas.berg@mailbox.example>",
+    "To": "Pharmacovigilance Intake <pv-intake@clinevo-demo.example>",
+    "Subject": "Pulmoflex problem",
+    "X-Synthetic-Case-Id": "icsr_sparse_breathless",
+    "raw_byte_size": "570",
+    "attachment_count": "0"
+  },
+  "categories": [
+    "NOT_RELEVANT"
+  ],
+  "documents": [
+    {
+      "document_id": "178877439793.23128.18278061338262275370@clinevo-demo.example::body",
+      "file_name": "(email body)",
+      "media_type": "text/plain",
+      "flavour": "email_body",
+      "language": "en",
+      "page_count": 0,
+      "processed": true,
+      "extracted_text": "I started using the Pulmoflex inhaler two weeks ago and I have been getting short of breath and my heart races after each dose. I am 41. I have stopped using it.\n\nTomas",
+      "tables": [],
+      "images": [],
+      "doc_metadata": {
+        "char_count": "168"
+      },
+      "warnings": [],
+      "summary": "",
+      "looks_relevant": null,
+      "relevance_reason": "",
+      "summary_confidence": null,
+      "ocr_confidence": null
+    }
+  ],
+  "classifications": [
+    {
+      "category": "ICSR",
+      "applies": false,
+      "confidence": 0.2,
+      "reason": "[offline stub] 1 keyword signal(s) matched.",
+      "model_name": "offline-stub"
+    },
+    {
+      "category": "PQC",
+      "applies": false,
+      "confidence": 0.15,
+      "reason": "[offline stub] 0 keyword signal(s) matched.",
+      "model_name": "offline-stub"
+    },
+    {
+      "category": "MI",
+      "applies": false,
+      "confidence": 0.15,
+      "reason": "[offline stub] 0 keyword signal(s) matched.",
+      "model_name": "offline-stub"
+    },
+    {
+      "category": "NOT_RELEVANT",
+      "applies": true,
+      "confidence": 0.15,
+      "reason": "[offline stub] 0 keyword signal(s) matched.",
+      "model_name": "offline-stub"
+    }
+  ],
+  "extractions": [],
+  "review_actions": [],
+  "audit_events": [
+    {
+      "event_type": "EXTRACT",
+      "model_name": "offline-stub",
+      "is_stub": true,
+      "prompt_sha256": "",
+      "prompt_chars": 289,
+      "latency_ms": 0.0,
+      "succeeded": true,
+      "error": "",
+      "created_at": "2026-09-08T03:35:42.394905Z"
+    },
+    {
+      "event_type": "CLASSIFY",
+      "model_name": "offline-stub",
+      "is_stub": true,
+      "prompt_sha256": "098cde9774d89fb4b3e2039e6e8b1eee576f3ccddddbcd79231fbef23b63ebe5",
+      "prompt_chars": 289,
+      "latency_ms": 0.1,
+      "succeeded": true,
+      "error": "",
+      "created_at": "2026-09-08T03:35:42.393907Z"
+    }
+  ]
+}

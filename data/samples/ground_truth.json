@@ -1,0 +1,537 @@
+{
+  "generated_at": "2026-09-07T09:46:38+00:00",
+  "seed": 20260907,
+  "note": "Entirely synthetic. No real patient data, and every product name is fictional. Regenerate with: python -m generator.generate",
+  "documents": [
+    {
+      "doc_id": "icsr_full_rash",
+      "kind": "email",
+      "file": "icsr_full_rash.eml",
+      "subject": "Adverse reaction report - Cardiozan - severe rash",
+      "sender": "a.osei@northgate-clinic.example",
+      "language": "en",
+      "categories": [
+        "ICSR"
+      ],
+      "attachments": [
+        {
+          "file": "form_icsr_full_rash.pdf",
+          "pdf_flavour": "digital",
+          "language": "en",
+          "processed": true
+        },
+        {
+          "file": "ward_roster.csv",
+          "pdf_flavour": null,
+          "language": null,
+          "processed": false
+        }
+      ],
+      "expected_fields": {
+        "patient_age": "54 years",
+        "patient_sex": "Female",
+        "patient_weight": "68 kg",
+        "patient_history": "Hypertension, type 2 diabetes",
+        "reporter_name": "Dr Amara Osei",
+        "reporter_role": "Physician",
+        "reporter_country": "United Kingdom",
+        "product_name": "Cardiozan",
+        "product_dose": "20 mg once daily",
+        "product_route": "Oral",
+        "product_start_date": "03 March 2026",
+        "reaction": "Widespread erythematous rash with pruritus",
+        "reaction_onset": "11 March 2026",
+        "reaction_outcome": "Recovered",
+        "seriousness": "Non-serious"
+      },
+      "notes": "Complete report: all four ICSR elements plus most detail fields."
+    },
+    {
+      "doc_id": "icsr_full_hepatic",
+      "kind": "email",
+      "file": "icsr_full_hepatic.eml",
+      "subject": "Serious adverse event - Hepatrol - hospitalisation",
+      "sender": "l.wei@riverside-hospital.example",
+      "language": "en",
+      "categories": [
+        "ICSR"
+      ],
+      "attachments": [
+        {
+          "file": "form_icsr_full_hepatic.pdf",
+          "pdf_flavour": "digital",
+          "language": "en",
+          "processed": true
+        }
+      ],
+      "expected_fields": {
+        "patient_age": "67 years",
+        "patient_sex": "Male",
+        "patient_weight": "81 kg",
+        "patient_history": "No significant prior liver disease",
+        "reporter_name": "Dr Liang Wei",
+        "reporter_role": "Physician (Consultant Hepatologist)",
+        "reporter_country": "Singapore",
+        "product_name": "Hepatrol",
+        "product_dose": "500 mg twice daily",
+        "product_route": "Oral",
+        "product_start_date": "12 January 2026",
+        "reaction": "Jaundice, dark urine, fatigue, deranged liver function tests",
+        "reaction_onset": "02 February 2026",
+        "reaction_outcome": "Recovering",
+        "seriousness": "Serious - hospitalisation"
+      },
+      "notes": "Serious case; seriousness must be picked up from hospitalisation."
+    },
+    {
+      "doc_id": "icsr_sparse_dizzy",
+      "kind": "email",
+      "file": "icsr_sparse_dizzy.eml",
+      "subject": "my mother had a bad turn on her tablets",
+      "sender": "j.whitfield88@mailbox.example",
+      "language": "en",
+      "categories": [
+        "ICSR"
+      ],
+      "attachments": [],
+      "expected_fields": {
+        "patient_age": "79 years",
+        "patient_sex": "Female",
+        "patient_weight": "Not stated",
+        "patient_history": "Not stated",
+        "reporter_name": "Janet Whitfield",
+        "reporter_role": "Consumer (patient's daughter)",
+        "reporter_country": "Not stated",
+        "product_name": "Glucostat",
+        "product_dose": "Not stated",
+        "product_route": "Not stated",
+        "product_start_date": "Not stated",
+        "reaction": "Dizziness and a fall",
+        "reaction_onset": "Approximately one week before the report",
+        "reaction_outcome": "Not stated",
+        "seriousness": "Not stated"
+      },
+      "notes": "Sparse consumer report. Four elements are present but loosely: patient (mother), reporter (daughter), drug, event. Most detail fields must come back Not stated. Also asks a question, but the reaction dominates."
+    },
+    {
+      "doc_id": "icsr_sparse_breathless",
+      "kind": "email",
+      "file": "icsr_sparse_breathless.eml",
+      "subject": "Pulmoflex problem",
+      "sender": "tomas.berg@mailbox.example",
+      "language": "en",
+      "categories": [
+        "ICSR"
+      ],
+      "attachments": [],
+      "expected_fields": {
+        "patient_age": "41 years",
+        "patient_sex": "Not stated",
+        "patient_weight": "Not stated",
+        "patient_history": "Not stated",
+        "reporter_name": "Tomas Berg",
+        "reporter_role": "Consumer (patient)",
+        "reporter_country": "Not stated",
+        "product_name": "Pulmoflex",
+        "product_dose": "Not stated",
+        "product_route": "Inhalation",
+        "product_start_date": "Not stated",
+        "reaction": "Shortness of breath and palpitations",
+        "reaction_onset": "Within two weeks of starting treatment",
+        "reaction_outcome": "Not stated - product discontinued",
+        "seriousness": "Not stated"
+      },
+      "notes": "Self-reporting patient; sex and weight genuinely absent."
+    },
+    {
+      "doc_id": "icsr_and_pqc_combined",
+      "kind": "email",
+      "file": "icsr_and_pqc_combined.eml",
+      "subject": "Discoloured Dermacalm cream caused a burning rash",
+      "sender": "priya.raman@mailbox.example",
+      "language": "en",
+      "categories": [
+        "ICSR",
+        "PQC"
+      ],
+      "attachments": [
+        {
+          "file": "scan_icsr_and_pqc_combined.pdf",
+          "pdf_flavour": "scanned",
+          "language": "en",
+          "processed": true
+        }
+      ],
+      "expected_fields": {
+        "patient_age": "33 years",
+        "patient_sex": "Not stated",
+        "patient_weight": "Not stated",
+        "patient_history": "Not stated",
+        "reporter_name": "Priya Raman",
+        "reporter_role": "Consumer (patient)",
+        "reporter_country": "United Kingdom",
+        "product_name": "Dermacalm",
+        "product_dose": "Not stated",
+        "product_route": "Topical",
+        "product_start_date": "Not stated",
+        "reaction": "Burning sensation and skin blistering",
+        "reaction_onset": "Within one hour of application",
+        "reaction_outcome": "Recovering",
+        "seriousness": "Non-serious"
+      },
+      "notes": "Deliberately dual-label: a genuine adverse reaction AND a genuine product defect. A system that forces one label gets this wrong."
+    },
+    {
+      "doc_id": "icsr_fatal_outcome",
+      "kind": "email",
+      "file": "icsr_fatal_outcome.eml",
+      "subject": "Fatal outcome following Renalix therapy - urgent",
+      "sender": "s.marchetti@ospedale-centrale.example",
+      "language": "en",
+      "categories": [
+        "ICSR"
+      ],
+      "attachments": [
+        {
+          "file": "form_icsr_fatal_outcome.pdf",
+          "pdf_flavour": "digital",
+          "language": "en",
+          "processed": true
+        }
+      ],
+      "expected_fields": {
+        "patient_age": "84 years",
+        "patient_sex": "Male",
+        "patient_weight": "Not stated",
+        "patient_history": "Chronic kidney disease stage 4",
+        "reporter_name": "Dr Sofia Marchetti",
+        "reporter_role": "Physician",
+        "reporter_country": "Italy",
+        "product_name": "Renalix",
+        "product_dose": "10 mg daily",
+        "product_route": "Oral",
+        "product_start_date": "18 December 2025",
+        "reaction": "Severe hyperkalaemia and cardiac arrhythmia",
+        "reaction_onset": "05 January 2026",
+        "reaction_outcome": "Fatal",
+        "seriousness": "Serious - death"
+      },
+      "notes": "Fatal outcome; seriousness must be classified as death."
+    },
+    {
+      "doc_id": "icsr_pregnancy_context",
+      "kind": "email",
+      "file": "icsr_pregnancy_context.eml",
+      "subject": "Adverse event during pregnancy - Osteovance",
+      "sender": "h.achebe@communitycare.example",
+      "language": "en",
+      "categories": [
+        "ICSR"
+      ],
+      "attachments": [
+        {
+          "file": "form_icsr_pregnancy_context.pdf",
+          "pdf_flavour": "digital",
+          "language": "en",
+          "processed": true
+        }
+      ],
+      "expected_fields": {
+        "patient_age": "29 years",
+        "patient_sex": "Female",
+        "patient_weight": "Not stated",
+        "patient_history": "22 weeks pregnant",
+        "reporter_name": "Helen Achebe",
+        "reporter_role": "Nurse practitioner",
+        "reporter_country": "Ireland",
+        "product_name": "Osteovance",
+        "product_dose": "1000 mg once daily",
+        "product_route": "Oral",
+        "product_start_date": "Not stated",
+        "reaction": "Severe nausea and vomiting leading to dehydration",
+        "reaction_onset": "Approximately four days after starting treatment",
+        "reaction_outcome": "Improving",
+        "seriousness": "Non-serious"
+      },
+      "notes": "Healthcare professional reporter who is not a physician."
+    },
+    {
+      "doc_id": "icsr_ambiguous_timing",
+      "kind": "email",
+      "file": "icsr_ambiguous_timing.eml",
+      "subject": "Possible reaction - Neurolept-X",
+      "sender": "k.mensah@westside-practice.example",
+      "language": "en",
+      "categories": [
+        "ICSR"
+      ],
+      "attachments": [
+        {
+          "file": "form_icsr_ambiguous_timing.pdf",
+          "pdf_flavour": "digital",
+          "language": "en",
+          "processed": true
+        }
+      ],
+      "expected_fields": {
+        "patient_age": "46 years",
+        "patient_sex": "Male",
+        "patient_weight": "Not stated",
+        "patient_history": "Not stated",
+        "reporter_name": "Dr Kwame Mensah",
+        "reporter_role": "Physician",
+        "reporter_country": "Ghana",
+        "product_name": "Neurolept-X",
+        "product_dose": "Not stated",
+        "product_route": "Not stated",
+        "product_start_date": "Not stated",
+        "reaction": "Tremor and insomnia",
+        "reaction_onset": "Not stated",
+        "reaction_outcome": "Not stated",
+        "seriousness": "Not stated"
+      },
+      "notes": "Explicitly uncertain timing - onset must NOT be invented."
+    },
+    {
+      "doc_id": "icsr_german",
+      "kind": "email",
+      "file": "icsr_german.eml",
+      "subject": "Meldung einer Nebenwirkung - Cardiozan",
+      "sender": "m.hoffmann@praxis-hoffmann.example",
+      "language": "de",
+      "categories": [
+        "ICSR"
+      ],
+      "attachments": [
+        {
+          "file": "form_icsr_german.pdf",
+          "pdf_flavour": "non_english",
+          "language": "de",
+          "processed": true
+        }
+      ],
+      "expected_fields": {
+        "patient_age": "61 years",
+        "patient_sex": "Female",
+        "patient_weight": "74 kg",
+        "patient_history": "Not stated",
+        "reporter_name": "Dr Markus Hoffmann",
+        "reporter_role": "Physician",
+        "reporter_country": "Germany",
+        "product_name": "Cardiozan",
+        "product_dose": "20 mg once daily",
+        "product_route": "Oral",
+        "product_start_date": "05 February 2026",
+        "reaction": "Severe headache and dizziness",
+        "reaction_onset": "19 February 2026",
+        "reaction_outcome": "Recovering",
+        "seriousness": "Non-serious"
+      },
+      "notes": "German. Fields are expected in English after translation."
+    },
+    {
+      "doc_id": "icsr_spanish",
+      "kind": "email",
+      "file": "icsr_spanish.eml",
+      "subject": "Notificacion de reaccion adversa - Pulmoflex",
+      "sender": "c.ruiz@clinica-delmar.example",
+      "language": "es",
+      "categories": [
+        "ICSR"
+      ],
+      "attachments": [
+        {
+          "file": "form_icsr_spanish.pdf",
+          "pdf_flavour": "non_english",
+          "language": "es",
+          "processed": true
+        }
+      ],
+      "expected_fields": {
+        "patient_age": "38 years",
+        "patient_sex": "Male",
+        "patient_weight": "79 kg",
+        "patient_history": "No relevant history",
+        "reporter_name": "Dra Carmen Ruiz",
+        "reporter_role": "Physician",
+        "reporter_country": "Spain",
+        "product_name": "Pulmoflex",
+        "product_dose": "Not stated",
+        "product_route": "Inhalation",
+        "product_start_date": "10 January 2026",
+        "reaction": "Generalised urticaria and lip swelling",
+        "reaction_onset": "24 January 2026",
+        "reaction_outcome": "Recovered",
+        "seriousness": "Non-serious"
+      },
+      "notes": "Spanish. Fields are expected in English after translation."
+    },
+    {
+      "doc_id": "pqc_broken_seal",
+      "kind": "email",
+      "file": "pqc_broken_seal.eml",
+      "subject": "Damaged packaging - Cardiozan batch CZ-2208-A",
+      "sender": "m.delaney@pharmacy-brookfield.example",
+      "language": "en",
+      "categories": [
+        "PQC"
+      ],
+      "attachments": [],
+      "expected_fields": {
+        "product_name": "Cardiozan",
+        "batch_number": "CZ-2208-A",
+        "defect_description": "Crushed cartons and broken tamper-evident seals",
+        "photo_mentioned": "No"
+      },
+      "notes": "Pure PQC: explicitly states no patient exposure, so NOT an ICSR."
+    },
+    {
+      "doc_id": "pqc_discoloured_photo",
+      "kind": "email",
+      "file": "pqc_discoloured_photo.eml",
+      "subject": "Glucostat tablets wrong colour - photo attached",
+      "sender": "ana.beltran@mailbox.example",
+      "language": "en",
+      "categories": [
+        "PQC"
+      ],
+      "attachments": [
+        {
+          "file": "scan_pqc_discoloured_photo.pdf",
+          "pdf_flavour": "scanned",
+          "language": "en",
+          "processed": true
+        }
+      ],
+      "expected_fields": {
+        "product_name": "Glucostat",
+        "batch_number": "GS-9931-C",
+        "defect_description": "Tablets pale yellow instead of white; some chipped",
+        "photo_mentioned": "Yes"
+      },
+      "notes": "PQC with a photo reference - photo_mentioned must be Yes."
+    },
+    {
+      "doc_id": "mi_dosing_renal",
+      "kind": "email",
+      "file": "mi_dosing_renal.eml",
+      "subject": "Dosing query - Renalix in renal impairment",
+      "sender": "y.tanaka@sakura-medical.example",
+      "language": "en",
+      "categories": [
+        "MI"
+      ],
+      "attachments": [],
+      "expected_fields": {
+        "question": "What is the recommended Renalix dose adjustment for patients with eGFR 30-45 mL/min?",
+        "product_or_topic": "Renalix - dosing in renal impairment"
+      },
+      "notes": "Explicitly states no harm occurred - must not be classed as ICSR."
+    },
+    {
+      "doc_id": "mi_interaction",
+      "kind": "email",
+      "file": "mi_interaction.eml",
+      "subject": "Interaction question about Neurolept-X",
+      "sender": "f.alrashid@cityhealth.example",
+      "language": "en",
+      "categories": [
+        "MI"
+      ],
+      "attachments": [],
+      "expected_fields": {
+        "question": "Can Neurolept-X be taken with over-the-counter antihistamines, and should it be taken with food?",
+        "product_or_topic": "Neurolept-X - drug interactions and administration"
+      },
+      "notes": "Two questions in one message; both should be captured."
+    },
+    {
+      "doc_id": "irrelevant_marketing",
+      "kind": "email",
+      "file": "irrelevant_marketing.eml",
+      "subject": "Boost your clinic's revenue by 40% this quarter!",
+      "sender": "offers@growthpartners.example",
+      "language": "en",
+      "categories": [
+        "NOT_RELEVANT"
+      ],
+      "attachments": [],
+      "expected_fields": {},
+      "notes": "Obvious marketing spam - no product, no patient, no question."
+    },
+    {
+      "doc_id": "irrelevant_internal",
+      "kind": "email",
+      "file": "irrelevant_internal.eml",
+      "subject": "Reminder: office closure for the bank holiday",
+      "sender": "facilities@internal.example",
+      "language": "en",
+      "categories": [
+        "NOT_RELEVANT"
+      ],
+      "attachments": [],
+      "expected_fields": {},
+      "notes": "Internal admin chatter. Mentions 'samples' and a fridge, which is a deliberate near-miss for a keyword-matching classifier."
+    },
+    {
+      "doc_id": "art_single_case",
+      "kind": "article",
+      "file": "art_single_case.pdf",
+      "title": "Acute hepatic injury following Hepatrol therapy: a case report",
+      "language": "en",
+      "pdf_flavour": "article",
+      "categories": [],
+      "case_count": 1,
+      "reportable": true,
+      "notes": "One identifiable case. References must be ignored by extraction."
+    },
+    {
+      "doc_id": "art_two_cases",
+      "kind": "article",
+      "file": "art_two_cases.pdf",
+      "title": "Two cases of severe cutaneous reaction associated with Dermacalm",
+      "language": "en",
+      "pdf_flavour": "article",
+      "categories": [],
+      "case_count": 2,
+      "reportable": true,
+      "notes": "Two distinct cases in one article - must be split, not merged."
+    },
+    {
+      "doc_id": "art_review_no_case",
+      "kind": "article",
+      "file": "art_review_no_case.pdf",
+      "title": "Mechanisms of drug-induced QT prolongation: a narrative review",
+      "language": "en",
+      "pdf_flavour": "article",
+      "categories": [],
+      "case_count": 0,
+      "reportable": false,
+      "notes": "Review article with NO identifiable case - the key negative example."
+    },
+    {
+      "doc_id": "art_aggregate_only",
+      "kind": "article",
+      "file": "art_aggregate_only.pdf",
+      "title": "Post-marketing surveillance of Glucostat: a cohort analysis",
+      "language": "en",
+      "pdf_flavour": "article",
+      "categories": [],
+      "case_count": 0,
+      "reportable": false,
+      "notes": "Aggregate data only. Adverse events ARE described, but no identifiable individual - a hard negative for a naive keyword classifier."
+    },
+    {
+      "doc_id": "art_case_in_discussion",
+      "kind": "article",
+      "file": "art_case_in_discussion.pdf",
+      "title": "Renalix and electrolyte disturbance: clinical implications",
+      "language": "en",
+      "pdf_flavour": "article",
+      "categories": [],
+      "case_count": 1,
+      "reportable": true,
+      "notes": "Case is buried inside a discussion piece, not a dedicated report."
+    }
+  ]
+}

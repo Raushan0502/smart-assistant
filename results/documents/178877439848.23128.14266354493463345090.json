@@ -1,0 +1,108 @@
+{
+  "id": 59,
+  "message_id": "178877439848.23128.14266354493463345090@clinevo-demo.example",
+  "subject": "Reminder: office closure for the bank holiday",
+  "sender": "Facilities Team <facilities@internal.example>",
+  "recipient": "Pharmacovigilance Intake <pv-intake@clinevo-demo.example>",
+  "sent_at": "2026-03-20T03:00:00Z",
+  "received_at": "2026-09-08T03:35:44.471279Z",
+  "body_text": "All,\n\nA reminder that the office will be closed on Monday 25 May for the bank holiday. Building access cards will not work between 18:00 Friday and 07:00 Tuesday.\n\nPlease make sure any samples in the third-floor fridge are logged before you leave on Friday.\n\nFacilities Team",
+  "language": "en",
+  "processing_status": "READY",
+  "review_status": "PENDING",
+  "processing_ms": 3,
+  "error": "",
+  "warnings": [],
+  "headers": {
+    "Message-ID": "<178877439848.23128.14266354493463345090@clinevo-demo.example>",
+    "Date": "Fri, 20 Mar 2026 03:00:00 +0000",
+    "From": "Facilities Team <facilities@internal.example>",
+    "To": "Pharmacovigilance Intake <pv-intake@clinevo-demo.example>",
+    "Subject": "Reminder: office closure for the bank holiday",
+    "X-Synthetic-Case-Id": "irrelevant_internal",
+    "raw_byte_size": "709",
+    "attachment_count": "0"
+  },
+  "categories": [
+    "NOT_RELEVANT"
+  ],
+  "documents": [
+    {
+      "document_id": "178877439848.23128.14266354493463345090@clinevo-demo.example::body",
+      "file_name": "(email body)",
+      "media_type": "text/plain",
+      "flavour": "email_body",
+      "language": "en",
+      "page_count": 0,
+      "processed": true,
+      "extracted_text": "All,\n\nA reminder that the office will be closed on Monday 25 May for the bank holiday. Building access cards will not work between 18:00 Friday and 07:00 Tuesday.\n\nPlease make sure any samples in the third-floor fridge are logged before you leave on Friday.\n\nFacilities Team",
+      "tables": [],
+      "images": [],
+      "doc_metadata": {
+        "char_count": "274"
+      },
+      "warnings": [],
+      "summary": "",
+      "looks_relevant": null,
+      "relevance_reason": "",
+      "summary_confidence": null,
+      "ocr_confidence": null
+    }
+  ],
+  "classifications": [
+    {
+      "category": "NOT_RELEVANT",
+      "applies": true,
+      "confidence": 0.25,
+      "reason": "[offline stub] 2 keyword signal(s) matched.",
+      "model_name": "offline-stub"
+    },
+    {
+      "category": "ICSR",
+      "applies": false,
+      "confidence": 0.15,
+      "reason": "[offline stub] 0 keyword signal(s) matched.",
+      "model_name": "offline-stub"
+    },
+    {
+      "category": "PQC",
+      "applies": false,
+      "confidence": 0.15,
+      "reason": "[offline stub] 0 keyword signal(s) matched.",
+      "model_name": "offline-stub"
+    },
+    {
+      "category": "MI",
+      "applies": false,
+      "confidence": 0.15,
+      "reason": "[offline stub] 0 keyword signal(s) matched.",
+      "model_name": "offline-stub"
+    }
+  ],
+  "extractions": [],
+  "review_actions": [],
+  "audit_events": [
+    {
+      "event_type": "EXTRACT",
+      "model_name": "offline-stub",
+      "is_stub": true,
+      "prompt_sha256": "",
+      "prompt_chars": 429,
+      "latency_ms": 0.0,
+      "succeeded": true,
+      "error": "",
+      "created_at": "2026-09-08T03:35:44.499548Z"
+    },
+    {
+      "event_type": "CLASSIFY",
+      "model_name": "offline-stub",
+      "is_stub": true,
+      "prompt_sha256": "0251142866cf58944db77243223f81ad4298b8727e5a4d6ad6a81c7b85e1e0d6",
+      "prompt_chars": 429,
+      "latency_ms": 0.1,
+      "succeeded": true,
+      "error": "",
+      "created_at": "2026-09-08T03:35:44.497536Z"
+    }
+  ]
+}
