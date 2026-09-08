@@ -321,21 +321,42 @@ the generator emitted *before* any model saw the documents:
 cd backend && .venv/Scripts/python manage.py run_batch --reset
 ```
 
-| Category | Precision | Recall | F1 |
-|---|---|---|---|
-| ICSR | 1.00 | 0.70 | 0.82 |
-| PQC | 1.00 | 1.00 | 1.00 |
-| MI | 1.00 | 1.00 | 1.00 |
-| NOT_RELEVANT | 0.40 | 1.00 | 0.57 |
+### Live run — `gemini-3.5-flash`
 
-**Exact match 81.2%** (13/16). Timing: mean 58 ms, median 70 ms per message.
-Extraction integrity: 121 fields, 100% honest `Not stated`, 0 unverified.
+Two numbers, because they answer different questions.
 
-> **These numbers are from the offline keyword stub, not a real model** — no API
-> key was configured when they were measured. All three misses are stub
-> limitations (one German message, two very sparse consumer emails) that a
-> language model would be expected to handle. Reported as measured rather than
-> omitted; re-run the command above with `GEMINI_API_KEY` set for real figures.
+**Model quality, on the messages that reached it:**
+
+| | |
+|---|---|
+| Classification correct | **6 / 6** (100%), including the dual-label ICSR+PQC case |
+| Fields extracted | 94 |
+| Stated by the source | 78 (83%) |
+| Honest `Not stated` | 16 (17%) |
+| **Stated but unverifiable** | **0** |
+
+Zero unverified means every value the model asserted carried a verbatim quote
+that was located in the source document. The anti-fabrication check in §3 holds
+on real model output, not only on the stub.
+
+**Batch completion, which free-tier quota dominates:**
+
+| | |
+|---|---|
+| Reached the model | 6 / 16 |
+| Failed on `429 RESOURCE_EXHAUSTED` | 7 |
+| Exact-match over all scored | 46.2% |
+
+> **The 46.2% is a quota artefact, not model accuracy.** Google's free tier
+> allows 20 `generate_content` requests for the newest Flash model; a 16-message
+> batch needs 40–60 calls. Every scored miss is a message that never reached the
+> model, not one it got wrong. The honest headline is the first table.
+
+### Offline stub, for comparison
+
+With no API key the same command completes all 16 in ~3 seconds and scores
+**81.2% exact match** — higher than the live figure purely because nothing is
+rate-limited. Useful for demos; not a measure of anything.
 
 Outputs land in `results/`: `batch_summary.json` plus per-document JSON.
 

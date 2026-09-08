@@ -1,22 +1,18 @@
 {
-  "id": 101,
+  "id": 117,
   "message_id": "178885269749.19284.10488422672074896200@clinevo-demo.example",
   "subject": "Adverse reaction report - Cardiozan - severe rash",
   "sender": "Dr Amara Osei <a.osei@northgate-clinic.example>",
   "recipient": "Pharmacovigilance Intake <pv-intake@clinevo-demo.example>",
   "sent_at": "2026-03-16T09:00:00Z",
-  "received_at": "2026-09-08T08:00:32.039301Z",
+  "received_at": "2026-09-08T08:18:47.703214Z",
   "body_text": "Dear Safety Team,\n\nI am reporting an adverse event in one of my patients.\n\nThe patient is a 54-year-old female, weight 68 kg, with a history of hypertension and type 2 diabetes. She began taking Cardiozan 20 mg orally once daily on 03 March 2026 for blood pressure control.\n\nOn 11 March 2026, eight days after starting treatment, she developed a widespread erythematous rash across the trunk and upper arms, with associated pruritus. She attended our clinic the same day. Cardiozan was discontinued immediately and she was given oral antihistamines. The rash resolved over the following six days and she has now fully recovered.\n\nShe was not hospitalised and there were no other serious sequelae.\n\nPlease let me know if you require any further detail.\n\nKind regards,\nDr Amara Osei\nNorthgate Clinic, Manchester, United Kingdom",
   "language": "en",
-  "processing_status": "FAILED",
+  "processing_status": "READY",
   "review_status": "PENDING",
-  "processing_ms": 182834,
-  "error": "Classification produced no verdicts; the message is unclassified. Model call failed after 4 attempts: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-3.6-flash\\nPlease retry in 59.568956611s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-3.6-flash'}, 'quotaValue': '20'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '59s'}]}}",
-  "warnings": [
-    "Classification failed: Model call failed after 4 attempts: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-3.6-flash\\nPlease retry in 59.568956611s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-3.6-flash'}, 'quotaValue': '20'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '59s'}]}}",
-    "form_icsr_full_rash.pdf: summary failed (Model call failed after 4 attempts: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-3.6-flash\\nPlease retry in 28.114016889s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-3.6-flash'}, 'quotaValue': '20'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '28s'}]}}).",
-    "Classification produced no verdicts; the message is unclassified. Model call failed after 4 attempts: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-3.6-flash\\nPlease retry in 59.568956611s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-3.6-flash'}, 'quotaValue': '20'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '59s'}]}}"
-  ],
+  "processing_ms": 24064,
+  "error": "",
+  "warnings": [],
   "headers": {
     "Message-ID": "<178885269749.19284.10488422672074896200@clinevo-demo.example>",
     "Date": "Mon, 16 Mar 2026 09:00:00 +0000",
@@ -27,7 +23,9 @@
     "raw_byte_size": "6351",
     "attachment_count": "2"
   },
-  "categories": [],
+  "categories": [
+    "ICSR"
+  ],
   "documents": [
     {
       "document_id": "178885269749.19284.10488422672074896200@clinevo-demo.example::body",
@@ -44,6 +42,29 @@
         "char_count": "825"
       },
       "warnings": [],
+      "summary": "",
+      "looks_relevant": null,
+      "relevance_reason": "",
+      "summary_confidence": null,
+      "ocr_confidence": null
+    },
+    {
+      "document_id": "178885269749.19284.10488422672074896200@clinevo-demo.example::att1",
+      "file_name": "ward_roster.csv",
+      "media_type": "application/octet-stream",
+      "flavour": "unknown",
+      "language": "en",
+      "page_count": 0,
+      "processed": false,
+      "extracted_text": "",
+      "tables": [],
+      "images": [],
+      "doc_metadata": {
+        "byte_size": "74"
+      },
+      "warnings": [
+        "Attachment type 'application/octet-stream' is not processed; logged for audit only."
+      ],
       "summary": "",
       "looks_relevant": null,
       "relevance_reason": "",
@@ -201,61 +222,237 @@
         "byte_size": "3284"
       },
       "warnings": [],
-      "summary": "",
-      "looks_relevant": null,
-      "relevance_reason": "",
-      "summary_confidence": null,
-      "ocr_confidence": null
-    },
-    {
-      "document_id": "178885269749.19284.10488422672074896200@clinevo-demo.example::att1",
-      "file_name": "ward_roster.csv",
-      "media_type": "application/octet-stream",
-      "flavour": "unknown",
-      "language": "en",
-      "page_count": 0,
-      "processed": false,
-      "extracted_text": "",
-      "tables": [],
-      "images": [],
-      "doc_metadata": {
-        "byte_size": "74"
-      },
-      "warnings": [
-        "Attachment type 'application/octet-stream' is not processed; logged for audit only."
-      ],
-      "summary": "",
-      "looks_relevant": null,
-      "relevance_reason": "",
-      "summary_confidence": null,
+      "summary": "This document is a synthetic Adverse Event Report Form generated for testing purposes. The patient is a 54-year-old female weighing 68 kg with a medical history of hypertension and type 2 diabetes. The reporter is Dr. Amara Osei, a physician based in the United Kingdom. The suspect product involved is Cardiozan, administered orally at a dose of 20 mg once daily starting on 03 March 2026. The patient experienced a widespread erythematous rash with pruritus starting on 11 March 2026. The outcome of the reaction is reported as recovered, and the event is classified as non-serious. A laboratory results table shows notable high values for white cell count at 11.8 x10^9/L, eosinophils at 0.9 x10^9/L, and C-reactive protein at 24 mg/L. Haemoglobin and platelet levels are also listed in the table and are flagged as normal. Several expected details are missing from this report. The document does not state the stop date of the suspect product or whether the therapy was discontinued. It is not stated if any corrective treatment was administered for the rash. The patient's initials, date of birth, and specific reporter contact details or institution are also not stated.",
+      "looks_relevant": true,
+      "relevance_reason": "The document is an adverse event report form detailing a patient reaction to the suspect product Cardiozan.",
+      "summary_confidence": 1.0,
       "ocr_confidence": null
     }
   ],
-  "classifications": [],
-  "extractions": [],
+  "classifications": [
+    {
+      "category": "NOT_RELEVANT",
+      "applies": false,
+      "confidence": 1.0,
+      "reason": "The message is highly relevant as it is a valid safety report (ICSR).",
+      "model_name": "gemini-3.5-flash"
+    },
+    {
+      "category": "MI",
+      "applies": false,
+      "confidence": 1.0,
+      "reason": "The sender is reporting an adverse event and does not ask any medical information questions.",
+      "model_name": "gemini-3.5-flash"
+    },
+    {
+      "category": "PQC",
+      "applies": false,
+      "confidence": 1.0,
+      "reason": "There is no mention of any product quality issues or physical defects with Cardiozan.",
+      "model_name": "gemini-3.5-flash"
+    },
+    {
+      "category": "ICSR",
+      "applies": true,
+      "confidence": 1.0,
+      "reason": "The message contains an identifiable patient (54-year-old female), reporter (Dr Amara Osei), product (Cardiozan), and adverse event (severe rash).",
+      "model_name": "gemini-3.5-flash"
+    }
+  ],
+  "extractions": [
+    {
+      "category": "ICSR",
+      "narrative": "A 54-year-old female patient with a history of hypertension and type 2 diabetes started taking Cardiozan 20 mg orally once daily on 03 March 2026. On 11 March 2026, she developed a widespread erythematous rash with pruritus. Cardiozan was discontinued, and she was treated with oral antihistamines. The rash resolved, and she has fully recovered. The event was non-serious and did not require hospitalisation.",
+      "completeness": 1.0,
+      "model_name": "gemini-3.5-flash",
+      "fields_data": [
+        {
+          "name": "patient_age",
+          "value": "54 years",
+          "confidence": 1.0,
+          "is_stated": true,
+          "source_document": "[form_icsr_full_rash.pdf p.1]",
+          "source_page": null,
+          "source_quote": "54 years",
+          "quote_verified": true
+        },
+        {
+          "name": "patient_history",
+          "value": "Hypertension, type 2 diabetes",
+          "confidence": 1.0,
+          "is_stated": true,
+          "source_document": "[form_icsr_full_rash.pdf p.1]",
+          "source_page": null,
+          "source_quote": "Hypertension, type 2 diabetes",
+          "quote_verified": true
+        },
+        {
+          "name": "patient_sex",
+          "value": "Female",
+          "confidence": 1.0,
+          "is_stated": true,
+          "source_document": "[form_icsr_full_rash.pdf p.1]",
+          "source_page": null,
+          "source_quote": "Female",
+          "quote_verified": true
+        },
+        {
+          "name": "patient_weight",
+          "value": "68 kg",
+          "confidence": 1.0,
+          "is_stated": true,
+          "source_document": "[form_icsr_full_rash.pdf p.1]",
+          "source_page": null,
+          "source_quote": "68 kg",
+          "quote_verified": true
+        },
+        {
+          "name": "product_dose",
+          "value": "20 mg once daily",
+          "confidence": 1.0,
+          "is_stated": true,
+          "source_document": "[form_icsr_full_rash.pdf p.1]",
+          "source_page": null,
+          "source_quote": "20 mg once daily",
+          "quote_verified": true
+        },
+        {
+          "name": "product_name",
+          "value": "Cardiozan",
+          "confidence": 1.0,
+          "is_stated": true,
+          "source_document": "[form_icsr_full_rash.pdf p.1]",
+          "source_page": null,
+          "source_quote": "Cardiozan",
+          "quote_verified": true
+        },
+        {
+          "name": "product_route",
+          "value": "Oral",
+          "confidence": 1.0,
+          "is_stated": true,
+          "source_document": "[form_icsr_full_rash.pdf p.1]",
+          "source_page": null,
+          "source_quote": "Oral",
+          "quote_verified": true
+        },
+        {
+          "name": "product_start_date",
+          "value": "03 March 2026",
+          "confidence": 1.0,
+          "is_stated": true,
+          "source_document": "[form_icsr_full_rash.pdf p.1]",
+          "source_page": null,
+          "source_quote": "03 March 2026",
+          "quote_verified": true
+        },
+        {
+          "name": "reaction",
+          "value": "Widespread erythematous rash with pruritus",
+          "confidence": 1.0,
+          "is_stated": true,
+          "source_document": "[form_icsr_full_rash.pdf p.1]",
+          "source_page": null,
+          "source_quote": "Widespread erythematous rash with pruritus",
+          "quote_verified": true
+        },
+        {
+          "name": "reaction_onset",
+          "value": "11 March 2026",
+          "confidence": 1.0,
+          "is_stated": true,
+          "source_document": "[form_icsr_full_rash.pdf p.1]",
+          "source_page": null,
+          "source_quote": "11 March 2026",
+          "quote_verified": true
+        },
+        {
+          "name": "reaction_outcome",
+          "value": "Recovered",
+          "confidence": 1.0,
+          "is_stated": true,
+          "source_document": "[form_icsr_full_rash.pdf p.1]",
+          "source_page": null,
+          "source_quote": "Recovered",
+          "quote_verified": true
+        },
+        {
+          "name": "reporter_country",
+          "value": "United Kingdom",
+          "confidence": 1.0,
+          "is_stated": true,
+          "source_document": "[form_icsr_full_rash.pdf p.1]",
+          "source_page": null,
+          "source_quote": "United Kingdom",
+          "quote_verified": true
+        },
+        {
+          "name": "reporter_name",
+          "value": "Dr Amara Osei",
+          "confidence": 1.0,
+          "is_stated": true,
+          "source_document": "[form_icsr_full_rash.pdf p.1]",
+          "source_page": null,
+          "source_quote": "Dr Amara Osei",
+          "quote_verified": true
+        },
+        {
+          "name": "reporter_role",
+          "value": "Physician",
+          "confidence": 1.0,
+          "is_stated": true,
+          "source_document": "[form_icsr_full_rash.pdf p.1]",
+          "source_page": null,
+          "source_quote": "Physician",
+          "quote_verified": true
+        },
+        {
+          "name": "seriousness",
+          "value": "Non-serious",
+          "confidence": 1.0,
+          "is_stated": true,
+          "source_document": "[form_icsr_full_rash.pdf p.1]",
+          "source_page": null,
+          "source_quote": "Non-serious",
+          "quote_verified": true
+        }
+      ]
+    }
+  ],
   "review_actions": [],
   "audit_events": [
     {
-      "event_type": "CLASSIFY",
-      "model_name": "gemini-3.6-flash",
-      "is_stub": false,
-      "prompt_sha256": "596e8e7c71fb68cd490074edc595905e37f2b82f6bb35e4e4008f6a7f2615b99",
-      "prompt_chars": 2366,
-      "latency_ms": 91316.9,
-      "succeeded": false,
-      "error": "Model call failed after 4 attempts: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-3.6-flash\\nPlease retry in 59.568956611s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-3.6-flash'}, 'quotaValue': '20'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '59s'}]}}",
-      "created_at": "2026-09-08T08:00:32.069237Z"
-    },
-    {
       "event_type": "SUMMARY",
-      "model_name": "gemini-3.6-flash",
+      "model_name": "gemini-3.5-flash",
       "is_stub": false,
       "prompt_sha256": "",
       "prompt_chars": 0,
-      "latency_ms": 91465.7,
-      "succeeded": false,
-      "error": "Model call failed after 4 attempts: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-3.6-flash\\nPlease retry in 28.114016889s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-3.6-flash'}, 'quotaValue': '20'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '28s'}]}}",
-      "created_at": "2026-09-08T08:00:32.069237Z"
+      "latency_ms": 8659.8,
+      "succeeded": true,
+      "error": "",
+      "created_at": "2026-09-08T08:18:47.802277Z"
+    },
+    {
+      "event_type": "EXTRACT",
+      "model_name": "gemini-3.5-flash",
+      "is_stub": false,
+      "prompt_sha256": "",
+      "prompt_chars": 2366,
+      "latency_ms": 10097.0,
+      "succeeded": true,
+      "error": "",
+      "created_at": "2026-09-08T08:18:47.801270Z"
+    },
+    {
+      "event_type": "CLASSIFY",
+      "model_name": "gemini-3.5-flash",
+      "is_stub": false,
+      "prompt_sha256": "596e8e7c71fb68cd490074edc595905e37f2b82f6bb35e4e4008f6a7f2615b99",
+      "prompt_chars": 2366,
+      "latency_ms": 5260.5,
+      "succeeded": true,
+      "error": "",
+      "created_at": "2026-09-08T08:18:47.798476Z"
     }
   ]
 }

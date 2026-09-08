@@ -1,238 +1,35 @@
 {
-  "id": 102,
+  "id": 119,
   "message_id": "178885269783.19284.12282143440189652041@clinevo-demo.example",
   "subject": "Meldung einer Nebenwirkung - Cardiozan",
-  "sender": "Dr Markus Hoffmann <m.hoffmann@praxis-hoffmann.example>",
-  "recipient": "Pharmacovigilance Intake <pv-intake@clinevo-demo.example>",
-  "sent_at": "2026-03-18T09:00:00Z",
-  "received_at": "2026-09-08T08:02:04.761285Z",
-  "body_text": "Sehr geehrte Damen und Herren,\n\nhiermit melde ich eine unerwuenschte Arzneimittelwirkung.\n\nDie Patientin ist 61 Jahre alt, weiblich, 74 kg. Sie nimmt seit dem 05. Februar 2026 Cardiozan 20 mg einmal taeglich oral ein.\n\nAm 19. Februar 2026 entwickelte sie starke Kopfschmerzen und Schwindel. Sie wurde nicht stationaer aufgenommen. Das Praeparat wurde abgesetzt und die Beschwerden sind zurueckgegangen.\n\nMit freundlichen Gruessen\nDr Markus Hoffmann, Praxis Hoffmann, Muenchen, Deutschland",
-  "language": "de",
+  "sender": "",
+  "recipient": "",
+  "sent_at": null,
+  "received_at": "2026-09-08T08:23:45.677765Z",
+  "body_text": "",
+  "language": "en",
   "processing_status": "FAILED",
   "review_status": "PENDING",
-  "processing_ms": 182809,
-  "error": "Classification produced no verdicts; the message is unclassified. Model call failed after 4 attempts: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-3.6-flash\\nPlease retry in 26.838304995s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-3.6-flash'}, 'quotaValue': '20'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '26s'}]}}",
-  "warnings": [
-    "Classification failed: Model call failed after 4 attempts: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-3.6-flash\\nPlease retry in 26.838304995s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-3.6-flash'}, 'quotaValue': '20'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '26s'}]}}",
-    "form_icsr_german.pdf: summary failed (Model call failed after 4 attempts: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-3.6-flash\\nPlease retry in 55.408263937s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-3.6-flash'}, 'quotaValue': '20'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '55s'}]}}).",
-    "Classification produced no verdicts; the message is unclassified. Model call failed after 4 attempts: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-3.6-flash\\nPlease retry in 26.838304995s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-3.6-flash'}, 'quotaValue': '20'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '26s'}]}}"
-  ],
-  "headers": {
-    "Message-ID": "<178885269783.19284.12282143440189652041@clinevo-demo.example>",
-    "Date": "Wed, 18 Mar 2026 09:00:00 +0000",
-    "From": "Dr Markus Hoffmann <m.hoffmann@praxis-hoffmann.example>",
-    "To": "Pharmacovigilance Intake <pv-intake@clinevo-demo.example>",
-    "Subject": "Meldung einer Nebenwirkung - Cardiozan",
-    "X-Synthetic-Case-Id": "icsr_german",
-    "raw_byte_size": "5908",
-    "attachment_count": "1"
-  },
+  "processing_ms": null,
+  "error": "AI service call failed: HTTPConnectionPool(host='localhost', port=8000): Read timed out. (read timeout=300)",
+  "warnings": [],
+  "headers": {},
   "categories": [],
-  "documents": [
-    {
-      "document_id": "178885269783.19284.12282143440189652041@clinevo-demo.example::body",
-      "file_name": "(email body)",
-      "media_type": "text/plain",
-      "flavour": "email_body",
-      "language": "de",
-      "page_count": 0,
-      "processed": true,
-      "extracted_text": "Sehr geehrte Damen und Herren,\n\nhiermit melde ich eine unerwuenschte Arzneimittelwirkung.\n\nDie Patientin ist 61 Jahre alt, weiblich, 74 kg. Sie nimmt seit dem 05. Februar 2026 Cardiozan 20 mg einmal taeglich oral ein.\n\nAm 19. Februar 2026 entwickelte sie starke Kopfschmerzen und Schwindel. Sie wurde nicht stationaer aufgenommen. Das Praeparat wurde abgesetzt und die Beschwerden sind zurueckgegangen.\n\nMit freundlichen Gruessen\nDr Markus Hoffmann, Praxis Hoffmann, Muenchen, Deutschland",
-      "tables": [],
-      "images": [],
-      "doc_metadata": {
-        "char_count": "488"
-      },
-      "warnings": [],
-      "summary": "",
-      "looks_relevant": null,
-      "relevance_reason": "",
-      "summary_confidence": null,
-      "ocr_confidence": null
-    },
-    {
-      "document_id": "178885269783.19284.12282143440189652041@clinevo-demo.example::att0",
-      "file_name": "form_icsr_german.pdf",
-      "media_type": "application/pdf",
-      "flavour": "non_english",
-      "language": "de",
-      "page_count": 1,
-      "processed": true,
-      "extracted_text": "Meldeformular fuer unerwuenschte Arzneimittelwirkungen\nSYNTHETISCHES TESTDOKUMENT - keine echten Patientendaten\n1. Patientendaten\n2. Angaben zum Melder\n3. Verdaechtiges Arzneimittel\n4. Reaktion\n5. Relevante Laborwerte\nFormular SYN-AE-01 | Synthetisches Dokument, nur zu Testzwecken.",
-      "tables": [
-        {
-          "header": [
-            "Alter",
-            "61 Jahre"
-          ],
-          "rows": [
-            [
-              "Geschlecht",
-              "Weiblich"
-            ],
-            [
-              "Gewicht",
-              "74 kg"
-            ],
-            [
-              "Relevante Vorgeschichte",
-              "Bluthochdruck seit vielen Jahren bekannt"
-            ]
-          ],
-          "page": 1
-        },
-        {
-          "header": [
-            "Name des Melders",
-            "Dr Markus Hoffmann"
-          ],
-          "rows": [
-            [
-              "Funktion / Qualifikation",
-              "Arzt in eigener Praxis"
-            ],
-            [
-              "Land",
-              "Deutschland"
-            ]
-          ],
-          "page": 1
-        },
-        {
-          "header": [
-            "Arzneimittelname",
-            "Cardiozan"
-          ],
-          "rows": [
-            [
-              "Dosierung",
-              "20 mg einmal taeglich"
-            ],
-            [
-              "Art der Anwendung",
-              "Oral zum Einnehmen"
-            ],
-            [
-              "Therapiebeginn",
-              "05. Februar 2026"
-            ]
-          ],
-          "page": 1
-        },
-        {
-          "header": [
-            "Beschreibung der Reaktion",
-            "Starke Kopfschmerzen und Schwindel nach der Einnahme"
-          ],
-          "rows": [
-            [
-              "Datum des Auftretens",
-              "19. Februar 2026"
-            ],
-            [
-              "Ausgang",
-              "Beschwerden sind zurueckgegangen"
-            ],
-            [
-              "Schweregrad",
-              "Nicht schwerwiegend, keine Aufnahme in das Krankenhaus"
-            ]
-          ],
-          "page": 1
-        },
-        {
-          "header": [
-            "Test",
-            "Result",
-            "Unit",
-            "Reference range",
-            "Flag"
-          ],
-          "rows": [
-            [
-              "Haemoglobin",
-              "132",
-              "g/L",
-              "120 - 160",
-              "Normal"
-            ],
-            [
-              "White cell count",
-              "11.8",
-              "x10^9/L",
-              "4.0 - 11.0",
-              "HIGH"
-            ],
-            [
-              "Eosinophils",
-              "0.9",
-              "x10^9/L",
-              "0.0 - 0.4",
-              "HIGH"
-            ],
-            [
-              "C-reactive protein",
-              "24",
-              "mg/L",
-              "< 5",
-              "HIGH"
-            ],
-            [
-              "Platelets",
-              "268",
-              "x10^9/L",
-              "150 - 400",
-              "Normal"
-            ]
-          ],
-          "page": 1
-        }
-      ],
-      "images": [],
-      "doc_metadata": {
-        "Author": "Dr Markus Hoffmann",
-        "CreationDate": "D:20260908130137+05'00'",
-        "Creator": "(unspecified)",
-        "ModDate": "D:20260908130137+05'00'",
-        "Producer": "ReportLab PDF Library - (opensource)",
-        "Subject": "Meldung einer Nebenwirkung - Cardiozan",
-        "Title": "Meldeformular fuer unerwuenschte Arzneimittelwirkungen",
-        "Trapped": "False",
-        "byte_size": "3434"
-      },
-      "warnings": [],
-      "summary": "",
-      "looks_relevant": null,
-      "relevance_reason": "",
-      "summary_confidence": null,
-      "ocr_confidence": null
-    }
-  ],
+  "documents": [],
   "classifications": [],
   "extractions": [],
   "review_actions": [],
   "audit_events": [
     {
-      "event_type": "SUMMARY",
-      "model_name": "gemini-3.6-flash",
+      "event_type": "CLASSIFY",
+      "model_name": "",
       "is_stub": false,
       "prompt_sha256": "",
       "prompt_chars": 0,
-      "latency_ms": 91427.1,
+      "latency_ms": 0.0,
       "succeeded": false,
-      "error": "Model call failed after 4 attempts: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-3.6-flash\\nPlease retry in 55.408263937s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-3.6-flash'}, 'quotaValue': '20'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '55s'}]}}",
-      "created_at": "2026-09-08T08:02:04.802500Z"
-    },
-    {
-      "event_type": "CLASSIFY",
-      "model_name": "gemini-3.6-flash",
-      "is_stub": false,
-      "prompt_sha256": "a5f39b3e8cd871d6afde67c76f1df60339c1bb53ff6a56d95f6bed50798901b8",
-      "prompt_chars": 2191,
-      "latency_ms": 91328.7,
-      "succeeded": false,
-      "error": "Model call failed after 4 attempts: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-3.6-flash\\nPlease retry in 26.838304995s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-3.6-flash'}, 'quotaValue': '20'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '26s'}]}}",
-      "created_at": "2026-09-08T08:02:04.801501Z"
+      "error": "AI service call failed: HTTPConnectionPool(host='localhost', port=8000): Read timed out. (read timeout=300)",
+      "created_at": "2026-09-08T08:23:45.687361Z"
     }
   ]
 }

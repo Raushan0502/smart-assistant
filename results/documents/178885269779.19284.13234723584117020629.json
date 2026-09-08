@@ -1,23 +1,21 @@
 {
-  "id": 98,
+  "id": 114,
   "message_id": "178885269779.19284.13234723584117020629@clinevo-demo.example",
   "subject": "Discoloured Dermacalm cream caused a burning rash",
   "sender": "Priya Raman <priya.raman@mailbox.example>",
   "recipient": "Pharmacovigilance Intake <pv-intake@clinevo-demo.example>",
   "sent_at": "2026-03-17T09:00:00Z",
-  "received_at": "2026-09-08T07:55:54.707572Z",
+  "received_at": "2026-09-08T08:18:16.479157Z",
   "body_text": "Hello,\n\nI bought a tube of Dermacalm cream last month, batch number DC-4471-B. When I opened it the cream was brown rather than white and smelled strongly of chemicals. The seal under the cap was already broken.\n\nI used it anyway on my forearm and within an hour I had a burning sensation and the skin blistered. I am 33 years old. I saw my pharmacist who told me to stop using it and report it. The blisters are healing now.\n\nI have photographs of the tube and my arm if those are useful.\n\nPriya Raman, Leeds, UK",
   "language": "en",
-  "processing_status": "FAILED",
+  "processing_status": "READY",
   "review_status": "PENDING",
-  "processing_ms": 275699,
-  "error": "Classification produced no verdicts; the message is unclassified. Model call failed after 4 attempts: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-3.6-flash\\nPlease retry in 36.921626865s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-3.6-flash'}, 'quotaValue': '20'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '36s'}]}}",
+  "processing_ms": 104351,
+  "error": "",
   "warnings": [
-    "scan_icsr_and_pqc_combined.pdf p.1: OCR failed (Model call failed after 4 attempts: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-3.6-flash\\nPlease retry in 8.356918974s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-3.6-flash'}, 'quotaValue': '20'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '8s'}]}}). Needs manual review.",
-    "Content was read from page images. Every field derived from this document requires human verification regardless of reported confidence.",
-    "Classification failed: Model call failed after 4 attempts: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-3.6-flash\\nPlease retry in 36.921626865s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-3.6-flash'}, 'quotaValue': '20'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '36s'}]}}",
-    "scan_icsr_and_pqc_combined.pdf: summary failed (Model call failed after 4 attempts: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-3.6-flash\\nPlease retry in 5.428807661s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'model': 'gemini-3.6-flash', 'location': 'global'}, 'quotaValue': '20'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '5s'}]}}).",
-    "Classification produced no verdicts; the message is unclassified. Model call failed after 4 attempts: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-3.6-flash\\nPlease retry in 36.921626865s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-3.6-flash'}, 'quotaValue': '20'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '36s'}]}}"
+    "scan_icsr_and_pqc_combined.pdf p.1: handwritten content, transcription confidence 0.98. Verify against the original.",
+    "scan_icsr_and_pqc_combined.pdf p.1: The form is filled out in a neat, legible handwriting. The 'Sex' field was left blank.",
+    "Content was read from page images. Every field derived from this document requires human verification regardless of reported confidence."
   ],
   "headers": {
     "Message-ID": "<178885269779.19284.13234723584117020629@clinevo-demo.example>",
@@ -29,7 +27,10 @@
     "raw_byte_size": "139887",
     "attachment_count": "1"
   },
-  "categories": [],
+  "categories": [
+    "ICSR",
+    "PQC"
+  ],
   "documents": [
     {
       "document_id": "178885269779.19284.13234723584117020629@clinevo-demo.example::body",
@@ -60,13 +61,13 @@
       "language": "en",
       "page_count": 1,
       "processed": true,
-      "extracted_text": "",
+      "extracted_text": "Patient age: 33 years\nSex: Not stated\nProduct: Dermacalm\nRoute: Topical\nReaction: Burning sensation and skin blistering\nOnset: Within one hour of application\nOutcome: Recovering\nReporter: Priya Raman\nSignature: Priya Raman",
       "tables": [],
       "images": [
         {
           "width": 595,
           "height": 841,
-          "description": "Not transcribed",
+          "description": "Patient age: 33 years\nSex: Not stated\nProduct: Dermacalm\nRoute: Topical\nReaction: Burning sensation and skin blistering\nOnset: Within one hour of application\nOutcome: Recovering\nReporter: Priya Raman\n",
           "needs_review": true,
           "page": 1
         }
@@ -76,58 +77,306 @@
         "CreationDate": "D:20260908073137Z",
         "ModDate": "D:20260908073137Z",
         "byte_size": "102581",
-        "ocr_confidence": "0.000",
+        "ocr_confidence": "0.980",
         "ocr_pages": "1",
         "source_is_pixels": "true"
       },
       "warnings": [
         "No text layer: OCR or a vision model is required to read this document. Confidence should be reported for anything extracted.",
-        "scan_icsr_and_pqc_combined.pdf p.1: OCR failed (Model call failed after 4 attempts: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-3.6-flash\\nPlease retry in 8.356918974s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-3.6-flash'}, 'quotaValue': '20'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '8s'}]}}). Needs manual review.",
+        "scan_icsr_and_pqc_combined.pdf p.1: handwritten content, transcription confidence 0.98. Verify against the original.",
+        "scan_icsr_and_pqc_combined.pdf p.1: The form is filled out in a neat, legible handwriting. The 'Sex' field was left blank.",
         "Content was read from page images. Every field derived from this document requires human verification regardless of reported confidence."
       ],
-      "summary": "",
-      "looks_relevant": null,
-      "relevance_reason": "",
-      "summary_confidence": null,
-      "ocr_confidence": 0.0
+      "summary": "This document appears to be an adverse event report, though its specific document type is not explicitly stated. The patient is a 33-year-old individual. The patient's sex is explicitly listed as not stated. The reporter of the event is Priya Raman, who also provided a signature. The product involved in this report is Dermacalm, which was administered via a topical route. The adverse reactions reported are a burning sensation and skin blistering. These reactions occurred within one hour of the product's application. The outcome of the reaction is described as recovering. The document does not state whether the event was considered serious. There are no tables or figures present in the document, only a repeated text block from an image. A reviewer would likely expect to see several missing details, such as the patient's name or initials. The date of the event and the date of the report are also missing. The document does not state the product's batch number, lot number, or expiration date. The specific dosage and frequency of application are not provided. Finally, the country of occurrence and the reporter's professional occupation are not stated.",
+      "looks_relevant": true,
+      "relevance_reason": "The document is an adverse event report detailing a burning sensation and skin blistering after using Dermacalm.",
+      "summary_confidence": 1.0,
+      "ocr_confidence": 0.98
     }
   ],
-  "classifications": [],
-  "extractions": [],
+  "classifications": [
+    {
+      "category": "ICSR",
+      "applies": true,
+      "confidence": 1.0,
+      "reason": "The message identifies a patient (Priya Raman, 33), reporter (Priya Raman), product (Dermacalm), and adverse events (burning sensation and blistering).",
+      "model_name": "gemini-3.5-flash"
+    },
+    {
+      "category": "NOT_RELEVANT",
+      "applies": false,
+      "confidence": 1.0,
+      "reason": "The message is highly relevant as it contains valid safety and product quality complaints.",
+      "model_name": "gemini-3.5-flash"
+    },
+    {
+      "category": "PQC",
+      "applies": true,
+      "confidence": 1.0,
+      "reason": "The product had a broken seal, was discoloured brown instead of white, and had a strong chemical smell.",
+      "model_name": "gemini-3.5-flash"
+    },
+    {
+      "category": "MI",
+      "applies": false,
+      "confidence": 0.95,
+      "reason": "There are no medical information inquiries or questions about the product's usage, storage, or interactions.",
+      "model_name": "gemini-3.5-flash"
+    }
+  ],
+  "extractions": [
+    {
+      "category": "ICSR",
+      "narrative": "A 33-year-old patient in the UK applied Dermacalm cream topically to her forearm. The cream was discoloured (brown instead of white) with a broken seal and a strong chemical smell. Within an hour of application, she experienced a burning sensation and skin blistering. She consulted a pharmacist, stopped using the product, and reports that the blisters are now recovering.",
+      "completeness": 0.667,
+      "model_name": "gemini-3.5-flash",
+      "fields_data": [
+        {
+          "name": "patient_age",
+          "value": "33 years",
+          "confidence": 1.0,
+          "is_stated": true,
+          "source_document": "[scan_icsr_and_pqc_combined.pdf p.1]",
+          "source_page": null,
+          "source_quote": "Patient age: 33 years",
+          "quote_verified": true
+        },
+        {
+          "name": "patient_history",
+          "value": "Not stated",
+          "confidence": 0.0,
+          "is_stated": false,
+          "source_document": "",
+          "source_page": null,
+          "source_quote": "",
+          "quote_verified": false
+        },
+        {
+          "name": "patient_sex",
+          "value": "Not stated",
+          "confidence": 0.0,
+          "is_stated": false,
+          "source_document": "",
+          "source_page": null,
+          "source_quote": "",
+          "quote_verified": false
+        },
+        {
+          "name": "patient_weight",
+          "value": "Not stated",
+          "confidence": 0.0,
+          "is_stated": false,
+          "source_document": "",
+          "source_page": null,
+          "source_quote": "",
+          "quote_verified": false
+        },
+        {
+          "name": "product_dose",
+          "value": "Not stated",
+          "confidence": 0.0,
+          "is_stated": false,
+          "source_document": "",
+          "source_page": null,
+          "source_quote": "",
+          "quote_verified": false
+        },
+        {
+          "name": "product_name",
+          "value": "Dermacalm",
+          "confidence": 1.0,
+          "is_stated": true,
+          "source_document": "[scan_icsr_and_pqc_combined.pdf p.1]",
+          "source_page": null,
+          "source_quote": "Product: Dermacalm",
+          "quote_verified": true
+        },
+        {
+          "name": "product_route",
+          "value": "Topical",
+          "confidence": 1.0,
+          "is_stated": true,
+          "source_document": "[scan_icsr_and_pqc_combined.pdf p.1]",
+          "source_page": null,
+          "source_quote": "Route: Topical",
+          "quote_verified": true
+        },
+        {
+          "name": "product_start_date",
+          "value": "Not stated",
+          "confidence": 0.0,
+          "is_stated": false,
+          "source_document": "",
+          "source_page": null,
+          "source_quote": "",
+          "quote_verified": false
+        },
+        {
+          "name": "reaction",
+          "value": "Burning sensation and skin blistering",
+          "confidence": 1.0,
+          "is_stated": true,
+          "source_document": "[scan_icsr_and_pqc_combined.pdf p.1]",
+          "source_page": null,
+          "source_quote": "Reaction: Burning sensation and skin blistering",
+          "quote_verified": true
+        },
+        {
+          "name": "reaction_onset",
+          "value": "Within one hour of application",
+          "confidence": 1.0,
+          "is_stated": true,
+          "source_document": "[scan_icsr_and_pqc_combined.pdf p.1]",
+          "source_page": null,
+          "source_quote": "Onset: Within one hour of application",
+          "quote_verified": true
+        },
+        {
+          "name": "reaction_outcome",
+          "value": "Recovering",
+          "confidence": 1.0,
+          "is_stated": true,
+          "source_document": "[scan_icsr_and_pqc_combined.pdf p.1]",
+          "source_page": null,
+          "source_quote": "Outcome: Recovering",
+          "quote_verified": true
+        },
+        {
+          "name": "reporter_country",
+          "value": "UK",
+          "confidence": 1.0,
+          "is_stated": true,
+          "source_document": "[(email body)]",
+          "source_page": null,
+          "source_quote": "UK",
+          "quote_verified": true
+        },
+        {
+          "name": "reporter_name",
+          "value": "Priya Raman",
+          "confidence": 1.0,
+          "is_stated": true,
+          "source_document": "[(email body)]",
+          "source_page": null,
+          "source_quote": "Priya Raman",
+          "quote_verified": true
+        },
+        {
+          "name": "reporter_role",
+          "value": "consumer",
+          "confidence": 0.9,
+          "is_stated": true,
+          "source_document": "[(email body)]",
+          "source_page": null,
+          "source_quote": "I bought a tube of Dermacalm cream",
+          "quote_verified": true
+        },
+        {
+          "name": "seriousness",
+          "value": "non-serious",
+          "confidence": 0.9,
+          "is_stated": true,
+          "source_document": "[(email body)]",
+          "source_page": null,
+          "source_quote": "The blisters are healing now.",
+          "quote_verified": true
+        }
+      ]
+    },
+    {
+      "category": "PQC",
+      "narrative": "Priya Raman reported a quality issue with Dermacalm cream (batch DC-4471-B). Upon opening, the cream was brown instead of white, had a strong chemical smell, and the seal under the cap was broken. Application of the cream resulted in a burning sensation and skin blistering on her forearm. She has photographs of the tube and her arm available.",
+      "completeness": 1.0,
+      "model_name": "gemini-3.5-flash",
+      "fields_data": [
+        {
+          "name": "batch_number",
+          "value": "DC-4471-B",
+          "confidence": 1.0,
+          "is_stated": true,
+          "source_document": "[(email body)]",
+          "source_page": null,
+          "source_quote": "DC-4471-B",
+          "quote_verified": true
+        },
+        {
+          "name": "defect_description",
+          "value": "The cream was brown rather than white, smelled strongly of chemicals, and the seal under the cap was already broken.",
+          "confidence": 1.0,
+          "is_stated": true,
+          "source_document": "[(email body)]",
+          "source_page": null,
+          "source_quote": "the cream was brown rather than white and smelled strongly of chemicals. The seal under the cap was already broken.",
+          "quote_verified": true
+        },
+        {
+          "name": "photo_mentioned",
+          "value": "Yes",
+          "confidence": 1.0,
+          "is_stated": true,
+          "source_document": "[(email body)]",
+          "source_page": null,
+          "source_quote": "I have photographs of the tube and my arm if those are useful.",
+          "quote_verified": true
+        },
+        {
+          "name": "product_name",
+          "value": "Dermacalm cream",
+          "confidence": 1.0,
+          "is_stated": true,
+          "source_document": "[(email body)]",
+          "source_page": null,
+          "source_quote": "Dermacalm cream",
+          "quote_verified": true
+        }
+      ]
+    }
+  ],
   "review_actions": [],
   "audit_events": [
     {
       "event_type": "SUMMARY",
-      "model_name": "gemini-3.6-flash",
+      "model_name": "gemini-3.5-flash",
       "is_stub": false,
       "prompt_sha256": "",
       "prompt_chars": 0,
-      "latency_ms": 91501.0,
-      "succeeded": false,
-      "error": "Model call failed after 4 attempts: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-3.6-flash\\nPlease retry in 5.428807661s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'model': 'gemini-3.6-flash', 'location': 'global'}, 'quotaValue': '20'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '5s'}]}}",
-      "created_at": "2026-09-08T07:55:54.794542Z"
+      "latency_ms": 8130.1,
+      "succeeded": true,
+      "error": "",
+      "created_at": "2026-09-08T08:18:16.606317Z"
+    },
+    {
+      "event_type": "EXTRACT",
+      "model_name": "gemini-3.5-flash",
+      "is_stub": false,
+      "prompt_sha256": "",
+      "prompt_chars": 1235,
+      "latency_ms": 87075.3,
+      "succeeded": true,
+      "error": "",
+      "created_at": "2026-09-08T08:18:16.605317Z"
     },
     {
       "event_type": "CLASSIFY",
-      "model_name": "gemini-3.6-flash",
+      "model_name": "gemini-3.5-flash",
       "is_stub": false,
-      "prompt_sha256": "e1a1ed6d53b43d4147cb2d3b65d724493380935d9fc23e40fbd65e785b603f8f",
-      "prompt_chars": 789,
-      "latency_ms": 91419.2,
-      "succeeded": false,
-      "error": "Model call failed after 4 attempts: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-3.6-flash\\nPlease retry in 36.921626865s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-3.6-flash'}, 'quotaValue': '20'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '36s'}]}}",
-      "created_at": "2026-09-08T07:55:54.791371Z"
+      "prompt_sha256": "b3742c621efa0616c98c4cc74a5aa3467c90e861f13aa189b7014e8beee46618",
+      "prompt_chars": 1235,
+      "latency_ms": 4948.1,
+      "succeeded": true,
+      "error": "",
+      "created_at": "2026-09-08T08:18:16.603317Z"
     },
     {
       "event_type": "OCR",
-      "model_name": "gemini-3.6-flash",
+      "model_name": "gemini-3.5-flash",
       "is_stub": false,
       "prompt_sha256": "",
       "prompt_chars": 0,
-      "latency_ms": 92763.1,
-      "succeeded": false,
+      "latency_ms": 4104.3,
+      "succeeded": true,
       "error": "",
-      "created_at": "2026-09-08T07:55:54.790245Z"
+      "created_at": "2026-09-08T08:18:16.602317Z"
     }
   ]
 }

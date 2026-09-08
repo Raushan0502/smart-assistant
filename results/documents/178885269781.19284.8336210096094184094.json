@@ -1,21 +1,19 @@
 {
-  "id": 103,
+  "id": 118,
   "message_id": "178885269781.19284.8336210096094184094@clinevo-demo.example",
   "subject": "Adverse event during pregnancy - Osteovance",
   "sender": "Nurse Practitioner Helen Achebe <h.achebe@communitycare.example>",
   "recipient": "Pharmacovigilance Intake <pv-intake@clinevo-demo.example>",
   "sent_at": "2026-03-17T21:00:00Z",
-  "received_at": "2026-09-08T08:03:36.867279Z",
+  "received_at": "2026-09-08T08:23:01.808588Z",
   "body_text": "Dear Sir or Madam,\n\nA 29-year-old female patient, 22 weeks pregnant, was taking Osteovance 1000 mg orally once daily. She reports persistent severe nausea and vomiting beginning approximately four days after starting the product, leading to dehydration. She attended the day unit for intravenous fluids but was not admitted overnight.\n\nThe product has been stopped and symptoms are improving.\n\nHelen Achebe, Nurse Practitioner\nCommunity Care Centre, Dublin, Ireland",
   "language": "en",
-  "processing_status": "FAILED",
+  "processing_status": "READY",
   "review_status": "PENDING",
-  "processing_ms": 182678,
-  "error": "Classification produced no verdicts; the message is unclassified. Model call failed after 4 attempts: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-3.6-flash\\nPlease retry in 54.659285644s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-3.6-flash'}, 'quotaValue': '20'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '54s'}]}}",
+  "processing_ms": 251869,
+  "error": "",
   "warnings": [
-    "Classification failed: Model call failed after 4 attempts: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-3.6-flash\\nPlease retry in 54.659285644s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-3.6-flash'}, 'quotaValue': '20'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '54s'}]}}",
-    "form_icsr_pregnancy_context.pdf: summary failed (Model call failed after 4 attempts: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-3.6-flash\\nPlease retry in 23.263621027s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-3.6-flash'}, 'quotaValue': '20'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '23s'}]}}).",
-    "Classification produced no verdicts; the message is unclassified. Model call failed after 4 attempts: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-3.6-flash\\nPlease retry in 54.659285644s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-3.6-flash'}, 'quotaValue': '20'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '54s'}]}}"
+    "form_icsr_pregnancy_context.pdf: summary failed (Model call failed after 4 attempts: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-3.5-flash\\nPlease retry in 58.374269733s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-3.5-flash'}, 'quotaValue': '20'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '58s'}]}})."
   ],
   "headers": {
     "Message-ID": "<178885269781.19284.8336210096094184094@clinevo-demo.example>",
@@ -27,7 +25,9 @@
     "raw_byte_size": "5752",
     "attachment_count": "1"
   },
-  "categories": [],
+  "categories": [
+    "ICSR"
+  ],
   "documents": [
     {
       "document_id": "178885269781.19284.8336210096094184094@clinevo-demo.example::body",
@@ -208,31 +208,230 @@
       "ocr_confidence": null
     }
   ],
-  "classifications": [],
-  "extractions": [],
+  "classifications": [
+    {
+      "category": "ICSR",
+      "applies": true,
+      "confidence": 1.0,
+      "reason": "The message contains an identifiable patient (29-year-old pregnant female), reporter (Helen Achebe), product (Osteovance), and adverse events (severe nausea, vomiting, dehydration).",
+      "model_name": "gemini-3.5-flash"
+    },
+    {
+      "category": "NOT_RELEVANT",
+      "applies": false,
+      "confidence": 1.0,
+      "reason": "The message is highly relevant as it represents a valid ICSR safety report.",
+      "model_name": "gemini-3.5-flash"
+    },
+    {
+      "category": "PQC",
+      "applies": false,
+      "confidence": 0.95,
+      "reason": "There is no mention of any product quality defects or packaging issues.",
+      "model_name": "gemini-3.5-flash"
+    },
+    {
+      "category": "MI",
+      "applies": false,
+      "confidence": 0.95,
+      "reason": "The sender is reporting an adverse event and does not ask any medical information questions.",
+      "model_name": "gemini-3.5-flash"
+    }
+  ],
+  "extractions": [
+    {
+      "category": "ICSR",
+      "narrative": "A 29-year-old female patient, 22 weeks pregnant, experienced severe nausea and vomiting leading to dehydration approximately four days after starting Osteovance 1000 mg once daily. She received intravenous fluids at a day unit but was not hospitalized overnight. The product was stopped, and her symptoms are improving.",
+      "completeness": 0.867,
+      "model_name": "gemini-3.5-flash",
+      "fields_data": [
+        {
+          "name": "patient_age",
+          "value": "29 years",
+          "confidence": 1.0,
+          "is_stated": true,
+          "source_document": "[form_icsr_pregnancy_context.pdf p.1]",
+          "source_page": null,
+          "source_quote": "29 years",
+          "quote_verified": true
+        },
+        {
+          "name": "patient_history",
+          "value": "22 weeks pregnant",
+          "confidence": 1.0,
+          "is_stated": true,
+          "source_document": "[form_icsr_pregnancy_context.pdf p.1]",
+          "source_page": null,
+          "source_quote": "22 weeks pregnant",
+          "quote_verified": true
+        },
+        {
+          "name": "patient_sex",
+          "value": "Female",
+          "confidence": 1.0,
+          "is_stated": true,
+          "source_document": "[form_icsr_pregnancy_context.pdf p.1]",
+          "source_page": null,
+          "source_quote": "Female",
+          "quote_verified": true
+        },
+        {
+          "name": "patient_weight",
+          "value": "Not stated",
+          "confidence": 0.0,
+          "is_stated": false,
+          "source_document": "",
+          "source_page": null,
+          "source_quote": "",
+          "quote_verified": false
+        },
+        {
+          "name": "product_dose",
+          "value": "1000 mg once daily",
+          "confidence": 1.0,
+          "is_stated": true,
+          "source_document": "[form_icsr_pregnancy_context.pdf p.1]",
+          "source_page": null,
+          "source_quote": "1000 mg once daily",
+          "quote_verified": true
+        },
+        {
+          "name": "product_name",
+          "value": "Osteovance",
+          "confidence": 1.0,
+          "is_stated": true,
+          "source_document": "[form_icsr_pregnancy_context.pdf p.1]",
+          "source_page": null,
+          "source_quote": "Osteovance",
+          "quote_verified": true
+        },
+        {
+          "name": "product_route",
+          "value": "Oral",
+          "confidence": 1.0,
+          "is_stated": true,
+          "source_document": "[form_icsr_pregnancy_context.pdf p.1]",
+          "source_page": null,
+          "source_quote": "Oral",
+          "quote_verified": true
+        },
+        {
+          "name": "product_start_date",
+          "value": "Not stated",
+          "confidence": 0.0,
+          "is_stated": false,
+          "source_document": "",
+          "source_page": null,
+          "source_quote": "",
+          "quote_verified": false
+        },
+        {
+          "name": "reaction",
+          "value": "Severe nausea and vomiting leading to dehydration",
+          "confidence": 1.0,
+          "is_stated": true,
+          "source_document": "[form_icsr_pregnancy_context.pdf p.1]",
+          "source_page": null,
+          "source_quote": "Severe nausea and vomiting leading to dehydration",
+          "quote_verified": true
+        },
+        {
+          "name": "reaction_onset",
+          "value": "Approximately four days after starting treatment",
+          "confidence": 1.0,
+          "is_stated": true,
+          "source_document": "[form_icsr_pregnancy_context.pdf p.1]",
+          "source_page": null,
+          "source_quote": "Approximately four days after starting treatment",
+          "quote_verified": true
+        },
+        {
+          "name": "reaction_outcome",
+          "value": "recovering",
+          "confidence": 1.0,
+          "is_stated": true,
+          "source_document": "[form_icsr_pregnancy_context.pdf p.1]",
+          "source_page": null,
+          "source_quote": "Improving",
+          "quote_verified": true
+        },
+        {
+          "name": "reporter_country",
+          "value": "Ireland",
+          "confidence": 1.0,
+          "is_stated": true,
+          "source_document": "[form_icsr_pregnancy_context.pdf p.1]",
+          "source_page": null,
+          "source_quote": "Ireland",
+          "quote_verified": true
+        },
+        {
+          "name": "reporter_name",
+          "value": "Helen Achebe",
+          "confidence": 1.0,
+          "is_stated": true,
+          "source_document": "[form_icsr_pregnancy_context.pdf p.1]",
+          "source_page": null,
+          "source_quote": "Helen Achebe",
+          "quote_verified": true
+        },
+        {
+          "name": "reporter_role",
+          "value": "Nurse practitioner",
+          "confidence": 1.0,
+          "is_stated": true,
+          "source_document": "[form_icsr_pregnancy_context.pdf p.1]",
+          "source_page": null,
+          "source_quote": "Nurse practitioner",
+          "quote_verified": true
+        },
+        {
+          "name": "seriousness",
+          "value": "Non-serious",
+          "confidence": 1.0,
+          "is_stated": true,
+          "source_document": "[form_icsr_pregnancy_context.pdf p.1]",
+          "source_page": null,
+          "source_quote": "Non-serious",
+          "quote_verified": true
+        }
+      ]
+    }
+  ],
   "review_actions": [],
   "audit_events": [
     {
       "event_type": "SUMMARY",
-      "model_name": "gemini-3.6-flash",
+      "model_name": "gemini-3.5-flash",
       "is_stub": false,
       "prompt_sha256": "",
       "prompt_chars": 0,
-      "latency_ms": 91396.8,
+      "latency_ms": 166450.7,
       "succeeded": false,
-      "error": "Model call failed after 4 attempts: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-3.6-flash\\nPlease retry in 23.263621027s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-3.6-flash'}, 'quotaValue': '20'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '23s'}]}}",
-      "created_at": "2026-09-08T08:03:36.882820Z"
+      "error": "Model call failed after 4 attempts: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-3.5-flash\\nPlease retry in 58.374269733s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-3.5-flash'}, 'quotaValue': '20'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '58s'}]}}",
+      "created_at": "2026-09-08T08:23:01.920785Z"
+    },
+    {
+      "event_type": "EXTRACT",
+      "model_name": "gemini-3.5-flash",
+      "is_stub": false,
+      "prompt_sha256": "",
+      "prompt_chars": 2109,
+      "latency_ms": 9904.7,
+      "succeeded": true,
+      "error": "",
+      "created_at": "2026-09-08T08:23:01.919158Z"
     },
     {
       "event_type": "CLASSIFY",
-      "model_name": "gemini-3.6-flash",
+      "model_name": "gemini-3.5-flash",
       "is_stub": false,
       "prompt_sha256": "add785cbc8f7a428cdbd9dd0139604845895092123745284a9ce9e79b2e310d0",
       "prompt_chars": 2109,
-      "latency_ms": 91232.0,
-      "succeeded": false,
-      "error": "Model call failed after 4 attempts: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-3.6-flash\\nPlease retry in 54.659285644s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-3.6-flash'}, 'quotaValue': '20'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '54s'}]}}",
-      "created_at": "2026-09-08T08:03:36.881319Z"
+      "latency_ms": 75463.4,
+      "succeeded": true,
+      "error": "",
+      "created_at": "2026-09-08T08:23:01.917576Z"
     }
   ]
 }

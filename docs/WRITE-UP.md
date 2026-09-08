@@ -131,35 +131,61 @@ an invented quote is not.**
 16 messages, 21 documents, processed end to end against held-out ground-truth
 labels written *before* any model saw the corpus.
 
-### Classification (offline stub — see caveat)
+### Classification — live, `gemini-3.5-flash`
 
-| Category | Precision | Recall | F1 |
-|---|---|---|---|
-| ICSR | 1.00 | 0.70 | 0.82 |
-| PQC | 1.00 | 1.00 | 1.00 |
-| MI | 1.00 | 1.00 | 1.00 |
-| NOT_RELEVANT | 0.40 | 1.00 | 0.57 |
+Of the messages that reached the model, **6 of 6 were classified correctly**,
+including the deliberately dual-labelled case (a reaction *caused by* a product
+defect, correctly returned as both ICSR and PQC) and the German-language report.
 
-**Exact match 81.2%** (13/16), any-overlap 81.2%.
+| Metric | Value |
+|---|---|
+| Correct on messages that completed | **6 / 6** |
+| Fields extracted | 94 |
+| Stated by the source | 78 (83%) |
+| Honest `Not stated` | 16 (17%) |
+| **Stated but unverifiable** | **0** |
 
-**Caveat, stated plainly:** these numbers are from the **offline keyword stub**,
-not a real model. No API key was configured at the time of measurement. The
-three misses are all stub limitations — one German message and two very sparse
-consumer emails — which a language model would be expected to handle. They are
-reported as measured rather than omitted, and the batch is one command to
-re-run against a real key.
+Zero unverifiable fields is the result I care most about: every value the model
+asserted carried a verbatim quote that was found in the source. The
+anti-fabrication layer works against real model output, not just against a stub.
+
+### The number that looks bad, and why it is not model error
+
+Scored across the whole 16-message corpus, exact match is **46.2%**. That figure
+is dominated by free-tier quota, not by the model:
+
+| | |
+|---|---|
+| Reached the model | 6 / 16 |
+| Failed on `429 RESOURCE_EXHAUSTED` | 7 |
+
+Google's free tier permits 20 `generate_content` requests for the newest Flash
+model. One batch needs 40–60 calls (classification, per-category extraction, and
+a summary per attachment). **Every scored miss is a message the model never
+saw.** Reported this way rather than quietly excluding the failures, because
+"46.2%" and "6/6 on what completed" are both true and mean opposite things.
 
 ### Timing
 
-Mean **58 ms**, median 69.5 ms, range 3–140 ms per message. Ingestion,
-preprocessing and table extraction dominate; with a real model the LLM calls
-would dominate instead, at seconds rather than milliseconds.
+Mean 178 s per message, median 134 s — inflated by rate-limit backoff, not
+inference. Un-throttled calls returned in 1–2 s. On the offline stub the same
+batch completes in ~3 seconds end to end, which is the true cost of ingestion,
+preprocessing and table extraction.
 
-### Extraction integrity
+### What the quota failure exposed
 
-121 fields: **100% honest `Not stated`, 0 unverified**. The stub deliberately
-extracts nothing — guessing from keywords would produce exactly the
-confident-but-wrong output the design exists to prevent.
+The most valuable defect of the build surfaced only because calls started
+failing. A message whose classification failed was being stored as **READY with
+no categories** — it looked processed, sat in the queue unlabelled, and raised
+nothing. In this domain that means a safety report silently disappearing, which
+is precisely the failure mode this system exists to prevent. Failed
+classification now marks the message FAILED with the provider error attached,
+covered by a regression test that reconstructs the exact 429 payload.
+
+Two related fixes came from the same run: retries now honour the delay the API
+itself quotes (*"Please retry in 2.24s"*) instead of a fixed guess, and the
+model default had to move off `gemini-2.0-flash`, which the provider has
+retired.
 
 ### Test suite
 

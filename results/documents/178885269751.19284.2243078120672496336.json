@@ -1,22 +1,18 @@
 {
-  "id": 100,
+  "id": 116,
   "message_id": "178885269751.19284.2243078120672496336@clinevo-demo.example",
   "subject": "Serious adverse event - Hepatrol - hospitalisation",
   "sender": "Dr Liang Wei <l.wei@riverside-hospital.example>",
   "recipient": "Pharmacovigilance Intake <pv-intake@clinevo-demo.example>",
   "sent_at": "2026-03-16T15:00:00Z",
-  "received_at": "2026-09-08T07:58:59.820840Z",
+  "received_at": "2026-09-08T08:18:43.458937Z",
   "body_text": "To the Pharmacovigilance Department,\n\nI wish to report a serious adverse event.\n\nPatient: 67-year-old male, 81 kg, no significant prior liver disease.\nProduct: Hepatrol 500 mg, taken orally twice daily, started 12 January 2026.\n\nOn 02 February 2026 the patient presented with jaundice, dark urine and marked fatigue. Liver function tests were significantly deranged. He was admitted to Riverside Hospital on the same day and remained an inpatient for nine days. Hepatrol was withdrawn on admission.\n\nAt the time of writing the patient is recovering but liver enzymes have not yet returned to baseline. I consider this event serious on the grounds of hospitalisation.\n\nDr Liang Wei, Consultant Hepatologist\nRiverside Hospital, Singapore",
   "language": "en",
-  "processing_status": "FAILED",
+  "processing_status": "READY",
   "review_status": "PENDING",
-  "processing_ms": 182906,
-  "error": "Classification produced no verdicts; the message is unclassified. Model call failed after 4 attempts: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-3.6-flash\\nPlease retry in 31.865911771s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'model': 'gemini-3.6-flash', 'location': 'global'}, 'quotaValue': '20'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '31s'}]}}",
-  "warnings": [
-    "Classification failed: Model call failed after 4 attempts: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-3.6-flash\\nPlease retry in 31.865911771s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'model': 'gemini-3.6-flash', 'location': 'global'}, 'quotaValue': '20'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '31s'}]}}",
-    "form_icsr_full_hepatic.pdf: summary failed (Model call failed after 4 attempts: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-3.6-flash\\nPlease retry in 414.094472ms.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'model': 'gemini-3.6-flash', 'location': 'global'}, 'quotaValue': '20'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '0s'}]}}).",
-    "Classification produced no verdicts; the message is unclassified. Model call failed after 4 attempts: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-3.6-flash\\nPlease retry in 31.865911771s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'model': 'gemini-3.6-flash', 'location': 'global'}, 'quotaValue': '20'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '31s'}]}}"
-  ],
+  "processing_ms": 24751,
+  "error": "",
+  "warnings": [],
   "headers": {
     "Message-ID": "<178885269751.19284.2243078120672496336@clinevo-demo.example>",
     "Date": "Mon, 16 Mar 2026 15:00:00 +0000",
@@ -27,7 +23,9 @@
     "raw_byte_size": "5999",
     "attachment_count": "1"
   },
-  "categories": [],
+  "categories": [
+    "ICSR"
+  ],
   "documents": [
     {
       "document_id": "178885269751.19284.2243078120672496336@clinevo-demo.example::body",
@@ -201,38 +199,237 @@
         "byte_size": "3305"
       },
       "warnings": [],
-      "summary": "",
-      "looks_relevant": null,
-      "relevance_reason": "",
-      "summary_confidence": null,
+      "summary": "This document is an Adverse Event Report Form, which is a synthetic test document containing no real patient data. The patient is a 67-year-old male weighing 81 kg with no significant prior liver disease. The reporter is Dr Liang Wei, a Physician and Consultant Hepatologist based in Singapore. The suspect product involved is Hepatrol, administered orally at a dose of 500 mg twice daily. Therapy with Hepatrol started on 12 January 2026. The reported reaction consists of jaundice, dark urine, fatigue, and deranged liver function tests, which began on 02 February 2026. The outcome of the reaction is described as recovering. The event is classified as serious, resulting in hospitalisation. A laboratory results table shows elevated liver enzymes, including Alanine aminotransferase at 512 U/L and Aspartate aminotransferase at 388 U/L. The table also shows high total bilirubin at 78 umol/L and high alkaline phosphatase at 142 U/L, while albumin is normal at 38 g/L. Several expected details are missing from the document, such as the therapy stop date for Hepatrol. The document also does not state the batch or lot number of the suspect product. Concomitant medications and the specific dates when the laboratory tests were performed are also not stated.",
+      "looks_relevant": true,
+      "relevance_reason": "The document is an Adverse Event Report Form detailing a serious adverse reaction of jaundice and deranged liver function tests associated with the product Hepatrol.",
+      "summary_confidence": 1.0,
       "ocr_confidence": null
     }
   ],
-  "classifications": [],
-  "extractions": [],
+  "classifications": [
+    {
+      "category": "NOT_RELEVANT",
+      "applies": false,
+      "confidence": 1.0,
+      "reason": "The message is highly relevant as it is a valid ICSR safety report.",
+      "model_name": "gemini-3.5-flash"
+    },
+    {
+      "category": "ICSR",
+      "applies": true,
+      "confidence": 1.0,
+      "reason": "The message contains an identifiable patient (67-year-old male), reporter (Dr Liang Wei), product (Hepatrol), and adverse events (jaundice, dark urine, fatigue, hospitalisation).",
+      "model_name": "gemini-3.5-flash"
+    },
+    {
+      "category": "PQC",
+      "applies": false,
+      "confidence": 0.99,
+      "reason": "There is no mention of any product quality issues, defects, or packaging damage.",
+      "model_name": "gemini-3.5-flash"
+    },
+    {
+      "category": "MI",
+      "applies": false,
+      "confidence": 0.99,
+      "reason": "The sender is reporting an adverse event and does not ask any medical information questions about the product.",
+      "model_name": "gemini-3.5-flash"
+    }
+  ],
+  "extractions": [
+    {
+      "category": "ICSR",
+      "narrative": "A 67-year-old male patient with no significant prior liver disease experienced jaundice, dark urine, fatigue, and deranged liver function tests starting on 02 February 2026 after taking Hepatrol (500 mg twice daily, oral) since 12 January 2026. The patient was hospitalised for nine days, and Hepatrol was withdrawn. The patient is recovering, but liver enzymes have not yet returned to baseline. The event was reported by Dr Liang Wei, a physician from Singapore.",
+      "completeness": 1.0,
+      "model_name": "gemini-3.5-flash",
+      "fields_data": [
+        {
+          "name": "patient_age",
+          "value": "67 years",
+          "confidence": 1.0,
+          "is_stated": true,
+          "source_document": "[form_icsr_full_hepatic.pdf p.1]",
+          "source_page": null,
+          "source_quote": "67 years",
+          "quote_verified": true
+        },
+        {
+          "name": "patient_history",
+          "value": "No significant prior liver disease",
+          "confidence": 1.0,
+          "is_stated": true,
+          "source_document": "[form_icsr_full_hepatic.pdf p.1]",
+          "source_page": null,
+          "source_quote": "No significant prior liver disease",
+          "quote_verified": true
+        },
+        {
+          "name": "patient_sex",
+          "value": "Male",
+          "confidence": 1.0,
+          "is_stated": true,
+          "source_document": "[form_icsr_full_hepatic.pdf p.1]",
+          "source_page": null,
+          "source_quote": "Male",
+          "quote_verified": true
+        },
+        {
+          "name": "patient_weight",
+          "value": "81 kg",
+          "confidence": 1.0,
+          "is_stated": true,
+          "source_document": "[form_icsr_full_hepatic.pdf p.1]",
+          "source_page": null,
+          "source_quote": "81 kg",
+          "quote_verified": true
+        },
+        {
+          "name": "product_dose",
+          "value": "500 mg twice daily",
+          "confidence": 1.0,
+          "is_stated": true,
+          "source_document": "[form_icsr_full_hepatic.pdf p.1]",
+          "source_page": null,
+          "source_quote": "500 mg twice daily",
+          "quote_verified": true
+        },
+        {
+          "name": "product_name",
+          "value": "Hepatrol",
+          "confidence": 1.0,
+          "is_stated": true,
+          "source_document": "[form_icsr_full_hepatic.pdf p.1]",
+          "source_page": null,
+          "source_quote": "Hepatrol",
+          "quote_verified": true
+        },
+        {
+          "name": "product_route",
+          "value": "Oral",
+          "confidence": 1.0,
+          "is_stated": true,
+          "source_document": "[form_icsr_full_hepatic.pdf p.1]",
+          "source_page": null,
+          "source_quote": "Oral",
+          "quote_verified": true
+        },
+        {
+          "name": "product_start_date",
+          "value": "12 January 2026",
+          "confidence": 1.0,
+          "is_stated": true,
+          "source_document": "[form_icsr_full_hepatic.pdf p.1]",
+          "source_page": null,
+          "source_quote": "12 January 2026",
+          "quote_verified": true
+        },
+        {
+          "name": "reaction",
+          "value": "Jaundice, dark urine, fatigue, deranged liver function tests",
+          "confidence": 1.0,
+          "is_stated": true,
+          "source_document": "[form_icsr_full_hepatic.pdf p.1]",
+          "source_page": null,
+          "source_quote": "Jaundice, dark urine, fatigue, deranged liver function tests",
+          "quote_verified": true
+        },
+        {
+          "name": "reaction_onset",
+          "value": "02 February 2026",
+          "confidence": 1.0,
+          "is_stated": true,
+          "source_document": "[form_icsr_full_hepatic.pdf p.1]",
+          "source_page": null,
+          "source_quote": "02 February 2026",
+          "quote_verified": true
+        },
+        {
+          "name": "reaction_outcome",
+          "value": "Recovering",
+          "confidence": 1.0,
+          "is_stated": true,
+          "source_document": "[form_icsr_full_hepatic.pdf p.1]",
+          "source_page": null,
+          "source_quote": "Recovering",
+          "quote_verified": true
+        },
+        {
+          "name": "reporter_country",
+          "value": "Singapore",
+          "confidence": 1.0,
+          "is_stated": true,
+          "source_document": "[form_icsr_full_hepatic.pdf p.1]",
+          "source_page": null,
+          "source_quote": "Singapore",
+          "quote_verified": true
+        },
+        {
+          "name": "reporter_name",
+          "value": "Dr Liang Wei",
+          "confidence": 1.0,
+          "is_stated": true,
+          "source_document": "[form_icsr_full_hepatic.pdf p.1]",
+          "source_page": null,
+          "source_quote": "Dr Liang Wei",
+          "quote_verified": true
+        },
+        {
+          "name": "reporter_role",
+          "value": "Physician",
+          "confidence": 1.0,
+          "is_stated": true,
+          "source_document": "[form_icsr_full_hepatic.pdf p.1]",
+          "source_page": null,
+          "source_quote": "Physician (Consultant Hepatologist)",
+          "quote_verified": true
+        },
+        {
+          "name": "seriousness",
+          "value": "Serious",
+          "confidence": 1.0,
+          "is_stated": true,
+          "source_document": "[form_icsr_full_hepatic.pdf p.1]",
+          "source_page": null,
+          "source_quote": "Serious - hospitalisation",
+          "quote_verified": true
+        }
+      ]
+    }
+  ],
   "review_actions": [],
   "audit_events": [
     {
       "event_type": "SUMMARY",
-      "model_name": "gemini-3.6-flash",
+      "model_name": "gemini-3.5-flash",
       "is_stub": false,
       "prompt_sha256": "",
       "prompt_chars": 0,
-      "latency_ms": 91512.3,
-      "succeeded": false,
-      "error": "Model call failed after 4 attempts: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-3.6-flash\\nPlease retry in 414.094472ms.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'model': 'gemini-3.6-flash', 'location': 'global'}, 'quotaValue': '20'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '0s'}]}}",
-      "created_at": "2026-09-08T07:58:59.843113Z"
+      "latency_ms": 10608.5,
+      "succeeded": true,
+      "error": "",
+      "created_at": "2026-09-08T08:18:43.551215Z"
+    },
+    {
+      "event_type": "EXTRACT",
+      "model_name": "gemini-3.5-flash",
+      "is_stub": false,
+      "prompt_sha256": "",
+      "prompt_chars": 2368,
+      "latency_ms": 9587.9,
+      "succeeded": true,
+      "error": "",
+      "created_at": "2026-09-08T08:18:43.550215Z"
     },
     {
       "event_type": "CLASSIFY",
-      "model_name": "gemini-3.6-flash",
+      "model_name": "gemini-3.5-flash",
       "is_stub": false,
       "prompt_sha256": "4ecee2bb017cd30c5dcd18a50f0aedb53f38e78fcb8c17f0935e790f4c4f005a",
       "prompt_chars": 2368,
-      "latency_ms": 91345.5,
-      "succeeded": false,
-      "error": "Model call failed after 4 attempts: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-3.6-flash\\nPlease retry in 31.865911771s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'model': 'gemini-3.6-flash', 'location': 'global'}, 'quotaValue': '20'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '31s'}]}}",
-      "created_at": "2026-09-08T07:58:59.841108Z"
+      "latency_ms": 4506.0,
+      "succeeded": true,
+      "error": "",
+      "created_at": "2026-09-08T08:18:43.548215Z"
     }
   ]
 }
