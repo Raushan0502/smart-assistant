@@ -27,6 +27,7 @@ because the natural failure mode is a model inventing plausible ink.
 from __future__ import annotations
 
 import logging
+from io import BytesIO
 
 import pypdfium2 as pdfium
 
@@ -90,8 +91,6 @@ ALSO RETURN
 
 def render_page_png(data: bytes, page_number: int, scale: float = PAGE_RENDER_SCALE) -> bytes:
     """Render one PDF page (1-based) to PNG bytes."""
-    from io import BytesIO
-
     document = pdfium.PdfDocument(data)
     try:
         image = document[page_number - 1].render(scale=scale).to_pil()

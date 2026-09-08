@@ -32,25 +32,25 @@ class AIServiceError(RuntimeError):
     """The AI service could not be reached, or returned an error."""
 
 
-def _base_url() -> str:
+def base_url() -> str:
     return settings.AI_SERVICE_URL.rstrip("/")
 
 
 def health() -> dict:
     """Ask the AI service for its status and which model it is using."""
     try:
-        response = requests.get(f"{_base_url()}/health", timeout=HEALTH_TIMEOUT_SECONDS)
+        response = requests.get(f"{base_url()}/health", timeout=HEALTH_TIMEOUT_SECONDS)
         response.raise_for_status()
         return response.json()
     except requests.RequestException as exc:
-        raise AIServiceError(f"AI service unreachable at {_base_url()}: {exc}") from exc
+        raise AIServiceError(f"AI service unreachable at {base_url()}: {exc}") from exc
 
 
 def process_message(raw: bytes, file_name: str = "message.eml") -> dict:
     """Send one raw email to the AI service and return its analysis."""
     try:
         response = requests.post(
-            f"{_base_url()}/process-message",
+            f"{base_url()}/process-message",
             files={"file": (file_name, raw, "message/rfc822")},
             timeout=PROCESS_TIMEOUT_SECONDS,
         )
@@ -67,7 +67,7 @@ def screen_article(data: bytes, file_name: str = "article.pdf") -> dict:
     """Send one article PDF for literature screening."""
     try:
         response = requests.post(
-            f"{_base_url()}/screen-article",
+            f"{base_url()}/screen-article",
             files={"file": (file_name, data, "application/pdf")},
             timeout=PROCESS_TIMEOUT_SECONDS,
         )

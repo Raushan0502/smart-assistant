@@ -85,7 +85,7 @@ def normalise_text(text: str) -> str:
     return text.strip()
 
 
-def _furniture_lines(blocks: list[TextBlock]) -> set[str]:
+def furniture_lines(blocks: list[TextBlock]) -> set[str]:
     """Find lines repeated across pages that are page furniture.
 
     Lines are compared with digits masked, so ``Page 3 of 12`` and ``Page 7 of
@@ -124,7 +124,7 @@ def strip_page_furniture(document: ExtractedDocument) -> int:
     dropped rather than having it disappear silently.
     """
     blocks = document.text_blocks
-    furniture = _furniture_lines(blocks)
+    furniture = furniture_lines(blocks)
     if not furniture:
         return 0
 

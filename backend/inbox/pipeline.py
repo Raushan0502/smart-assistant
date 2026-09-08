@@ -41,7 +41,7 @@ FLAVOUR_MAP = {
 }
 
 
-def _parse_sent_at(value: str) -> datetime | None:
+def parse_sent_at(value: str) -> datetime | None:
     """Parse the message date, tolerating whatever the sender put there."""
     if not value:
         return None
@@ -51,7 +51,7 @@ def _parse_sent_at(value: str) -> datetime | None:
         return None
 
 
-def _tables_from(document_payload: dict) -> list[dict]:
+def tables_from(document_payload: dict) -> list[dict]:
     """Pull table blocks out of a document payload, keeping them structured."""
     return [
         {
@@ -64,7 +64,7 @@ def _tables_from(document_payload: dict) -> list[dict]:
     ]
 
 
-def _images_from(document_payload: dict) -> list[dict]:
+def images_from(document_payload: dict) -> list[dict]:
     """Pull image blocks out of a document payload."""
     return [
         {
@@ -79,7 +79,7 @@ def _images_from(document_payload: dict) -> list[dict]:
     ]
 
 
-def _text_from(document_payload: dict) -> str:
+def text_from(document_payload: dict) -> str:
     """Concatenate the prose blocks of a document payload."""
     return "\n\n".join(
         block.get("text", "")
@@ -88,7 +88,7 @@ def _text_from(document_payload: dict) -> str:
     )
 
 
-def _save_document(
+def save_document(
     message: Message, payload: dict, summaries: dict[str, dict], is_body: bool
 ) -> Document:
     """Persist one document (body or attachment) with its structure."""
@@ -111,9 +111,9 @@ def _save_document(
             "language": payload.get("language", "en"),
             "page_count": payload.get("page_count", 0),
             "processed": payload.get("processed", True),
-            "extracted_text": _text_from(payload),
-            "tables": _tables_from(payload),
-            "images": _images_from(payload),
+            "extracted_text": text_from(payload),
+            "tables": tables_from(payload),
+            "images": images_from(payload),
             "doc_metadata": metadata,
             "warnings": payload.get("warnings", []),
             "summary": summary.get("summary", ""),
@@ -126,7 +126,7 @@ def _save_document(
     return document
 
 
-def _save_fields(extraction: Extraction, fields_payload: dict) -> None:
+def save_fields(extraction: Extraction, fields_payload: dict) -> None:
     """Persist extracted fields with their provenance.
 
     ``quote_verified`` is derived rather than trusted: the AI service reduces
@@ -178,8 +178,8 @@ def persist_analysis(analysis: dict) -> Message:
             "subject": payload.get("subject", "")[:1000],
             "sender": payload.get("sender", "")[:400],
             "recipient": payload.get("recipient", "")[:400],
-            "sent_at": _parse_sent_at(payload.get("sent_at", "")),
-            "body_text": _text_from(payload.get("body", {})),
+            "sent_at": parse_sent_at(payload.get("sent_at", "")),
+            "body_text": text_from(payload.get("body", {})),
             "language": payload.get("body", {}).get("language", "en"),
             "processing_status": ProcessingStatus.READY,
             "processing_ms": int(timings.get("total_ms", 0)),
@@ -190,9 +190,9 @@ def persist_analysis(analysis: dict) -> Message:
     )
 
     summaries = {s["document_id"]: s for s in analysis.get("summaries", [])}
-    _save_document(message, payload.get("body", {}), summaries, is_body=True)
+    save_document(message, payload.get("body", {}), summaries, is_body=True)
     for attachment in payload.get("attachments", []):
-        _save_document(message, attachment, summaries, is_body=False)
+        save_document(message, attachment, summaries, is_body=False)
 
     for verdict in analysis.get("classification", {}).get("verdicts", []):
         Classification.objects.update_or_create(
@@ -216,7 +216,7 @@ def persist_analysis(analysis: dict) -> Message:
                 "completeness": float(item.get("completeness", 0.0) or 0.0),
             },
         )
-        _save_fields(extraction, item.get("fields", {}))
+        save_fields(extraction, item.get("fields", {}))
 
     for event in analysis.get("audit_events", []):
         AuditEvent.objects.create(

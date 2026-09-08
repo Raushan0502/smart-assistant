@@ -89,7 +89,7 @@ ARTICLE
 """
 
 
-def _render(document: ExtractedDocument) -> str:
+def render(document: ExtractedDocument) -> str:
     """Render a document for a prompt, truncating very long ones."""
     body = document.to_prompt_text()
     if len(body) > MAX_PROMPT_CHARS:
@@ -97,7 +97,7 @@ def _render(document: ExtractedDocument) -> str:
     return body
 
 
-def _build(document: ExtractedDocument, payload: dict, model: str) -> DocumentSummary:
+def build(document: ExtractedDocument, payload: dict, model: str) -> DocumentSummary:
     """Turn a raw model payload into a :class:`DocumentSummary`."""
     return DocumentSummary(
         document_id=document.document_id,
@@ -115,9 +115,9 @@ def summarise_document(
     """Summarise one attachment for the review queue."""
     client = client or LLMClient()
     response = client.generate_json(
-        SUMMARY_PROMPT.format(document=_render(document)), SUMMARY_SCHEMA
+        SUMMARY_PROMPT.format(document=render(document)), SUMMARY_SCHEMA
     )
-    return _build(document, response.data, response.model)
+    return build(document, response.data, response.model)
 
 
 def screen_article(
@@ -132,6 +132,6 @@ def screen_article(
     """
     client = client or LLMClient()
     response = client.generate_json(
-        SCREENING_PROMPT.format(document=_render(document)), SUMMARY_SCHEMA
+        SCREENING_PROMPT.format(document=render(document)), SUMMARY_SCHEMA
     )
-    return _build(document, response.data, response.model)
+    return build(document, response.data, response.model)

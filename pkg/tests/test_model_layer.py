@@ -7,14 +7,23 @@ the validation layer exists to catch.
 """
 from __future__ import annotations
 
+import os
 import unittest
 from pathlib import Path
 
-from ai_service.classify import classify_message, parse_verdicts
+from ai_service.classify import build_prompt, classify_message, parse_verdicts
 from ai_service.extract import extract_fields, parse_fields, verify_quote
-from ai_service.llm import LLMClient, LLMError, StubProvider, _extract_json
+from ai_service.llm import LLMClient, LLMError, StubProvider, extract_json
 from ai_service.mail import parse_message_file
-from ai_service.schemas import Category, Classification, CategoryVerdict, ExtractedField
+from ai_service.schemas import (
+    CLASSIFICATION_SCHEMA,
+    ICSR_FIELDS,
+    Category,
+    CategoryVerdict,
+    Classification,
+    ExtractedField,
+    extraction_schema,
+)
 
 SAMPLES = Path(__file__).resolve().parents[2] / "data" / "samples"
 
@@ -38,19 +47,19 @@ class TestJsonRecovery(unittest.TestCase):
     """Model output is not always clean JSON."""
 
     def test_plain_json(self):
-        self.assertEqual(_extract_json('{"a": 1}'), {"a": 1})
+        self.assertEqual(extract_json('{"a": 1}'), {"a": 1})
 
     def test_fenced_json(self):
-        self.assertEqual(_extract_json('```json\n{"a": 1}\n```'), {"a": 1})
+        self.assertEqual(extract_json('```json\n{"a": 1}\n```'), {"a": 1})
 
     def test_json_with_preamble(self):
-        self.assertEqual(_extract_json('Sure, here it is:\n{"a": 1}'), {"a": 1})
+        self.assertEqual(extract_json('Sure, here it is:\n{"a": 1}'), {"a": 1})
 
     def test_no_json_raises(self):
         # Must raise rather than return {} -- an empty result would read as
         # "the document said nothing", which is the dangerous false negative.
         with self.assertRaises(LLMError):
-            _extract_json("I could not do that.")
+            extract_json("I could not do that.")
 
 
 class TestClassificationParsing(unittest.TestCase):
@@ -236,14 +245,12 @@ class TestStubProvider(unittest.TestCase):
     """The stub must be safe, not clever."""
 
     def test_stub_extracts_nothing(self):
-        from ai_service.schemas import extraction_schema, ICSR_FIELDS
 
         payload = StubProvider().generate_json("anything", extraction_schema(ICSR_FIELDS))
         self.assertTrue(all(f["value"] == "Not stated" for f in payload["fields"]))
         self.assertTrue(all(f["confidence"] == 0.0 for f in payload["fields"]))
 
     def test_stub_confidence_is_capped_low(self):
-        from ai_service.schemas import CLASSIFICATION_SCHEMA
 
         payload = StubProvider().generate_json(
             "rash adverse reaction hospital", CLASSIFICATION_SCHEMA
@@ -251,7 +258,6 @@ class TestStubProvider(unittest.TestCase):
         self.assertTrue(all(v["confidence"] <= 0.45 for v in payload["verdicts"]))
 
     def test_stub_output_is_marked(self):
-        from ai_service.schemas import CLASSIFICATION_SCHEMA
 
         payload = StubProvider().generate_json("x", CLASSIFICATION_SCHEMA)
         self.assertTrue(all("[offline stub]" in v["reason"] for v in payload["verdicts"]))
@@ -263,8 +269,6 @@ class TestStubProvider(unittest.TestCase):
         ("rash", "broken seal", "dosing"...). Scoring the whole prompt matched
         all four categories on every message -- including obvious marketing.
         """
-        from ai_service.classify import build_prompt
-        from ai_service.schemas import CLASSIFICATION_SCHEMA
 
         message = parse_message_file(SAMPLES / "irrelevant_marketing.eml")
         payload = StubProvider().generate_json(
@@ -274,8 +278,6 @@ class TestStubProvider(unittest.TestCase):
         self.assertEqual(applied, ["NOT_RELEVANT"])
 
     def test_stub_finds_dual_label_case(self):
-        from ai_service.classify import build_prompt
-        from ai_service.schemas import CLASSIFICATION_SCHEMA
 
         message = parse_message_file(SAMPLES / "icsr_and_pqc_combined.eml")
         payload = StubProvider().generate_json(
@@ -285,7 +287,6 @@ class TestStubProvider(unittest.TestCase):
         self.assertEqual(applied, {"ICSR", "PQC"})
 
     def test_client_falls_back_to_stub_without_key(self):
-        import os
 
         saved = os.environ.pop("GEMINI_API_KEY", None)
         try:

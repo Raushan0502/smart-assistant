@@ -74,7 +74,7 @@ LAB_PANELS: dict[str, list[list[str]]] = {
 }
 
 
-def _panel_for(case: Case) -> str:
+def panel_for(case: Case) -> str:
     """Pick the lab panel that fits the case's reaction."""
     reaction = case.expected_fields.get("reaction", "").lower()
     if "hepat" in reaction or "jaundice" in reaction or "liver" in reaction:
@@ -84,7 +84,7 @@ def _panel_for(case: Case) -> str:
     return "general"
 
 
-def _styles() -> dict[str, ParagraphStyle]:
+def build_styles() -> dict[str, ParagraphStyle]:
     """Paragraph styles shared by the text-layer renderers."""
     base = getSampleStyleSheet()
     return {
@@ -119,7 +119,7 @@ def _styles() -> dict[str, ParagraphStyle]:
     }
 
 
-def _field_table(rows: list[tuple[str, str]]) -> Table:
+def field_table(rows: list[tuple[str, str]]) -> Table:
     """Render label/value pairs as a bordered two-column table.
 
     Real forms put fields in ruled boxes, and keeping that structure means the
@@ -145,7 +145,7 @@ def _field_table(rows: list[tuple[str, str]]) -> Table:
     return table
 
 
-def _lab_table(panel: str) -> Table:
+def lab_table(panel: str) -> Table:
     """Render a lab-results panel as a real table with a header row."""
     data = [LAB_TABLE_HEADER] + LAB_PANELS[panel]
     table = Table(data, colWidths=[52 * mm, 22 * mm, 22 * mm, 38 * mm, 24 * mm])
@@ -170,7 +170,7 @@ def _lab_table(panel: str) -> Table:
 
 def render_digital_form(case: Case, path: Path, language: str = "en") -> None:
     """Render a filled-in adverse-event report form with a real text layer."""
-    styles = _styles()
+    styles = build_styles()
     labels = FORM_LABELS.get(language, FORM_LABELS["en"])
     doc = SimpleDocTemplate(
         str(path),
@@ -191,7 +191,7 @@ def render_digital_form(case: Case, path: Path, language: str = "en") -> None:
         Paragraph(labels["subtitle"], styles["small"]),
         Spacer(1, 4 * mm),
         Paragraph(labels["patient"], styles["heading"]),
-        _field_table(
+        field_table(
             [
                 (labels["age"], fields.get("patient_age", NOT_STATED)),
                 (labels["sex"], fields.get("patient_sex", NOT_STATED)),
@@ -200,7 +200,7 @@ def render_digital_form(case: Case, path: Path, language: str = "en") -> None:
             ]
         ),
         Paragraph(labels["reporter"], styles["heading"]),
-        _field_table(
+        field_table(
             [
                 (labels["reporter_name"], fields.get("reporter_name", NOT_STATED)),
                 (labels["reporter_role"], fields.get("reporter_role", NOT_STATED)),
@@ -208,7 +208,7 @@ def render_digital_form(case: Case, path: Path, language: str = "en") -> None:
             ]
         ),
         Paragraph(labels["product"], styles["heading"]),
-        _field_table(
+        field_table(
             [
                 (labels["product_name"], fields.get("product_name", NOT_STATED)),
                 (labels["dose"], fields.get("product_dose", NOT_STATED)),
@@ -217,7 +217,7 @@ def render_digital_form(case: Case, path: Path, language: str = "en") -> None:
             ]
         ),
         Paragraph(labels["reaction"], styles["heading"]),
-        _field_table(
+        field_table(
             [
                 (labels["reaction_desc"], fields.get("reaction", NOT_STATED)),
                 (labels["onset"], fields.get("reaction_onset", NOT_STATED)),
@@ -226,7 +226,7 @@ def render_digital_form(case: Case, path: Path, language: str = "en") -> None:
             ]
         ),
         Paragraph(labels["labs"], styles["heading"]),
-        _lab_table(_panel_for(case)),
+        lab_table(panel_for(case)),
         Spacer(1, 4 * mm),
         Paragraph(labels["footer"], styles["small"]),
     ]
@@ -235,7 +235,7 @@ def render_digital_form(case: Case, path: Path, language: str = "en") -> None:
 
 def render_article(article: Article, path: Path) -> None:
     """Render a journal article across two columns on every page."""
-    styles = _styles()
+    styles = build_styles()
     doc = BaseDocTemplate(
         str(path),
         pagesize=A4,
@@ -431,11 +431,11 @@ def render_scanned_form(case: Case, path: Path, seed: int = 0) -> None:
     draw.text((100, y + 30), "Signature:", font=label_font, fill=(40, 40, 40))
     draw.text((445, y + 12), case.sender_name, font=hand_font, fill=(28, 40, 105))
 
-    page = _apply_scan_artefacts(page, rng)
+    page = apply_scan_artefacts(page, rng)
     page.save(str(path), "PDF", resolution=150.0)
 
 
-def _apply_scan_artefacts(page: Image.Image, rng: random.Random) -> Image.Image:
+def apply_scan_artefacts(page: Image.Image, rng: random.Random) -> Image.Image:
     """Degrade a clean render so it looks like it came off a real scanner."""
     page = page.rotate(
         rng.uniform(-1.4, 1.4), resample=Image.BICUBIC, expand=False, fillcolor=(252, 251, 247)

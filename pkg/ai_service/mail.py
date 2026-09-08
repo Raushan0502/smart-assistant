@@ -37,7 +37,7 @@ AUDIT_HEADERS = [
 ]
 
 
-def _stable_id(raw: bytes, message_id: str | None) -> str:
+def stable_id(raw: bytes, message_id: str | None) -> str:
     """Derive a stable identifier for a message.
 
     ``Message-ID`` is used when present, since it is the mail system's own
@@ -52,7 +52,7 @@ def _stable_id(raw: bytes, message_id: str | None) -> str:
     return "sha256:" + hashlib.sha256(raw).hexdigest()[:32]
 
 
-def _body_text(message: EmailMessage) -> tuple[str, list[str]]:
+def extract_body_text(message: EmailMessage) -> tuple[str, list[str]]:
     """Return the plain-text body, falling back to HTML when necessary."""
     warnings: list[str] = []
     part = message.get_body(preferencelist=("plain",))
@@ -73,7 +73,7 @@ def _body_text(message: EmailMessage) -> tuple[str, list[str]]:
     return text, warnings
 
 
-def _attachment_document(part: EmailMessage, message_id: str, index: int) -> ExtractedDocument:
+def attachment_document(part: EmailMessage, message_id: str, index: int) -> ExtractedDocument:
     """Ingest one attachment, or record why it was not processed."""
     file_name = part.get_filename() or f"attachment_{index}"
     content_type = (part.get_content_type() or "").lower()
@@ -110,7 +110,7 @@ def _attachment_document(part: EmailMessage, message_id: str, index: int) -> Ext
 def parse_message(raw: bytes) -> IngestedMessage:
     """Parse raw MIME bytes into an :class:`IngestedMessage`."""
     message: EmailMessage = email.message_from_bytes(raw, policy=policy.default)
-    message_id = _stable_id(raw, message.get("Message-ID"))
+    message_id = stable_id(raw, message.get("Message-ID"))
 
     sent_at = ""
     warnings: list[str] = []
@@ -122,7 +122,7 @@ def parse_message(raw: bytes) -> IngestedMessage:
     else:
         warnings.append("Message has no Date header.")
 
-    body_text, body_warnings = _body_text(message)
+    body_text, body_warnings = extract_body_text(message)
     warnings.extend(body_warnings)
 
     body = ExtractedDocument(
@@ -147,7 +147,7 @@ def parse_message(raw: bytes) -> IngestedMessage:
         )
 
     attachments = [
-        _attachment_document(part, message_id, index)
+        attachment_document(part, message_id, index)
         for index, part in enumerate(message.iter_attachments())
     ]
 

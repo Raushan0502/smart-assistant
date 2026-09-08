@@ -70,11 +70,11 @@ def tearDownModule():
     llm_module.BACKOFF_SECONDS = _SAVED_BACKOFF
 
 
-def _ref(page: int = 1) -> SourceRef:
+def make_ref(page: int = 1) -> SourceRef:
     return SourceRef("doc", "scan.pdf", page=page, block_index=0)
 
 
-def _ocr_payload(**overrides) -> dict:
+def ocr_payload(**overrides) -> dict:
     payload = {
         "text": "Patient age: 33 years\nSex: Not stated\nProduct: Dermacalm",
         "confidence": 0.82,
@@ -103,49 +103,49 @@ class TestOcrPage(unittest.TestCase):
     """Transcription must be honest about its own reliability."""
 
     def test_transcribes_and_returns_confidence(self):
-        client = LLMClient(FakeProvider(_ocr_payload()))
-        block, confidence, _ = ocr_page(b"png", _ref(), client)
+        client = LLMClient(FakeProvider(ocr_payload()))
+        block, confidence, _ = ocr_page(b"png", make_ref(), client)
         self.assertIsNotNone(block)
         self.assertIn("Dermacalm", block.text)
         self.assertAlmostEqual(confidence, 0.82)
 
     def test_provenance_is_preserved(self):
-        client = LLMClient(FakeProvider(_ocr_payload()))
-        block, _, _ = ocr_page(b"png", _ref(page=3), client)
+        client = LLMClient(FakeProvider(ocr_payload()))
+        block, _, _ = ocr_page(b"png", make_ref(page=3), client)
         self.assertEqual(block.source.page, 3)
 
     def test_handwriting_raises_a_warning(self):
-        client = LLMClient(FakeProvider(_ocr_payload(is_handwritten=True)))
-        _, _, warnings = ocr_page(b"png", _ref(), client)
+        client = LLMClient(FakeProvider(ocr_payload(is_handwritten=True)))
+        _, _, warnings = ocr_page(b"png", make_ref(), client)
         self.assertTrue(any("handwritten" in w for w in warnings))
 
     def test_low_confidence_raises_a_warning(self):
-        payload = _ocr_payload(confidence=LOW_CONFIDENCE_THRESHOLD - 0.2)
-        _, _, warnings = ocr_page(b"png", _ref(), LLMClient(FakeProvider(payload)))
+        payload = ocr_payload(confidence=LOW_CONFIDENCE_THRESHOLD - 0.2)
+        _, _, warnings = ocr_page(b"png", make_ref(), LLMClient(FakeProvider(payload)))
         self.assertTrue(any("low transcription confidence" in w for w in warnings))
 
     def test_illegible_marker_raises_a_warning(self):
-        payload = _ocr_payload(text="Patient age: [illegible]")
-        _, _, warnings = ocr_page(b"png", _ref(), LLMClient(FakeProvider(payload)))
+        payload = ocr_payload(text="Patient age: [illegible]")
+        _, _, warnings = ocr_page(b"png", make_ref(), LLMClient(FakeProvider(payload)))
         self.assertTrue(any("illegible" in w for w in warnings))
 
     def test_empty_transcription_warns_rather_than_silently_passing(self):
         block, _, warnings = ocr_page(
-            b"png", _ref(), LLMClient(FakeProvider(_ocr_payload(text="")))
+            b"png", make_ref(), LLMClient(FakeProvider(ocr_payload(text="")))
         )
         self.assertIsNone(block)
         self.assertTrue(any("nothing could be transcribed" in w for w in warnings))
 
     def test_failure_does_not_raise(self):
         # A failed page must degrade to a warning, not kill the document.
-        block, confidence, warnings = ocr_page(b"png", _ref(), LLMClient(FailingProvider()))
+        block, confidence, warnings = ocr_page(b"png", make_ref(), LLMClient(FailingProvider()))
         self.assertIsNone(block)
         self.assertEqual(confidence, 0.0)
         self.assertTrue(any("OCR failed" in w for w in warnings))
 
     def test_prompt_tells_model_blank_means_not_stated(self):
-        provider = FakeProvider(_ocr_payload())
-        ocr_page(b"png", _ref(), LLMClient(provider))
+        provider = FakeProvider(ocr_payload())
+        ocr_page(b"png", make_ref(), LLMClient(provider))
         prompt = provider.prompts[0]
         # The key anti-invention instruction for handwritten forms.
         self.assertIn("Not stated", prompt)
@@ -153,8 +153,8 @@ class TestOcrPage(unittest.TestCase):
         self.assertIn("[illegible]", prompt)
 
     def test_image_is_actually_sent(self):
-        provider = FakeProvider(_ocr_payload())
-        ocr_page(b"png", _ref(), LLMClient(provider))
+        provider = FakeProvider(ocr_payload())
+        ocr_page(b"png", make_ref(), LLMClient(provider))
         self.assertEqual(provider.image_counts[0], 1)
 
 
@@ -162,7 +162,7 @@ class TestImageDescription(unittest.TestCase):
     """Images get a good-faith description and always keep the review flag."""
 
     def _block(self) -> ImageBlock:
-        return ImageBlock(width=400, height=300, source=_ref())
+        return ImageBlock(width=400, height=300, source=make_ref())
 
     def test_description_is_attached(self):
         payload = {
@@ -244,7 +244,7 @@ class TestReadScannedDocument(unittest.TestCase):
 
     def test_ocr_text_becomes_text_blocks(self):
         document = self._scanned_doc()
-        client = LLMClient(FakeProvider(_ocr_payload()))
+        client = LLMClient(FakeProvider(ocr_payload()))
         read_scanned_document(document, self.pdf_bytes, client)
         # After OCR the document behaves like any other for downstream stages.
         self.assertIn("Dermacalm", document.full_text())
@@ -252,18 +252,18 @@ class TestReadScannedDocument(unittest.TestCase):
 
     def test_page_images_are_retained_as_evidence(self):
         document = self._scanned_doc()
-        read_scanned_document(document, self.pdf_bytes, LLMClient(FakeProvider(_ocr_payload())))
+        read_scanned_document(document, self.pdf_bytes, LLMClient(FakeProvider(ocr_payload())))
         self.assertEqual(len(document.images), 1)
 
     def test_confidence_recorded_in_metadata(self):
         document = self._scanned_doc()
-        read_scanned_document(document, self.pdf_bytes, LLMClient(FakeProvider(_ocr_payload())))
+        read_scanned_document(document, self.pdf_bytes, LLMClient(FakeProvider(ocr_payload())))
         self.assertIn("ocr_confidence", document.metadata)
         self.assertEqual(document.metadata["source_is_pixels"], "true")
 
     def test_always_warns_that_verification_is_required(self):
         document = self._scanned_doc()
-        read_scanned_document(document, self.pdf_bytes, LLMClient(FakeProvider(_ocr_payload())))
+        read_scanned_document(document, self.pdf_bytes, LLMClient(FakeProvider(ocr_payload())))
         self.assertTrue(
             any("requires human verification" in w for w in document.warnings)
         )

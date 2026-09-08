@@ -16,6 +16,7 @@ nothing that has already been stored.
 from __future__ import annotations
 
 import email
+import hashlib
 import imaplib
 import logging
 from email import policy
@@ -49,18 +50,16 @@ class MailboxError(RuntimeError):
     """The mailbox could not be reached or read."""
 
 
-def _already_stored(message_id: str) -> bool:
+def already_stored(message_id: str) -> bool:
     """Whether this message has already been ingested."""
     return Message.objects.filter(message_id=message_id).exists()
 
 
-def _message_identity(raw: bytes) -> tuple[str, str]:
+def message_identity(raw: bytes) -> tuple[str, str]:
     """Return the Message-ID and subject without fully parsing the message."""
     parsed = email.message_from_bytes(raw, policy=policy.default)
     message_id = (parsed.get("Message-ID") or "").strip().strip("<>")
     if not message_id:
-        import hashlib
-
         message_id = "sha256:" + hashlib.sha256(raw).hexdigest()[:32]
     return message_id, str(parsed.get("Subject", ""))
 
@@ -104,8 +103,8 @@ def poll_imap(limit: int = MAX_PER_POLL) -> int:
                     continue
 
                 raw = payload[0][1]
-                message_id, subject = _message_identity(raw)
-                if _already_stored(message_id):
+                message_id, subject = message_identity(raw)
+                if already_stored(message_id):
                     continue
 
                 get_queue().submit(
@@ -135,8 +134,8 @@ def load_offline(directory: Path | None = None, limit: int = MAX_PER_POLL) -> in
     queued = 0
     for path in sorted(directory.glob("*.eml"))[:limit]:
         raw = path.read_bytes()
-        message_id, subject = _message_identity(raw)
-        if _already_stored(message_id):
+        message_id, subject = message_identity(raw)
+        if already_stored(message_id):
             continue
         get_queue().submit(
             Job(raw=raw, file_name=path.name, message_id=message_id, subject=subject)

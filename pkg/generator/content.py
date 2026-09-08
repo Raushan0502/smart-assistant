@@ -70,7 +70,7 @@ class Case:
     notes: str = ""
 
 
-def _icsr_fields(
+def icsr_fields(
     age: str = NOT_STATED,
     sex: str = NOT_STATED,
     weight: str = NOT_STATED,
@@ -136,7 +136,7 @@ ICSR_CASES: list[Case] = [
             "Dr Amara Osei\n"
             "Northgate Clinic, Manchester, United Kingdom"
         ),
-        expected_fields=_icsr_fields(
+        expected_fields=icsr_fields(
             age="54 years",
             sex="Female",
             weight="68 kg",
@@ -177,7 +177,7 @@ ICSR_CASES: list[Case] = [
             "Dr Liang Wei, Consultant Hepatologist\n"
             "Riverside Hospital, Singapore"
         ),
-        expected_fields=_icsr_fields(
+        expected_fields=icsr_fields(
             age="67 years",
             sex="Male",
             weight="81 kg",
@@ -211,7 +211,7 @@ ICSR_CASES: list[Case] = [
             "Should she stop taking them?\n\n"
             "Janet"
         ),
-        expected_fields=_icsr_fields(
+        expected_fields=icsr_fields(
             age="79 years",
             sex="Female",
             reporter="Janet Whitfield",
@@ -238,7 +238,7 @@ ICSR_CASES: list[Case] = [
             "getting short of breath and my heart races after each dose. I am 41. "
             "I have stopped using it.\n\nTomas"
         ),
-        expected_fields=_icsr_fields(
+        expected_fields=icsr_fields(
             age="41 years",
             reporter="Tomas Berg",
             reporter_role="Consumer (patient)",
@@ -267,7 +267,7 @@ ICSR_CASES: list[Case] = [
             "I have photographs of the tube and my arm if those are useful.\n\n"
             "Priya Raman, Leeds, UK"
         ),
-        expected_fields=_icsr_fields(
+        expected_fields=icsr_fields(
             age="33 years",
             reporter="Priya Raman",
             reporter_role="Consumer (patient)",
@@ -302,7 +302,7 @@ ICSR_CASES: list[Case] = [
             "Dr Sofia Marchetti\n"
             "Ospedale Centrale, Milan, Italy"
         ),
-        expected_fields=_icsr_fields(
+        expected_fields=icsr_fields(
             age="84 years",
             sex="Male",
             history="Chronic kidney disease stage 4",
@@ -338,7 +338,7 @@ ICSR_CASES: list[Case] = [
             "Helen Achebe, Nurse Practitioner\n"
             "Community Care Centre, Dublin, Ireland"
         ),
-        expected_fields=_icsr_fields(
+        expected_fields=icsr_fields(
             age="29 years",
             sex="Female",
             history="22 weeks pregnant",
@@ -371,7 +371,7 @@ ICSR_CASES: list[Case] = [
             "Reporting for completeness.\n\n"
             "Dr Kwame Mensah, Accra, Ghana"
         ),
-        expected_fields=_icsr_fields(
+        expected_fields=icsr_fields(
             age="46 years",
             sex="Male",
             reporter="Dr Kwame Mensah",
@@ -570,7 +570,7 @@ NON_ENGLISH_CASES: list[Case] = [
             "Mit freundlichen Gruessen\n"
             "Dr Markus Hoffmann, Praxis Hoffmann, Muenchen, Deutschland"
         ),
-        expected_fields=_icsr_fields(
+        expected_fields=icsr_fields(
             age="61 years",
             sex="Female",
             weight="74 kg",
@@ -625,7 +625,7 @@ NON_ENGLISH_CASES: list[Case] = [
             "Atentamente,\n"
             "Dra Carmen Ruiz, Clinica del Mar, Barcelona, Espana"
         ),
-        expected_fields=_icsr_fields(
+        expected_fields=icsr_fields(
             age="38 years",
             sex="Male",
             weight="79 kg",

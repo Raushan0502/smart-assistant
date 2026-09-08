@@ -21,6 +21,7 @@ from __future__ import annotations
 import logging
 import queue
 import threading
+import time
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 
@@ -117,8 +118,6 @@ class ProcessingQueue:
             self._queue.join()
             return True
         # Queue.join takes no timeout, so poll the unfinished-task count.
-        import time
-
         deadline = time.monotonic() + timeout
         while time.monotonic() < deadline:
             if self._queue.unfinished_tasks == 0:

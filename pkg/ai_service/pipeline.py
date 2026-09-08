@@ -18,9 +18,11 @@ trace of how a record came to look the way it does.
 """
 from __future__ import annotations
 
+import email
 import hashlib
 import logging
 import time
+from email import policy
 from dataclasses import dataclass, field
 
 from .classify import classify_message
@@ -104,7 +106,7 @@ def elapsed_ms(started: float) -> float:
     return (time.perf_counter() - started) * 1000
 
 
-def _ocr_scanned_attachments(
+def ocr_scanned_attachments(
     message: IngestedMessage,
     attachment_bytes: dict[str, bytes],
     client: LLMClient,
@@ -139,7 +141,7 @@ def _ocr_scanned_attachments(
     return warnings
 
 
-def _summarise_attachments(
+def summarise_attachments(
     message: IngestedMessage, client: LLMClient, events: list[AuditEvent]
 ) -> tuple[list[DocumentSummary], list[str]]:
     """Summarise every processed attachment for the review queue."""
@@ -189,7 +191,7 @@ def process_message(
     started = time.perf_counter()
     message = parse_message(raw)
     if attachment_bytes is None:
-        attachment_bytes = _recover_attachment_bytes(raw)
+        attachment_bytes = recover_attachment_bytes(raw)
     stage_ms["parse"] = elapsed_ms(started)
     warnings.extend(message.warnings)
 
@@ -198,7 +200,7 @@ def process_message(
     stage_ms["preprocess"] = elapsed_ms(started)
 
     started = time.perf_counter()
-    warnings.extend(_ocr_scanned_attachments(message, attachment_bytes, client, events))
+    warnings.extend(ocr_scanned_attachments(message, attachment_bytes, client, events))
     stage_ms["ocr"] = elapsed_ms(started)
 
     started = time.perf_counter()
@@ -259,7 +261,7 @@ def process_message(
         stage_ms["extract"] = elapsed_ms(started)
 
     started = time.perf_counter()
-    summaries, summary_warnings = _summarise_attachments(message, client, events)
+    summaries, summary_warnings = summarise_attachments(message, client, events)
     warnings.extend(summary_warnings)
     stage_ms["summarise"] = elapsed_ms(started)
 
@@ -275,11 +277,8 @@ def process_message(
     )
 
 
-def _recover_attachment_bytes(raw: bytes) -> dict[str, bytes]:
+def recover_attachment_bytes(raw: bytes) -> dict[str, bytes]:
     """Pull attachment payloads out of a raw message, keyed by filename."""
-    import email
-    from email import policy
-
     parsed = email.message_from_bytes(raw, policy=policy.default)
     recovered: dict[str, bytes] = {}
     for part in parsed.iter_attachments():

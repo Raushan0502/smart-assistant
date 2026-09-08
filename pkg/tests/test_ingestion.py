@@ -7,6 +7,7 @@ tested separately with stubs.
 """
 from __future__ import annotations
 
+import json
 import unittest
 from pathlib import Path
 
@@ -30,7 +31,7 @@ from ai_service.preprocess import (
 SAMPLES = Path(__file__).resolve().parents[2] / "data" / "samples"
 
 
-def _ref(page: int = 1, index: int = 0) -> SourceRef:
+def make_ref(page: int = 1, index: int = 0) -> SourceRef:
     return SourceRef("doc", "file.pdf", page=page, block_index=index)
 
 
@@ -38,7 +39,7 @@ class TestSourceRef(unittest.TestCase):
     """Provenance must be present and immutable."""
 
     def test_describe_includes_page_for_pdf(self):
-        self.assertEqual(_ref(page=3).describe(), "file.pdf p.3")
+        self.assertEqual(make_ref(page=3).describe(), "file.pdf p.3")
 
     def test_describe_omits_page_when_absent(self):
         ref = SourceRef("doc", "(email body)", page=None)
@@ -47,7 +48,7 @@ class TestSourceRef(unittest.TestCase):
     def test_source_ref_is_frozen(self):
         # A reference must not be editable after a fact has cited it.
         with self.assertRaises(Exception):
-            _ref().page = 9
+            make_ref().page = 9
 
 
 class TestTableBlock(unittest.TestCase):
@@ -57,7 +58,7 @@ class TestTableBlock(unittest.TestCase):
         table = TableBlock(
             header=["Test", "Result", "Unit"],
             rows=[["Potassium", "6.8", "mmol/L"]],
-            source=_ref(),
+            source=make_ref(),
         )
         rendered = table.to_prompt_text()
         self.assertIn("| Test | Result | Unit |", rendered)
@@ -66,7 +67,7 @@ class TestTableBlock(unittest.TestCase):
         self.assertIn("file.pdf p.1", rendered)
 
     def test_handles_missing_cells(self):
-        table = TableBlock(header=["A", "B"], rows=[["x", None]], source=_ref())
+        table = TableBlock(header=["A", "B"], rows=[["x", None]], source=make_ref())
         self.assertIn("| x |  |", table.to_prompt_text())
 
 
@@ -111,7 +112,7 @@ class TestPageFurniture(unittest.TestCase):
     def _doc(self, pages: list[str]) -> ExtractedDocument:
         doc = ExtractedDocument("d", "f.pdf", "application/pdf")
         doc.blocks = [
-            TextBlock(text=text, source=_ref(page=n))
+            TextBlock(text=text, source=make_ref(page=n))
             for n, text in enumerate(pages, start=1)
         ]
         return doc
@@ -152,10 +153,10 @@ class TestPreprocessPreservesStructure(unittest.TestCase):
         table = TableBlock(
             header=["Test", "Reference range"],
             rows=[["Potassium", "3.5 - 5.0"]],
-            source=_ref(),
+            source=make_ref(),
         )
         doc = ExtractedDocument("d", "f.pdf", "application/pdf")
-        doc.blocks = [TextBlock(text="some  prose", source=_ref()), table]
+        doc.blocks = [TextBlock(text="some  prose", source=make_ref()), table]
 
         preprocess_document(doc)
 
@@ -164,7 +165,7 @@ class TestPreprocessPreservesStructure(unittest.TestCase):
         self.assertEqual(doc.tables[0].header, ["Test", "Reference range"])
 
     def test_images_are_preserved(self):
-        image = ImageBlock(width=400, height=300, source=_ref())
+        image = ImageBlock(width=400, height=300, source=make_ref())
         doc = ExtractedDocument("d", "f.pdf", "application/pdf")
         doc.blocks = [image]
         preprocess_document(doc)
@@ -172,7 +173,7 @@ class TestPreprocessPreservesStructure(unittest.TestCase):
         self.assertTrue(doc.images[0].needs_review)
 
     def test_provenance_survives_preprocessing(self):
-        block = TextBlock(text="text  with   spaces", source=_ref(page=4, index=2))
+        block = TextBlock(text="text  with   spaces", source=make_ref(page=4, index=2))
         doc = ExtractedDocument("d", "f.pdf", "application/pdf")
         doc.blocks = [block]
         preprocess_document(doc)
@@ -233,7 +234,6 @@ class TestCorpusIngestion(unittest.TestCase):
                 self.assertTrue(message.body.full_text())
 
     def test_flavour_detection_matches_ground_truth(self):
-        import json
 
         truth = json.loads((SAMPLES / "ground_truth.json").read_text(encoding="utf-8"))
         expected = {}

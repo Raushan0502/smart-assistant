@@ -13,6 +13,7 @@ to come from the page itself.
 from __future__ import annotations
 
 import re
+from functools import partial
 from io import BytesIO
 from pathlib import Path
 
@@ -95,7 +96,7 @@ def detect_language(text: str) -> str:
     return "en"
 
 
-def _page_image_coverage(page: pdfplumber.page.Page) -> float:
+def page_image_coverage(page: pdfplumber.page.Page) -> float:
     """Fraction of the page area covered by its largest image."""
     page_area = float(page.width) * float(page.height)
     if page_area <= 0 or not page.images:
@@ -119,7 +120,7 @@ def detect_flavour(pdf: pdfplumber.PDF, text: str) -> tuple[PdfFlavour, list[str
     first = pdf.pages[0]
 
     has_text_layer = len(text.strip()) >= MIN_CHARS_FOR_TEXT_LAYER
-    image_coverage = _page_image_coverage(first)
+    image_coverage = page_image_coverage(first)
 
     if not has_text_layer:
         if image_coverage >= FULL_PAGE_IMAGE_COVERAGE:
@@ -148,15 +149,15 @@ def detect_flavour(pdf: pdfplumber.PDF, text: str) -> tuple[PdfFlavour, list[str
     return PdfFlavour.DIGITAL, warnings
 
 
-def _clean_cell(value: str | None) -> str:
+def clean_cell(value: str | None) -> str:
     """Normalise one table cell, collapsing the newlines wrapping introduces."""
     if value is None:
         return ""
     return re.sub(r"\s+", " ", value).strip()
 
 
-def _extract_tables(
-    page: pdfplumber.page.Page, ref_for: object, page_number: int, start_index: int
+def extract_tables(
+    page: pdfplumber.page.Page, document_id: str, file_name: str, page_number: int
 ) -> tuple[list[TableBlock], list[tuple[float, float]]]:
     """Extract every table on a page, and report the areas they occupy.
 
@@ -171,7 +172,7 @@ def _extract_tables(
         rows = table.extract()
         if not rows or len(rows) < 2:
             continue
-        cleaned = [[_clean_cell(cell) for cell in row] for row in rows]
+        cleaned = [[clean_cell(cell) for cell in row] for row in rows]
         # Treat the first row as a header only if it is complete; a table whose
         # first row has blanks is usually a label/value grid, not a matrix.
         header, body = ([], cleaned)
@@ -181,39 +182,46 @@ def _extract_tables(
             TableBlock(
                 header=header,
                 rows=body,
-                source=ref_for(page_number, start_index + offset),
+                source=SourceRef(document_id, file_name, page_number, offset),
             )
         )
         regions.append((table.bbox[1], table.bbox[3]))
     return blocks, regions
 
 
-def _extract_prose(
+def outside_table_bands(table_regions: list[tuple[float, float]], obj: dict) -> bool:
+    """Whether a page object sits outside every detected table band.
+
+    Bound to its regions with ``functools.partial`` at the call site, because
+    ``page.filter`` takes a one-argument predicate.
+
+    ``page.filter`` is applied to every object type on the page, not only
+    characters, and not all of them carry geometry. Those are kept rather than
+    guessed at, which makes this predicate total -- so the filter cannot raise
+    and needs no exception handler around it.
+    """
+    top, bottom = obj.get("top"), obj.get("bottom")
+    if top is None or bottom is None:
+        return True
+    middle = (top + bottom) / 2
+    return not any(start <= middle <= end for start, end in table_regions)
+
+
+def extract_prose(
     page: pdfplumber.page.Page, table_regions: list[tuple[float, float]]
 ) -> str:
     """Extract page prose, excluding any vertical band occupied by a table."""
     if not table_regions:
         return page.extract_text() or ""
-
-    def outside_every_table(obj: dict) -> bool:
-        """Whether a page object sits outside all detected table bands.
-
-        ``page.filter`` is applied to every object type on the page, not just
-        characters, and not all of them carry geometry. Those are kept rather
-        than guessed at -- which makes this predicate total, so the filter
-        cannot raise and needs no exception handler around it.
-        """
-        top, bottom = obj.get("top"), obj.get("bottom")
-        if top is None or bottom is None:
-            return True
-        middle = (top + bottom) / 2
-        return not any(start <= middle <= end for start, end in table_regions)
-
-    return page.filter(outside_every_table).extract_text() or ""
+    return page.filter(partial(outside_table_bands, table_regions)).extract_text() or ""
 
 
-def _extract_images(
-    page: pdfplumber.page.Page, ref_for: object, page_number: int, skip_full_page: bool
+def extract_images(
+    page: pdfplumber.page.Page,
+    document_id: str,
+    file_name: str,
+    page_number: int,
+    skip_full_page: bool,
 ) -> list[ImageBlock]:
     """Collect meaningful images, ignoring logos, rules and scan backdrops."""
     blocks: list[ImageBlock] = []
@@ -231,7 +239,7 @@ def _extract_images(
             ImageBlock(
                 width=int(width),
                 height=int(height),
-                source=ref_for(page_number, index),
+                source=SourceRef(document_id, file_name, page_number, index),
             )
         )
     return blocks
@@ -264,7 +272,6 @@ def extract_pdf_bytes(
         file_name=file_name,
         media_type="application/pdf",
     )
-    path = Path(file_name)
 
     with pdfplumber.open(BytesIO(data)) as pdf:
         document.page_count = len(pdf.pages)
@@ -283,28 +290,27 @@ def extract_pdf_bytes(
         is_scanned = document.flavour is PdfFlavour.SCANNED
 
         for page_number, page in enumerate(pdf.pages, start=1):
-
-            def ref_for(page_no: int, block_index: int) -> SourceRef:
-                return SourceRef(
-                    document_id=document_id,
-                    file_name=path.name,
-                    page=page_no,
-                    block_index=block_index,
-                )
-
             tables: list[TableBlock] = []
             regions: list[tuple[float, float]] = []
             if not is_scanned:
-                tables, regions = _extract_tables(page, ref_for, page_number, 0)
+                tables, regions = extract_tables(
+                    page, document_id, file_name, page_number
+                )
 
-            prose = "" if is_scanned else _extract_prose(page, regions)
+            prose = "" if is_scanned else extract_prose(page, regions)
             if prose.strip():
                 document.blocks.append(
-                    TextBlock(text=prose.strip(), source=ref_for(page_number, 0))
+                    TextBlock(
+                        text=prose.strip(),
+                        source=SourceRef(document_id, file_name, page_number, 0),
+                    )
                 )
             document.blocks.extend(tables)
             document.blocks.extend(
-                _extract_images(page, ref_for, page_number, skip_full_page=not is_scanned)
+                extract_images(
+                    page, document_id, file_name, page_number,
+                    skip_full_page=not is_scanned,
+                )
             )
 
         if is_scanned:
@@ -314,7 +320,7 @@ def extract_pdf_bytes(
                 ImageBlock(
                     width=int(page.width),
                     height=int(page.height),
-                    source=SourceRef(document_id, path.name, page=n, block_index=0),
+                    source=SourceRef(document_id, file_name, page=n, block_index=0),
                     needs_review=True,
                 )
                 for n, page in enumerate(pdf.pages, start=1)

@@ -30,6 +30,9 @@ import time
 from dataclasses import dataclass
 from typing import Any
 
+from google import genai
+from google.genai import types
+
 logger = logging.getLogger(__name__)
 
 STUB_MODEL_NAME = "offline-stub"
@@ -52,7 +55,7 @@ class LLMError(RuntimeError):
     """Raised when a model call cannot be completed or parsed."""
 
 
-def _extract_json(text: str) -> dict[str, Any]:
+def extract_json(text: str) -> dict[str, Any]:
     """Parse a JSON object from a model response.
 
     Even in JSON mode, models occasionally wrap output in a fenced code block
@@ -234,9 +237,7 @@ class GeminiProvider:
     is_stub = False
 
     def __init__(self, api_key: str, model: str, vision_model: str | None = None):
-        from google import genai
-
-        self._genai = genai
+        """Create one reusable client for this process."""
         # The client is created once and reused: constructing one per call
         # leaves the shared transport to be closed by the garbage collector,
         # which surfaces later as "client has been closed" mid-run.
@@ -248,8 +249,6 @@ class GeminiProvider:
         self, prompt: str, schema: dict, images: list[bytes] | None = None
     ) -> dict[str, Any]:
         """Call the model in JSON mode and return the parsed object."""
-        from google.genai import types
-
         contents: list[Any] = [prompt]
         for image in images or []:
             contents.append(types.Part.from_bytes(data=image, mime_type="image/png"))
@@ -265,7 +264,7 @@ class GeminiProvider:
         response = self._client.models.generate_content(
             model=model, contents=contents, config=config
         )
-        return _extract_json(response.text or "")
+        return extract_json(response.text or "")
 
 
 class LLMClient:

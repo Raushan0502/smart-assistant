@@ -27,7 +27,7 @@ from ai_service.models import PdfFlavour
 from ai_service.pdf import extract_pdf
 from ai_service.pipeline import process_message, screen_literature
 from ai_service.preprocess import preprocess_document
-from ai_service.schemas import NOT_STATED, Category
+from ai_service.schemas import FIELDS_BY_CATEGORY, NOT_STATED, Category
 
 SAMPLES = Path(__file__).resolve().parents[2] / "data" / "samples"
 
@@ -174,7 +174,6 @@ class TestHonestyGuarantees(EndToEndBase):
     def test_every_expected_field_is_present(self):
         # A missing key would read as "not asked"; an explicit Not stated reads
         # as "asked, and the source did not say". Only the second is honest.
-        from ai_service.schemas import FIELDS_BY_CATEGORY
 
         for result in self.results:
             for extraction in result.extractions:

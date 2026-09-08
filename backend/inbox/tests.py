@@ -18,7 +18,8 @@ from unittest.mock import patch
 
 from django.test import Client, TestCase, TransactionTestCase, override_settings
 
-from .mailbox import SYNTHETIC_ONLY_SEARCH
+from .ai_client import AIServiceError
+from .mailbox import SYNTHETIC_ONLY_SEARCH, MailboxError, poll_imap
 from .models import (
     AuditEvent,
     Classification,
@@ -181,7 +182,6 @@ class TestMailboxGuard(TestCase):
     @override_settings(MAILBOX={"offline": False, "user": "", "password": "", "host": "h",
                                "port": 993, "folder": "INBOX", "poll_seconds": 60, "search": ""})
     def test_missing_credentials_raise_a_clear_error(self):
-        from .mailbox import MailboxError, poll_imap
 
         with self.assertRaises(MailboxError) as ctx:
             poll_imap()
@@ -423,16 +423,13 @@ class TestApi(TestCase):
     def test_status_reports_ai_service_unreachable_without_crashing(self):
         with patch(
             "inbox.views.ai_client.health",
-            side_effect=__import__("inbox.ai_client", fromlist=["AIServiceError"]).AIServiceError(
-                "down"
-            ),
+            side_effect=AIServiceError("down"),
         ):
             data = self.client.get("/api/status/").json()
         self.assertEqual(data["ai_service"]["status"], "unreachable")
         self.assertEqual(data["messages"]["total"], 1)
 
     def test_ingest_reports_mailbox_failure_as_503(self):
-        from .mailbox import MailboxError
 
         with patch("inbox.views.mailbox.ingest", side_effect=MailboxError("no credentials")):
             response = self.client.post("/api/ingest/")

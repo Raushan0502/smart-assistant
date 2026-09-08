@@ -33,7 +33,7 @@ SEED = 20260907
 UNSUPPORTED_ATTACHMENT_CASE = "icsr_full_rash"
 
 
-def _render_attachment(case: Case, out_dir: Path, index: int) -> tuple[Path, str]:
+def render_attachment(case: Case, out_dir: Path, index: int) -> tuple[Path, str]:
     """Render a case's attachment and return its path and PDF flavour."""
     if case.attachment_kind == "digital_form":
         path = out_dir / f"form_{case.case_id}.pdf"
@@ -50,7 +50,7 @@ def _render_attachment(case: Case, out_dir: Path, index: int) -> tuple[Path, str
     raise ValueError(f"unknown attachment kind: {case.attachment_kind}")
 
 
-def _email_record(
+def email_record(
     case: Case,
     eml_path: Path,
     attachment: tuple[Path, str] | None,
@@ -92,7 +92,7 @@ def _email_record(
     }
 
 
-def _article_record(article: Article, path: Path) -> dict:
+def article_record(article: Article, path: Path) -> dict:
     """Build the ground-truth record for one article PDF."""
     return {
         "doc_id": article.article_id,
@@ -130,7 +130,7 @@ def generate(out_dir: Path) -> dict:
     for index, case in enumerate(all_email_cases()):
         attachment = None
         if case.attachment_kind:
-            attachment = _render_attachment(case, out_dir, index)
+            attachment = render_attachment(case, out_dir, index)
 
         unsupported = None
         if case.case_id == UNSUPPORTED_ATTACHMENT_CASE:
@@ -144,12 +144,12 @@ def generate(out_dir: Path) -> dict:
         )
         eml_path = out_dir / f"{case.case_id}.eml"
         eml_path.write_bytes(bytes(message))
-        records.append(_email_record(case, eml_path, attachment, unsupported))
+        records.append(email_record(case, eml_path, attachment, unsupported))
 
     for article in ARTICLES:
         path = out_dir / f"{article.article_id}.pdf"
         render_article(article, path)
-        records.append(_article_record(article, path))
+        records.append(article_record(article, path))
 
     return {
         "generated_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
@@ -188,6 +188,22 @@ def summarise(truth: dict) -> str:
     return "\n".join(lines)
 
 
+def count_flavour(emails: list[dict], flavour: str) -> int:
+    """How many attachments across all emails have the given PDF flavour."""
+    return sum(
+        1 for d in emails for a in d["attachments"] if a["pdf_flavour"] == flavour
+    )
+
+
+def count_single_category(emails: list[dict], category: str) -> int:
+    """How many emails carry exactly one category, and it is this one.
+
+    The assignment asks for messages that are *only* a quality complaint or
+    *only* an info request, so a dual-labelled message must not count.
+    """
+    return sum(1 for d in emails if d["categories"] == [category])
+
+
 def check_requirements(truth: dict) -> list[str]:
     """Check the corpus against the assignment's stated minimums.
 
@@ -198,26 +214,15 @@ def check_requirements(truth: dict) -> list[str]:
     emails = [d for d in docs if d["kind"] == "email"]
     articles = [d for d in docs if d["kind"] == "article"]
 
-    def count_flavour(name: str) -> int:
-        return sum(
-            1
-            for d in emails
-            for a in d["attachments"]
-            if a["pdf_flavour"] == name
-        )
-
-    def only(category: str) -> int:
-        return sum(1 for d in emails if d["categories"] == [category])
-
     checks = [
         (">=10 emails about a reaction", sum(1 for d in emails if "ICSR" in d["categories"]), 10),
-        (">=5 digital PDFs", count_flavour("digital"), 5),
-        (">=2 scanned/handwritten PDFs", count_flavour("scanned"), 2),
+        (">=5 digital PDFs", count_flavour(emails, "digital"), 5),
+        (">=2 scanned/handwritten PDFs", count_flavour(emails, "scanned"), 2),
         (">=5 article PDFs", len(articles), 5),
-        (">=2 non-English PDFs", count_flavour("non_english"), 2),
-        (">=2 quality-complaint-only", only("PQC"), 2),
-        (">=2 info-request-only", only("MI"), 2),
-        (">=1 clearly irrelevant", only("NOT_RELEVANT"), 1),
+        (">=2 non-English PDFs", count_flavour(emails, "non_english"), 2),
+        (">=2 quality-complaint-only", count_single_category(emails, "PQC"), 2),
+        (">=2 info-request-only", count_single_category(emails, "MI"), 2),
+        (">=1 clearly irrelevant", count_single_category(emails, "NOT_RELEVANT"), 1),
     ]
     return [
         f"{label}: have {actual}, need {needed}"
