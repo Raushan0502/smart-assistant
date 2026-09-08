@@ -344,7 +344,7 @@ Outputs land in `results/`: `batch_summary.json` plus per-document JSON.
 | Tier | Tests | Command |
 |---|---|---|
 | `pkg/` — ingestion, model layer, vision, end-to-end | **116** | `cd pkg && .venv/Scripts/python -m unittest discover -s tests -t .` |
-| `backend/` — persistence, queue, API, mailbox guard | **30** | `cd backend && USE_SQLITE=true .venv/Scripts/python manage.py test inbox` |
+| `backend/` — persistence, queue, API, mailbox guard | **31** | `cd backend && USE_SQLITE=true .venv/Scripts/python manage.py test inbox` |
 | Oracle PL/SQL | verified VALID | `python db/apply_plsql.py --verify` |
 
 `pkg/tests/test_end_to_end.py` runs the whole chain over the real corpus and
@@ -353,7 +353,7 @@ structure survives, every block keeps its provenance, no field is stated
 without a source, unstated fields carry zero confidence. Asserting *what* the
 model said would test the provider; these assert the pipeline.
 
-**146 tests, no network and no API key.** Backend tests run on SQLite so no
+**147 tests, no network and no API key.** Backend tests run on SQLite so no
 container is needed — the models use no Oracle-specific column types. The two
 behaviours that *are* Oracle-specific (the PL/SQL package, and the NCLOB
 constraints that shaped the schema) are verified against the real database
