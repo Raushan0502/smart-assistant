@@ -10,7 +10,8 @@ from __future__ import annotations
 
 import logging
 
-from django.db.models import Prefetch
+from django.db.models import Count, IntegerField, OuterRef, Prefetch, Subquery
+from django.db.models.functions import Coalesce
 from rest_framework import status, viewsets
 from rest_framework.decorators import action, api_view
 from rest_framework.response import Response
@@ -18,6 +19,7 @@ from rest_framework.response import Response
 from . import ai_client, mailbox
 from .models import (
     Classification,
+    Document,
     ExtractedField,
     Extraction,
     Message,
@@ -56,7 +58,39 @@ class MessageViewSet(viewsets.ReadOnlyModelViewSet):
                     queryset=Extraction.objects.prefetch_related("fields"),
                 ),
             )
-        queryset = queryset.prefetch_related("classifications")
+        # Counts the queue row needs, computed in the database rather than per
+        # row in the serializer -- which made a 16-row page cost 49 queries,
+        # recurring constantly because the UI polls this endpoint.
+        #
+        # Correlated subqueries rather than aggregate annotations: an aggregate
+        # forces Oracle to GROUP BY every selected column, and Message carries
+        # NCLOB columns (body_text, warnings, headers) which cannot be grouped
+        # on (ORA-22848). A subquery produces the same counts with no GROUP BY.
+        document_count = (
+            Document.objects.filter(message=OuterRef("pk"))
+            .order_by()
+            .values("message")
+            .annotate(total=Count("pk"))
+            .values("total")[:1]
+        )
+        unverified_count = (
+            ExtractedField.objects.filter(
+                extraction__message=OuterRef("pk"), quote_verified=False
+            )
+            .exclude(value__iexact="Not stated")
+            .order_by()
+            .values("extraction__message")
+            .annotate(total=Count("pk"))
+            .values("total")[:1]
+        )
+        queryset = queryset.prefetch_related("classifications").annotate(
+            document_total=Coalesce(
+                Subquery(document_count, output_field=IntegerField()), 0
+            ),
+            unverified_total=Coalesce(
+                Subquery(unverified_count, output_field=IntegerField()), 0
+            ),
+        )
 
         # Filters the queue screen uses.
         params = self.request.query_params

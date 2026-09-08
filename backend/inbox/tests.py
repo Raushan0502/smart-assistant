@@ -16,7 +16,9 @@ from __future__ import annotations
 import json
 from unittest.mock import patch
 
+from django.db import connection
 from django.test import Client, TestCase, TransactionTestCase, override_settings
+from django.test.utils import CaptureQueriesContext
 
 from .ai_client import AIServiceError
 from .mailbox import SYNTHETIC_ONLY_SEARCH, MailboxError, poll_imap
@@ -351,6 +353,24 @@ class TestApi(TestCase):
         response = self.client.get("/api/messages/")
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.json()["count"], 1)
+
+    def test_queue_query_count_does_not_grow_with_rows(self):
+        """The queue endpoint must cost a constant number of queries.
+
+        It was 49 for 16 rows: the serializer counted documents and unverified
+        fields per row, and Message.categories called .filter() on a prefetched
+        relation, which issues a fresh query. The UI polls this endpoint, so the
+        cost recurred constantly.
+        """
+        for index in range(8):
+            persist_analysis(analysis_fixture(message_id=f"bulk-{index}"))
+
+        with CaptureQueriesContext(connection) as ctx:
+            response = self.client.get("/api/messages/")
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.json()["count"], 9)
+        # Page, count, and the classifications prefetch. Nothing per row.
+        self.assertLessEqual(len(ctx.captured_queries), 5)
 
     def test_category_filter(self):
         self.assertEqual(self.client.get("/api/messages/?category=ICSR").json()["count"], 1)

@@ -25,6 +25,8 @@ import time
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 
+from django.db import close_old_connections, connection
+
 from . import ai_client
 from .models import Message, ProcessingStatus
 from .pipeline import mark_failed, persist_analysis
@@ -73,6 +75,7 @@ class ProcessingQueue:
     """A small thread-pool queue draining into the AI service."""
 
     def __init__(self, workers: int = DEFAULT_WORKERS):
+        """Create a stopped queue with the given worker count."""
         self._queue: queue.Queue[Job | None] = queue.Queue(maxsize=MAX_QUEUE_SIZE)
         self._threads: list[threading.Thread] = []
         self._workers = workers
@@ -80,6 +83,10 @@ class ProcessingQueue:
         self._lock = threading.Lock()
         self._processed = 0
         self._failed = 0
+        # Jobs submitted but not yet finished. Tracked here rather than reading
+        # queue.unfinished_tasks, which is a private CPython attribute and no
+        # part of the Queue API.
+        self._in_flight = 0
 
     def start(self) -> None:
         """Start the worker threads, if they are not already running."""
@@ -89,7 +96,7 @@ class ProcessingQueue:
             self._running = True
             for index in range(self._workers):
                 thread = threading.Thread(
-                    target=self._worker, name=f"inbox-worker-{index}", daemon=True
+                    target=self.run_worker, name=f"inbox-worker-{index}", daemon=True
                 )
                 thread.start()
                 self._threads.append(thread)
@@ -110,46 +117,67 @@ class ProcessingQueue:
 
     def submit(self, job: Job) -> None:
         """Queue a message. Returns immediately."""
+        with self._lock:
+            self._in_flight += 1
         self._queue.put(job)
 
     def join(self, timeout: float | None = None) -> bool:
-        """Block until the queue drains. Used by the batch command and tests."""
+        """Block until every submitted job has finished.
+
+        Returns True if the queue drained, False if the timeout expired first.
+        """
         if timeout is None:
             self._queue.join()
             return True
-        # Queue.join takes no timeout, so poll the unfinished-task count.
         deadline = time.monotonic() + timeout
         while time.monotonic() < deadline:
-            if self._queue.unfinished_tasks == 0:
-                return True
+            with self._lock:
+                if self._in_flight == 0:
+                    return True
             time.sleep(0.1)
-        return self._queue.unfinished_tasks == 0
+        with self._lock:
+            return self._in_flight == 0
 
     def stats(self) -> QueueStats:
-        """Current queue state."""
-        return QueueStats(
-            pending=self._queue.qsize(),
-            processed=self._processed,
-            failed=self._failed,
-            workers=len(self._threads),
-            running=self._running,
-        )
+        """Current queue state, read under the lock that guards the writes."""
+        with self._lock:
+            return QueueStats(
+                pending=self._in_flight,
+                processed=self._processed,
+                failed=self._failed,
+                workers=len(self._threads),
+                running=self._running,
+            )
 
-    def _worker(self) -> None:
-        """Drain jobs until stopped."""
-        while True:
-            job = self._queue.get()
-            if job is None:
-                self._queue.task_done()
-                return
-            try:
-                self._process(job)
-            except Exception:  # noqa: BLE001 -- a worker must never die
-                logger.exception("Worker failed on %s", job.file_name)
-            finally:
-                self._queue.task_done()
+    def run_worker(self) -> None:
+        """Drain jobs until stopped, then release this thread's DB connection.
 
-    def _process(self, job: Job) -> None:
+        Django opens a connection per thread. Worker threads never enter the
+        request cycle where Django would normally close them, so a connection
+        the database had since timed out would be reused and fail -- and that
+        failure would look like a processing error rather than a connection
+        one. ``close_old_connections`` before each job discards any that have
+        gone stale; the close on exit stops a connection outliving its thread.
+        """
+        try:
+            while True:
+                job = self._queue.get()
+                if job is None:
+                    self._queue.task_done()
+                    return
+                close_old_connections()
+                try:
+                    self.process_job(job)
+                except Exception:  # noqa: BLE001 -- a worker must never die
+                    logger.exception("Worker failed on %s", job.file_name)
+                finally:
+                    self._queue.task_done()
+                    with self._lock:
+                        self._in_flight -= 1
+        finally:
+            connection.close()
+
+    def process_job(self, job: Job) -> None:
         """Send one job to the AI service and persist the result."""
         try:
             analysis = ai_client.process_message(job.raw, job.file_name)
@@ -157,12 +185,27 @@ class ProcessingQueue:
             with self._lock:
                 self._processed += 1
             logger.info("Processed %s -> %s", job.file_name, message.categories)
+            return
         except Exception as exc:  # noqa: BLE001 -- record, do not lose the mail
             logger.error("Processing failed for %s: %s", job.file_name, exc)
+            failure = str(exc)
+
+        with self._lock:
+            self._failed += 1
+        try:
             identifier = job.message_id or f"failed:{job.file_name}"
-            mark_failed(identifier, job.subject or job.file_name, str(exc))
-            with self._lock:
-                self._failed += 1
+            mark_failed(identifier, job.subject or job.file_name, failure)
+        except Exception:  # noqa: BLE001 -- the database is the thing that failed
+            # Recording the failure has itself failed, which usually means the
+            # database is down. Log loudly: the message is not recoverable from
+            # a table it never reached, so the log is the only remaining trace.
+            logger.critical(
+                "LOST MESSAGE: could not record failure for %s (%s). "
+                "Re-poll the mailbox once the database is available.",
+                job.file_name,
+                failure,
+                exc_info=True,
+            )
 
 
 # One queue per process. Django's dev server can import modules more than once,

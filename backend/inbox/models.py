@@ -93,11 +93,16 @@ class Message(models.Model):
 
     @property
     def categories(self) -> list[str]:
-        """Categories the AI decided apply, most confident first."""
-        return [
-            c.category
-            for c in self.classifications.filter(applies=True).order_by("-confidence")
-        ]
+        """Categories the AI decided apply, most confident first.
+
+        Filtered and sorted in Python rather than with ``.filter()``, because a
+        queryset method on a related manager issues a fresh query even when the
+        relation has been prefetched -- which turned every row of the review
+        queue into an extra round trip.
+        """
+        applied = [c for c in self.classifications.all() if c.applies]
+        applied.sort(key=lambda c: c.confidence, reverse=True)
+        return [c.category for c in applied]
 
 
 class Document(models.Model):

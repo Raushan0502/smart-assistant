@@ -154,7 +154,12 @@ class MessageListSerializer(serializers.ModelSerializer):
         return round(max(applied), 3) if applied else None
 
     def get_document_count(self, message: Message) -> int:
-        return message.documents.count()
+        """How many documents arrived with this message.
+
+        Reads the annotation the view attaches, so listing a page of messages
+        costs one query rather than one per row.
+        """
+        return getattr(message, "document_total", 0)
 
     def get_needs_attention(self, message: Message) -> bool:
         """Whether a reviewer should prioritise this message.
@@ -162,12 +167,14 @@ class MessageListSerializer(serializers.ModelSerializer):
         True when processing failed, when any warning was raised, or when a
         field was stated without a verifiable quote -- the three cases where
         the AI's output should not be taken at face value.
+
+        The unverified count is an annotation from the view for the same
+        reason as above: computing it per row turned a 16-row page into 49
+        queries.
         """
         if message.processing_status == "FAILED" or message.warnings:
             return True
-        return ExtractedField.objects.filter(
-            extraction__message=message, quote_verified=False
-        ).exclude(value__iexact="Not stated").exists()
+        return getattr(message, "unverified_total", 0) > 0
 
 
 class MessageDetailSerializer(serializers.ModelSerializer):
