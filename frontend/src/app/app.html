@@ -1,0 +1,363 @@
+<header class="topbar">
+  <div class="brand">
+    <span class="mark">SI</span>
+    <div>
+      <h1>Smart Inbox Assistant</h1>
+      <p>Pharmacovigilance intake triage &mdash; AI first pass, human decision</p>
+    </div>
+  </div>
+
+  <div class="status" *ngIf="status() as s">
+    <span class="chip" [class.chip-warn]="s.queue.pending > 0">
+      queue {{ s.queue.pending }}
+    </span>
+    <span class="chip">{{ s.messages.total }} messages</span>
+    <span class="chip" [class.chip-warn]="s.messages.failed > 0">
+      {{ s.messages.failed }} failed
+    </span>
+    <span
+      class="chip"
+      [class.chip-bad]="s.ai_service.status !== 'ok'"
+      [class.chip-warn]="s.ai_service.is_stub"
+      [title]="s.ai_service.note || s.ai_service.detail || ''"
+    >
+      AI: {{ s.ai_service.model || s.ai_service.status }}
+    </span>
+  </div>
+
+  <div class="actions">
+    <input class="reviewer" [(ngModel)]="reviewer" placeholder="reviewer name" />
+    <button class="primary" (click)="ingest()" [disabled]="busy()">
+      {{ busy() ? 'Working...' : 'Fetch mail' }}
+    </button>
+  </div>
+</header>
+
+<!-- Placeholder output must never be mistaken for a model's judgement. -->
+<div class="banner banner-warn" *ngIf="status()?.ai_service?.is_stub">
+  <strong>Offline stub active.</strong>
+  No model API key is configured, so classifications and extractions are
+  low-confidence placeholders, not real analysis.
+</div>
+
+<div class="banner banner-bad" *ngIf="error()">
+  {{ error() }}
+  <button class="link" (click)="error.set('')">dismiss</button>
+</div>
+
+<main class="layout">
+  <!-- ------------------------------------------------------- queue ---- -->
+  <section class="queue">
+    <div class="queue-head">
+      <h2>Review queue</h2>
+      <div class="filters">
+        <select [(ngModel)]="filters.category" (change)="refresh()">
+          <option value="">All categories</option>
+          <option *ngFor="let c of allCategories" [value]="c">
+            {{ categoryLabels[c] }}
+          </option>
+        </select>
+        <select [(ngModel)]="filters.review_status" (change)="refresh()">
+          <option value="">Any status</option>
+          <option value="PENDING">Pending</option>
+          <option value="ACCEPTED">Accepted</option>
+          <option value="OVERRIDDEN">Overridden</option>
+        </select>
+      </div>
+    </div>
+
+    <p class="muted" *ngIf="loading()">Loading...</p>
+    <p class="muted" *ngIf="!loading() && rows().length === 0">
+      Nothing in the queue. Press <strong>Fetch mail</strong> to ingest.
+    </p>
+
+    <ul class="rows">
+      <li
+        *ngFor="let row of rows()"
+        (click)="open(row)"
+        [class.active]="selected()?.id === row.id"
+        [class.attention]="row.needs_attention"
+      >
+        <div class="row-top">
+          <span class="subject">{{ row.subject || '(no subject)' }}</span>
+          <span class="ms" *ngIf="row.processing_ms">{{ row.processing_ms }}ms</span>
+        </div>
+        <div class="row-sender">{{ row.sender }}</div>
+        <div class="row-tags">
+          <span class="tag tag-{{ c }}" *ngFor="let c of row.categories">
+            {{ categoryLabels[c] }}
+          </span>
+          <span class="tag tag-none" *ngIf="row.categories.length === 0">unclassified</span>
+          <span class="conf {{ confidenceClass(row.top_confidence) }}">
+            {{ percent(row.top_confidence) }}
+          </span>
+          <span class="state">{{ row.review_status }}</span>
+        </div>
+      </li>
+    </ul>
+
+    <!-- ------------------------------------------ bonus: screening ---- -->
+    <div class="screening">
+      <h3>Literature screening</h3>
+      <p class="muted small">
+        Upload an article PDF directly (not via the mailbox) to check whether it
+        describes a reportable patient case.
+      </p>
+      <input type="file" accept="application/pdf" (change)="onArticleSelected($event)" />
+      <p class="muted small" *ngIf="screeningBusy()">Screening...</p>
+
+      <div class="screen-result" *ngIf="screening() as r">
+        <div class="verdict" [class.yes]="r.screening.looks_relevant" [class.no]="!r.screening.looks_relevant">
+          {{ r.screening.looks_relevant ? 'Reportable case found' : 'No reportable case' }}
+          <span class="conf {{ confidenceClass(r.screening.confidence) }}">
+            {{ percent(r.screening.confidence) }}
+          </span>
+        </div>
+        <p class="reason">{{ r.screening.relevance_reason }}</p>
+        <details>
+          <summary>Summary</summary>
+          <p class="small">{{ r.screening.summary }}</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ------------------------------------------------------ detail ---- -->
+  <section class="detail" *ngIf="selected() as m; else nothing">
+    <div class="detail-head">
+      <div>
+        <h2>{{ m.subject || '(no subject)' }}</h2>
+        <p class="muted">
+          {{ m.sender }} &middot; {{ m.sent_at | date: 'medium' }} &middot;
+          {{ m.processing_ms }}ms &middot; {{ m.language }}
+        </p>
+      </div>
+      <button class="primary" (click)="accept()" [disabled]="busy()">
+        Accept AI output
+      </button>
+    </div>
+
+    <div class="banner banner-bad" *ngIf="m.processing_status === 'FAILED'">
+      <strong>Processing failed.</strong> {{ m.error }}
+    </div>
+
+    <div class="banner banner-warn" *ngIf="hasIntegrityWarning(m)">
+      <strong>Unverified values.</strong>
+      At least one field was returned without a quote that could be located in
+      the source. Those rows are marked below and need checking.
+    </div>
+
+    <div class="banner banner-warn" *ngIf="m.warnings.length">
+      <ul class="warnlist">
+        <li *ngFor="let w of m.warnings">{{ w }}</li>
+      </ul>
+    </div>
+
+    <!-- categories, always all four so the negatives are visible too -->
+    <div class="categories">
+      <div class="cat" *ngFor="let c of allCategories">
+        <ng-container *ngIf="verdictFor(m, c) as v">
+          <label class="catline">
+            <input
+              type="checkbox"
+              [checked]="v.applies"
+              (change)="toggleCategory(c, !v.applies)"
+              [disabled]="busy()"
+            />
+            <span class="catname" [class.on]="v.applies">{{ categoryLabels[c] }}</span>
+            <span class="conf {{ confidenceClass(v.confidence) }}">
+              {{ percent(v.confidence) }}
+            </span>
+          </label>
+          <p class="reason">{{ v.reason }}</p>
+        </ng-container>
+      </div>
+    </div>
+
+    <nav class="tabs">
+      <button [class.on]="activeTab === 'fields'" (click)="activeTab = 'fields'">
+        Extracted fields
+      </button>
+      <button [class.on]="activeTab === 'documents'" (click)="activeTab = 'documents'">
+        Documents ({{ m.documents.length }})
+      </button>
+      <button [class.on]="activeTab === 'audit'" (click)="activeTab = 'audit'">
+        Audit trail
+      </button>
+    </nav>
+
+    <!-- ------------------------------------------------- fields tab --- -->
+    <div *ngIf="activeTab === 'fields'">
+      <p class="muted" *ngIf="m.extractions.length === 0">
+        No fields extracted &mdash; this message carries no substantive category.
+      </p>
+
+      <div class="extraction" *ngFor="let e of m.extractions">
+        <h3>
+          {{ categoryLabels[e.category] }}
+          <span class="muted small">
+            {{ percent(e.completeness) }} of fields stated in the source
+          </span>
+        </h3>
+        <p class="narrative" *ngIf="e.narrative">{{ e.narrative }}</p>
+
+        <table class="fields">
+          <thead>
+            <tr>
+              <th>Field</th>
+              <th>Value</th>
+              <th>Conf.</th>
+              <th>Source</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr
+              *ngFor="let f of e.fields_data"
+              [class.unstated]="!f.is_stated"
+              [class.unverified]="f.is_stated && !f.quote_verified"
+            >
+              <td class="fname">{{ fieldLabel(f.name) }}</td>
+              <td>
+                <input
+                  class="fvalue"
+                  [ngModel]="editedValue(f)"
+                  (ngModelChange)="edits[f.name] = $event"
+                  [disabled]="busy()"
+                />
+                <button class="save" *ngIf="isDirty(f)" (click)="saveField(f)">save</button>
+              </td>
+              <td>
+                <span class="conf {{ confidenceClass(f.confidence) }}">
+                  {{ percent(f.confidence) }}
+                </span>
+              </td>
+              <td class="src">
+                <ng-container *ngIf="f.is_stated; else nosource">
+                  <span class="srcdoc">
+                    {{ f.source_document || 'source not given' }}
+                  </span>
+                  <span class="badge-bad" *ngIf="!f.quote_verified" title="Quote not found in the source">
+                    unverified
+                  </span>
+                  <div class="quote" *ngIf="f.source_quote">&ldquo;{{ f.source_quote }}&rdquo;</div>
+                </ng-container>
+                <ng-template #nosource><span class="muted small">&mdash;</span></ng-template>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ---------------------------------------------- documents tab --- -->
+    <div *ngIf="activeTab === 'documents'">
+      <article class="doc" *ngFor="let d of m.documents">
+        <header>
+          <h3>{{ d.file_name }}</h3>
+          <span class="tag">{{ d.flavour }}</span>
+          <span class="tag" *ngIf="d.page_count">{{ d.page_count }}p</span>
+          <span class="tag" *ngIf="d.language !== 'en'">{{ d.language }}</span>
+          <span class="badge-bad" *ngIf="!d.processed">not processed</span>
+          <span class="badge-warn" *ngIf="d.ocr_confidence !== null">
+            OCR {{ percent(d.ocr_confidence) }}
+          </span>
+        </header>
+
+        <p class="summary" *ngIf="d.summary">{{ d.summary }}</p>
+        <p class="reason" *ngIf="d.relevance_reason">
+          <strong>{{ d.looks_relevant ? 'Looks relevant' : 'Looks not relevant' }}:</strong>
+          {{ d.relevance_reason }}
+        </p>
+
+        <ul class="warnlist" *ngIf="d.warnings.length">
+          <li *ngFor="let w of d.warnings">{{ w }}</li>
+        </ul>
+
+        <!-- tables kept as tables, which is the point of the extractor -->
+        <div class="tablewrap" *ngFor="let t of d.tables">
+          <table class="datatable">
+            <thead *ngIf="t.header.length">
+              <tr><th *ngFor="let h of t.header">{{ h }}</th></tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let r of t.rows">
+                <td *ngFor="let cell of r">{{ cell }}</td>
+              </tr>
+            </tbody>
+          </table>
+          <span class="muted small" *ngIf="t.page">page {{ t.page }}</span>
+        </div>
+
+        <div class="imageblock" *ngFor="let img of d.images">
+          <strong>Image</strong> {{ img.width }}&times;{{ img.height }}
+          <span class="badge-warn" *ngIf="img.needs_review">needs review</span>
+          <p class="small">{{ img.description || 'No description produced.' }}</p>
+        </div>
+
+        <details *ngIf="d.extracted_text">
+          <summary>Extracted text</summary>
+          <pre>{{ d.extracted_text }}</pre>
+        </details>
+      </article>
+    </div>
+
+    <!-- -------------------------------------------------- audit tab --- -->
+    <div *ngIf="activeTab === 'audit'">
+      <h3>AI calls</h3>
+      <table class="audit">
+        <thead>
+          <tr><th>Type</th><th>Model</th><th>Latency</th><th>Result</th><th>When</th></tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let a of m.audit_events">
+            <td>{{ a.event_type }}</td>
+            <td>
+              {{ a.model_name }}
+              <span class="badge-warn" *ngIf="a.is_stub">stub</span>
+            </td>
+            <td>{{ a.latency_ms | number: '1.0-0' }}ms</td>
+            <td>
+              <span *ngIf="a.succeeded">ok</span>
+              <span class="badge-bad" *ngIf="!a.succeeded" [title]="a.error">failed</span>
+            </td>
+            <td>{{ a.created_at | date: 'short' }}</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>Reviewer actions</h3>
+      <p class="muted" *ngIf="m.review_actions.length === 0">
+        No human decisions recorded yet.
+      </p>
+      <table class="audit" *ngIf="m.review_actions.length">
+        <thead>
+          <tr><th>Action</th><th>Reviewer</th><th>Change</th><th>When</th></tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let a of m.review_actions">
+            <td>{{ a.action }}</td>
+            <td>{{ a.reviewer }}</td>
+            <td>
+              <ng-container *ngIf="a.field_name">
+                <code>{{ a.field_name }}</code>:
+                <span class="was">{{ a.original_value || '(empty)' }}</span>
+                &rarr; <strong>{{ a.new_value }}</strong>
+              </ng-container>
+              <ng-container *ngIf="a.category">
+                <code>{{ a.category }}</code>: {{ a.original_value }} &rarr;
+                <strong>{{ a.new_value }}</strong>
+              </ng-container>
+            </td>
+            <td>{{ a.created_at | date: 'short' }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <ng-template #nothing>
+    <section class="detail empty">
+      <p class="muted">Select a message from the queue to review it.</p>
+    </section>
+  </ng-template>
+</main>
