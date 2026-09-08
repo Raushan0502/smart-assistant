@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-07T09:46:38+00:00",
+  "generated_at": "2026-09-08T07:21:05+00:00",
   "seed": 20260907,
   "note": "Entirely synthetic. No real patient data, and every product name is fictional. Regenerate with: python -m generator.generate",
   "documents": [

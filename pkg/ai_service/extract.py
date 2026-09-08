@@ -129,11 +129,6 @@ CATEGORY_DESCRIPTION = {
 }
 
 
-def _normalise_for_match(text: str) -> str:
-    """Lowercase and collapse whitespace for tolerant quote matching."""
-    return re.sub(r"\s+", " ", text).strip().lower()
-
-
 def verify_quote(quote: str, haystack: str) -> bool:
     """Check that a quote genuinely occurs in the source text.
 
@@ -141,15 +136,20 @@ def verify_quote(quote: str, haystack: str) -> bool:
     wrapped line legitimately differs from the raw text. Beyond that it must be
     a real substring: this is the check that separates a cited fact from an
     invented one.
+
+    Short quotes must match exactly. Only quotes of four words or more fall
+    back to word-overlap, because a two-word near-match is too easy to satisfy
+    by chance and would let an invented value through.
     """
-    needle = _normalise_for_match(quote)
+    collapse = r"\s+"
+    needle = re.sub(collapse, " ", quote).strip().lower()
     if not needle:
         return False
-    hay = _normalise_for_match(haystack)
+
+    hay = re.sub(collapse, " ", haystack).strip().lower()
     if needle in hay:
         return True
 
-    # Allow a near-match for quotes that dropped or added a stray character.
     words = needle.split()
     if len(words) < 4:
         return False

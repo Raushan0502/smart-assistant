@@ -22,7 +22,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 from .content import ARTICLES, Article, Case, all_email_cases
-from .emails import build_email, make_unsupported_attachment, write_email
+from .emails import build_email, make_unsupported_attachment
 from .render import render_article, render_digital_form, render_scanned_form
 
 DEFAULT_OUT = Path(__file__).resolve().parents[2] / "data" / "samples"
@@ -143,7 +143,7 @@ def generate(out_dir: Path) -> dict:
             extra_files=[unsupported] if unsupported else [],
         )
         eml_path = out_dir / f"{case.case_id}.eml"
-        write_email(message, eml_path)
+        eml_path.write_bytes(bytes(message))
         records.append(_email_record(case, eml_path, attachment, unsupported))
 
     for article in ARTICLES:

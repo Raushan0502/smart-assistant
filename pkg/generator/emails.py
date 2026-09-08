@@ -62,11 +62,6 @@ def build_email(
     return message
 
 
-def write_email(message: EmailMessage, path: Path) -> None:
-    """Write an assembled message to disk as ``.eml``."""
-    path.write_bytes(bytes(message))
-
-
 def make_unsupported_attachment(directory: Path, rng: random.Random) -> Path:
     """Create a small non-PDF attachment.
 

@@ -12,6 +12,7 @@ from __future__ import annotations
 
 import email
 import hashlib
+import re
 from email import policy
 from email.message import EmailMessage
 from email.utils import parsedate_to_datetime
@@ -65,8 +66,6 @@ def _body_text(message: EmailMessage) -> tuple[str, list[str]]:
 
     # Crude but adequate: strip tags rather than add an HTML parser dependency
     # for a fallback path. Recorded as a warning so the degradation is visible.
-    import re
-
     text = re.sub(r"<(script|style)[^>]*>.*?</\1>", " ", part.get_content(), flags=re.S | re.I)
     text = re.sub(r"<[^>]+>", " ", text)
     text = re.sub(r"\s+", " ", text).strip()

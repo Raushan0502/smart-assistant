@@ -51,6 +51,7 @@ class AuditEvent:
     document_id: str = ""
 
     def to_dict(self) -> dict:
+        """Serialise for the backend's audit table."""
         return {
             "event_type": self.event_type,
             "model_name": self.model_name,
@@ -93,19 +94,22 @@ class ProcessedMessage:
         }
 
 
-def _hash(text: str) -> str:
-    """Hash a prompt so the audit trail identifies it without storing it."""
-    return hashlib.sha256(text.encode("utf-8", errors="replace")).hexdigest()
-
-
 class _Timer:
-    """Accumulate wall-clock time per named stage."""
+    """Accumulate wall-clock time per named stage.
+
+    A class rather than a bare dict because ``record`` is called from eleven
+    places and each would otherwise repeat the same
+    ``(perf_counter() - started) * 1000`` arithmetic.
+    """
 
     def __init__(self) -> None:
+        """Start with no stages recorded."""
         self.stages: dict[str, float] = {}
 
     def record(self, name: str, started: float) -> None:
-        self.stages[name] = self.stages.get(name, 0.0) + (time.perf_counter() - started) * 1000
+        """Add the elapsed milliseconds since ``started`` to a named stage."""
+        elapsed_ms = (time.perf_counter() - started) * 1000
+        self.stages[name] = self.stages.get(name, 0.0) + elapsed_ms
 
 
 def _ocr_scanned_attachments(
@@ -221,7 +225,12 @@ def process_message(
             event_type="CLASSIFY",
             model_name=classification.model or client.provider.name,
             is_stub=client.is_stub,
-            prompt_sha256=_hash(message.to_prompt_text()),
+            # The prompt is identified by hash rather than stored: the full
+            # text is large, and the hash still proves which prompt produced
+            # this output.
+            prompt_sha256=hashlib.sha256(
+                message.to_prompt_text().encode("utf-8", errors="replace")
+            ).hexdigest(),
             prompt_chars=prompt_len,
             latency_ms=timer.stages["classify"],
             succeeded=succeeded,
