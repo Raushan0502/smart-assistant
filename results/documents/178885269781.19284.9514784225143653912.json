@@ -1,0 +1,435 @@
+{
+  "id": 81,
+  "message_id": "178885269781.19284.9514784225143653912@clinevo-demo.example",
+  "subject": "Possible reaction - Neurolept-X",
+  "sender": "Dr Kwame Mensah <k.mensah@westside-practice.example>",
+  "recipient": "Pharmacovigilance Intake <pv-intake@clinevo-demo.example>",
+  "sent_at": "2026-03-18T03:00:00Z",
+  "received_at": "2026-09-08T07:45:39.598873Z",
+  "body_text": "Reporting a possible adverse reaction.\n\nPatient is a 46-year-old male taking Neurolept-X. He describes tremor and difficulty sleeping. I cannot establish exactly when the symptoms began relative to starting the medication, and he is also taking two other products I have not been able to confirm.\n\nReporting for completeness.\n\nDr Kwame Mensah, Accra, Ghana",
+  "language": "en",
+  "processing_status": "READY",
+  "review_status": "PENDING",
+  "processing_ms": 29578,
+  "error": "",
+  "warnings": [],
+  "headers": {
+    "Message-ID": "<178885269781.19284.9514784225143653912@clinevo-demo.example>",
+    "Date": "Wed, 18 Mar 2026 03:00:00 +0000",
+    "From": "Dr Kwame Mensah <k.mensah@westside-practice.example>",
+    "To": "Pharmacovigilance Intake <pv-intake@clinevo-demo.example>",
+    "Subject": "Possible reaction - Neurolept-X",
+    "X-Synthetic-Case-Id": "icsr_ambiguous_timing",
+    "raw_byte_size": "5408",
+    "attachment_count": "1"
+  },
+  "categories": [
+    "ICSR"
+  ],
+  "documents": [
+    {
+      "document_id": "178885269781.19284.9514784225143653912@clinevo-demo.example::body",
+      "file_name": "(email body)",
+      "media_type": "text/plain",
+      "flavour": "email_body",
+      "language": "en",
+      "page_count": 0,
+      "processed": true,
+      "extracted_text": "Reporting a possible adverse reaction.\n\nPatient is a 46-year-old male taking Neurolept-X. He describes tremor and difficulty sleeping. I cannot establish exactly when the symptoms began relative to starting the medication, and he is also taking two other products I have not been able to confirm.\n\nReporting for completeness.\n\nDr Kwame Mensah, Accra, Ghana",
+      "tables": [],
+      "images": [],
+      "doc_metadata": {
+        "char_count": "356"
+      },
+      "warnings": [],
+      "summary": "",
+      "looks_relevant": null,
+      "relevance_reason": "",
+      "summary_confidence": null,
+      "ocr_confidence": null
+    },
+    {
+      "document_id": "178885269781.19284.9514784225143653912@clinevo-demo.example::att0",
+      "file_name": "form_icsr_ambiguous_timing.pdf",
+      "media_type": "application/pdf",
+      "flavour": "digital",
+      "language": "en",
+      "page_count": 1,
+      "processed": true,
+      "extracted_text": "Adverse Event Report Form\nSYNTHETIC TEST DOCUMENT - no real patient data\n1. Patient details\n2. Reporter details\n3. Suspect product\n4. Reaction\n5. Relevant laboratory results\nForm SYN-AE-01 | Synthetic document generated for testing purposes only.",
+      "tables": [
+        {
+          "header": [
+            "Age",
+            "46 years"
+          ],
+          "rows": [
+            [
+              "Sex",
+              "Male"
+            ],
+            [
+              "Weight",
+              "Not stated"
+            ],
+            [
+              "Relevant medical history",
+              "Not stated"
+            ]
+          ],
+          "page": 1
+        },
+        {
+          "header": [
+            "Reporter name",
+            "Dr Kwame Mensah"
+          ],
+          "rows": [
+            [
+              "Role / qualification",
+              "Physician"
+            ],
+            [
+              "Country",
+              "Ghana"
+            ]
+          ],
+          "page": 1
+        },
+        {
+          "header": [
+            "Product name",
+            "Neurolept-X"
+          ],
+          "rows": [
+            [
+              "Dose",
+              "Not stated"
+            ],
+            [
+              "Route of administration",
+              "Not stated"
+            ],
+            [
+              "Therapy start date",
+              "Not stated"
+            ]
+          ],
+          "page": 1
+        },
+        {
+          "header": [
+            "Description of reaction",
+            "Tremor and insomnia"
+          ],
+          "rows": [
+            [
+              "Date of onset",
+              "Not stated"
+            ],
+            [
+              "Outcome",
+              "Not stated"
+            ],
+            [
+              "Seriousness",
+              "Not stated"
+            ]
+          ],
+          "page": 1
+        },
+        {
+          "header": [
+            "Test",
+            "Result",
+            "Unit",
+            "Reference range",
+            "Flag"
+          ],
+          "rows": [
+            [
+              "Haemoglobin",
+              "132",
+              "g/L",
+              "120 - 160",
+              "Normal"
+            ],
+            [
+              "White cell count",
+              "11.8",
+              "x10^9/L",
+              "4.0 - 11.0",
+              "HIGH"
+            ],
+            [
+              "Eosinophils",
+              "0.9",
+              "x10^9/L",
+              "0.0 - 0.4",
+              "HIGH"
+            ],
+            [
+              "C-reactive protein",
+              "24",
+              "mg/L",
+              "< 5",
+              "HIGH"
+            ],
+            [
+              "Platelets",
+              "268",
+              "x10^9/L",
+              "150 - 400",
+              "Normal"
+            ]
+          ],
+          "page": 1
+        }
+      ],
+      "images": [],
+      "doc_metadata": {
+        "Author": "Dr Kwame Mensah",
+        "CreationDate": "D:20260908130137+05'00'",
+        "Creator": "(unspecified)",
+        "ModDate": "D:20260908130137+05'00'",
+        "Producer": "ReportLab PDF Library - (opensource)",
+        "Subject": "Possible reaction - Neurolept-X",
+        "Title": "Adverse Event Report Form",
+        "Trapped": "False",
+        "byte_size": "3155"
+      },
+      "warnings": [],
+      "summary": "This document is a synthetic Adverse Event Report Form generated for testing purposes. The reported patient is a 46-year-old male. The patient's weight and relevant medical history are explicitly not stated. The reporter is Dr Kwame Mensah, a physician based in Ghana. The suspect product involved is identified as Neurolept-X. The product's dose, route of administration, and therapy start date are not stated. The described adverse reactions are tremor and insomnia. The date of onset for these reactions is not stated. The outcome of the reactions and the event seriousness are also not stated. A laboratory results table highlights high white cell count at 11.8 x10^9/L and high eosinophils at 0.9 x10^9/L. The lab table further shows a high C-reactive protein level at 24 mg/L, alongside normal haemoglobin and platelet counts. Essential details missing that a pharmacovigilance reviewer would expect include product dosage, administration route, therapy start date, reaction onset date, outcome, and seriousness criteria.",
+      "looks_relevant": true,
+      "relevance_reason": "The document is an adverse event report detailing suspected adverse reactions associated with Neurolept-X.",
+      "summary_confidence": 1.0,
+      "ocr_confidence": null
+    }
+  ],
+  "classifications": [
+    {
+      "category": "ICSR",
+      "applies": true,
+      "confidence": 0.95,
+      "reason": "Identifiable reporter (Dr Kwame Mensah), patient (46-year-old male), product (Neurolept-X), and adverse events (tremor and insomnia) are present.",
+      "model_name": "gemini-3.6-flash"
+    },
+    {
+      "category": "PQC",
+      "applies": false,
+      "confidence": 0.95,
+      "reason": "There is no product quality complaint or physical defect mentioned in the report.",
+      "model_name": "gemini-3.6-flash"
+    },
+    {
+      "category": "MI",
+      "applies": false,
+      "confidence": 0.95,
+      "reason": "No medical information question or inquiry is asked in the communication.",
+      "model_name": "gemini-3.6-flash"
+    },
+    {
+      "category": "NOT_RELEVANT",
+      "applies": false,
+      "confidence": 0.95,
+      "reason": "The email qualifies as an ICSR safety report.",
+      "model_name": "gemini-3.6-flash"
+    }
+  ],
+  "extractions": [
+    {
+      "category": "ICSR",
+      "narrative": "Dr Kwame Mensah, a physician in Ghana, reported that a 46-year-old male patient taking Neurolept-X experienced tremor and difficulty sleeping. The onset timing relative to starting the medication could not be established.",
+      "completeness": 0.467,
+      "model_name": "gemini-3.6-flash",
+      "fields_data": [
+        {
+          "name": "patient_age",
+          "value": "46 years",
+          "confidence": 1.0,
+          "is_stated": true,
+          "source_document": "[form_icsr_ambiguous_timing.pdf p.1]",
+          "source_page": null,
+          "source_quote": "46 years",
+          "quote_verified": true
+        },
+        {
+          "name": "patient_history",
+          "value": "Not stated",
+          "confidence": 0.0,
+          "is_stated": false,
+          "source_document": "",
+          "source_page": null,
+          "source_quote": "",
+          "quote_verified": false
+        },
+        {
+          "name": "patient_sex",
+          "value": "Male",
+          "confidence": 1.0,
+          "is_stated": true,
+          "source_document": "[form_icsr_ambiguous_timing.pdf p.1]",
+          "source_page": null,
+          "source_quote": "Male",
+          "quote_verified": true
+        },
+        {
+          "name": "patient_weight",
+          "value": "Not stated",
+          "confidence": 0.0,
+          "is_stated": false,
+          "source_document": "",
+          "source_page": null,
+          "source_quote": "",
+          "quote_verified": false
+        },
+        {
+          "name": "product_dose",
+          "value": "Not stated",
+          "confidence": 0.0,
+          "is_stated": false,
+          "source_document": "",
+          "source_page": null,
+          "source_quote": "",
+          "quote_verified": false
+        },
+        {
+          "name": "product_name",
+          "value": "Neurolept-X",
+          "confidence": 1.0,
+          "is_stated": true,
+          "source_document": "[(email body)]",
+          "source_page": null,
+          "source_quote": "Neurolept-X",
+          "quote_verified": true
+        },
+        {
+          "name": "product_route",
+          "value": "Not stated",
+          "confidence": 0.0,
+          "is_stated": false,
+          "source_document": "",
+          "source_page": null,
+          "source_quote": "",
+          "quote_verified": false
+        },
+        {
+          "name": "product_start_date",
+          "value": "Not stated",
+          "confidence": 0.0,
+          "is_stated": false,
+          "source_document": "",
+          "source_page": null,
+          "source_quote": "",
+          "quote_verified": false
+        },
+        {
+          "name": "reaction",
+          "value": "Tremor and difficulty sleeping",
+          "confidence": 1.0,
+          "is_stated": true,
+          "source_document": "[(email body)]",
+          "source_page": null,
+          "source_quote": "tremor and difficulty sleeping",
+          "quote_verified": true
+        },
+        {
+          "name": "reaction_onset",
+          "value": "Not stated",
+          "confidence": 0.0,
+          "is_stated": false,
+          "source_document": "",
+          "source_page": null,
+          "source_quote": "",
+          "quote_verified": false
+        },
+        {
+          "name": "reaction_outcome",
+          "value": "Not stated",
+          "confidence": 0.0,
+          "is_stated": false,
+          "source_document": "",
+          "source_page": null,
+          "source_quote": "",
+          "quote_verified": false
+        },
+        {
+          "name": "reporter_country",
+          "value": "Ghana",
+          "confidence": 1.0,
+          "is_stated": true,
+          "source_document": "[form_icsr_ambiguous_timing.pdf p.1]",
+          "source_page": null,
+          "source_quote": "Ghana",
+          "quote_verified": true
+        },
+        {
+          "name": "reporter_name",
+          "value": "Dr Kwame Mensah",
+          "confidence": 1.0,
+          "is_stated": true,
+          "source_document": "[(email body)]",
+          "source_page": null,
+          "source_quote": "Dr Kwame Mensah",
+          "quote_verified": true
+        },
+        {
+          "name": "reporter_role",
+          "value": "Physician",
+          "confidence": 1.0,
+          "is_stated": true,
+          "source_document": "[form_icsr_ambiguous_timing.pdf p.1]",
+          "source_page": null,
+          "source_quote": "Physician",
+          "quote_verified": true
+        },
+        {
+          "name": "seriousness",
+          "value": "Not stated",
+          "confidence": 0.0,
+          "is_stated": false,
+          "source_document": "",
+          "source_page": null,
+          "source_quote": "",
+          "quote_verified": false
+        }
+      ]
+    }
+  ],
+  "review_actions": [],
+  "audit_events": [
+    {
+      "event_type": "SUMMARY",
+      "model_name": "gemini-3.6-flash",
+      "is_stub": false,
+      "prompt_sha256": "",
+      "prompt_chars": 0,
+      "latency_ms": 11657.9,
+      "succeeded": true,
+      "error": "",
+      "created_at": "2026-09-08T07:45:39.898290Z"
+    },
+    {
+      "event_type": "EXTRACT",
+      "model_name": "gemini-3.6-flash",
+      "is_stub": false,
+      "prompt_sha256": "",
+      "prompt_chars": 1883,
+      "latency_ms": 13462.5,
+      "succeeded": true,
+      "error": "",
+      "created_at": "2026-09-08T07:45:39.894275Z"
+    },
+    {
+      "event_type": "CLASSIFY",
+      "model_name": "gemini-3.6-flash",
+      "is_stub": false,
+      "prompt_sha256": "9833ae2c5d17767d443ae7b7a2d383be559d919056cfb2636a6230310a7ea417",
+      "prompt_chars": 1883,
+      "latency_ms": 4407.7,
+      "succeeded": true,
+      "error": "",
+      "created_at": "2026-09-08T07:45:39.887869Z"
+    }
+  ]
+}

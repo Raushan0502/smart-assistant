@@ -1,0 +1,435 @@
+{
+  "id": 84,
+  "message_id": "178885269780.19284.8472458009097250843@clinevo-demo.example",
+  "subject": "Fatal outcome following Renalix therapy - urgent",
+  "sender": "Dr Sofia Marchetti <s.marchetti@ospedale-centrale.example>",
+  "recipient": "Pharmacovigilance Intake <pv-intake@clinevo-demo.example>",
+  "sent_at": "2026-03-17T15:00:00Z",
+  "received_at": "2026-09-08T07:47:32.793655Z",
+  "body_text": "Pharmacovigilance,\n\nI am reporting a fatal case. An 84-year-old male patient with chronic kidney disease stage 4 was started on Renalix 10 mg orally daily on 18 December 2025.\n\nOn 05 January 2026 he was admitted with severe hyperkalaemia and cardiac arrhythmia. Despite treatment he died on 07 January 2026. The treating team considers the event possibly related to Renalix.\n\nDr Sofia Marchetti\nOspedale Centrale, Milan, Italy",
+  "language": "en",
+  "processing_status": "READY",
+  "review_status": "PENDING",
+  "processing_ms": 110787,
+  "error": "",
+  "warnings": [],
+  "headers": {
+    "Message-ID": "<178885269780.19284.8472458009097250843@clinevo-demo.example>",
+    "Date": "Tue, 17 Mar 2026 15:00:00 +0000",
+    "From": "Dr Sofia Marchetti <s.marchetti@ospedale-centrale.example>",
+    "To": "Pharmacovigilance Intake <pv-intake@clinevo-demo.example>",
+    "Subject": "Fatal outcome following Renalix therapy - urgent",
+    "X-Synthetic-Case-Id": "icsr_fatal_outcome",
+    "raw_byte_size": "5633",
+    "attachment_count": "1"
+  },
+  "categories": [
+    "ICSR"
+  ],
+  "documents": [
+    {
+      "document_id": "178885269780.19284.8472458009097250843@clinevo-demo.example::body",
+      "file_name": "(email body)",
+      "media_type": "text/plain",
+      "flavour": "email_body",
+      "language": "en",
+      "page_count": 0,
+      "processed": true,
+      "extracted_text": "Pharmacovigilance,\n\nI am reporting a fatal case. An 84-year-old male patient with chronic kidney disease stage 4 was started on Renalix 10 mg orally daily on 18 December 2025.\n\nOn 05 January 2026 he was admitted with severe hyperkalaemia and cardiac arrhythmia. Despite treatment he died on 07 January 2026. The treating team considers the event possibly related to Renalix.\n\nDr Sofia Marchetti\nOspedale Centrale, Milan, Italy",
+      "tables": [],
+      "images": [],
+      "doc_metadata": {
+        "char_count": "426"
+      },
+      "warnings": [],
+      "summary": "",
+      "looks_relevant": null,
+      "relevance_reason": "",
+      "summary_confidence": null,
+      "ocr_confidence": null
+    },
+    {
+      "document_id": "178885269780.19284.8472458009097250843@clinevo-demo.example::att0",
+      "file_name": "form_icsr_fatal_outcome.pdf",
+      "media_type": "application/pdf",
+      "flavour": "digital",
+      "language": "en",
+      "page_count": 1,
+      "processed": true,
+      "extracted_text": "Adverse Event Report Form\nSYNTHETIC TEST DOCUMENT - no real patient data\n1. Patient details\n2. Reporter details\n3. Suspect product\n4. Reaction\n5. Relevant laboratory results\nForm SYN-AE-01 | Synthetic document generated for testing purposes only.",
+      "tables": [
+        {
+          "header": [
+            "Age",
+            "84 years"
+          ],
+          "rows": [
+            [
+              "Sex",
+              "Male"
+            ],
+            [
+              "Weight",
+              "Not stated"
+            ],
+            [
+              "Relevant medical history",
+              "Chronic kidney disease stage 4"
+            ]
+          ],
+          "page": 1
+        },
+        {
+          "header": [
+            "Reporter name",
+            "Dr Sofia Marchetti"
+          ],
+          "rows": [
+            [
+              "Role / qualification",
+              "Physician"
+            ],
+            [
+              "Country",
+              "Italy"
+            ]
+          ],
+          "page": 1
+        },
+        {
+          "header": [
+            "Product name",
+            "Renalix"
+          ],
+          "rows": [
+            [
+              "Dose",
+              "10 mg daily"
+            ],
+            [
+              "Route of administration",
+              "Oral"
+            ],
+            [
+              "Therapy start date",
+              "18 December 2025"
+            ]
+          ],
+          "page": 1
+        },
+        {
+          "header": [
+            "Description of reaction",
+            "Severe hyperkalaemia and cardiac arrhythmia"
+          ],
+          "rows": [
+            [
+              "Date of onset",
+              "05 January 2026"
+            ],
+            [
+              "Outcome",
+              "Fatal"
+            ],
+            [
+              "Seriousness",
+              "Serious - death"
+            ]
+          ],
+          "page": 1
+        },
+        {
+          "header": [
+            "Test",
+            "Result",
+            "Unit",
+            "Reference range",
+            "Flag"
+          ],
+          "rows": [
+            [
+              "Serum potassium",
+              "6.8",
+              "mmol/L",
+              "3.5 - 5.0",
+              "HIGH"
+            ],
+            [
+              "Serum sodium",
+              "134",
+              "mmol/L",
+              "135 - 145",
+              "LOW"
+            ],
+            [
+              "Creatinine",
+              "212",
+              "umol/L",
+              "60 - 110",
+              "HIGH"
+            ],
+            [
+              "eGFR",
+              "28",
+              "mL/min",
+              "> 90",
+              "LOW"
+            ],
+            [
+              "Urea",
+              "18.4",
+              "mmol/L",
+              "2.5 - 7.8",
+              "HIGH"
+            ]
+          ],
+          "page": 1
+        }
+      ],
+      "images": [],
+      "doc_metadata": {
+        "Author": "Dr Sofia Marchetti",
+        "CreationDate": "D:20260908130137+05'00'",
+        "Creator": "(unspecified)",
+        "ModDate": "D:20260908130137+05'00'",
+        "Producer": "ReportLab PDF Library - (opensource)",
+        "Subject": "Fatal outcome following Renalix therapy - urgent",
+        "Title": "Adverse Event Report Form",
+        "Trapped": "False",
+        "byte_size": "3258"
+      },
+      "warnings": [],
+      "summary": "This document is an Adverse Event Report Form (Form SYN-AE-01) generated for testing purposes. The report concerns an 84-year-old male patient with a relevant medical history of stage 4 chronic kidney disease. The patient's weight is not stated in the document. The reporting individual is Dr Sofia Marchetti, a physician based in Italy. The suspect product involved is Renalix, administered orally at a dose of 10 mg daily. Treatment with Renalix was initiated on 18 December 2025. On 05 January 2026, the patient experienced severe hyperkalaemia and cardiac arrhythmia. The event outcome was fatal, classifying the reaction as serious due to death. Laboratory test tables highlight a high serum potassium level of 6.8 mmol/L and a low serum sodium level of 134 mmol/L. The laboratory results also show elevated creatinine at 212 umol/L, elevated urea at 18.4 mmol/L, and a reduced eGFR of 28 mL/min. Patient weight, concomitant medications, and drug stop date are not stated in the report. Action taken with the suspect drug and dechallenge or rechallenge information are not stated. The exact date of death and any autopsy results are also not stated in the document.",
+      "looks_relevant": true,
+      "relevance_reason": "This document is an adverse event report detailing a fatal reaction of severe hyperkalaemia and cardiac arrhythmia associated with Renalix.",
+      "summary_confidence": 1.0,
+      "ocr_confidence": null
+    }
+  ],
+  "classifications": [
+    {
+      "category": "PQC",
+      "applies": false,
+      "confidence": 1.0,
+      "reason": "No product quality defect or physical flaw is reported.",
+      "model_name": "gemini-3.6-flash"
+    },
+    {
+      "category": "ICSR",
+      "applies": true,
+      "confidence": 1.0,
+      "reason": "Contains an identifiable patient (84-year-old male), reporter (Dr Sofia Marchetti), product (Renalix), and fatal adverse outcome (hyperkalaemia, arrhythmia, death).",
+      "model_name": "gemini-3.6-flash"
+    },
+    {
+      "category": "MI",
+      "applies": false,
+      "confidence": 1.0,
+      "reason": "No medical information request or question is asked.",
+      "model_name": "gemini-3.6-flash"
+    },
+    {
+      "category": "NOT_RELEVANT",
+      "applies": false,
+      "confidence": 1.0,
+      "reason": "The message is a valid ICSR report.",
+      "model_name": "gemini-3.6-flash"
+    }
+  ],
+  "extractions": [
+    {
+      "category": "ICSR",
+      "narrative": "An 84-year-old male patient with a history of stage 4 chronic kidney disease was started on oral Renalix (10 mg daily) on 18 December 2025. On 05 January 2026, he was admitted with severe hyperkalaemia and cardiac arrhythmia. Despite receiving treatment, the patient died on 07 January 2026. The treating physician, Dr Sofia Marchetti in Italy, considers the fatal event possibly related to Renalix therapy.",
+      "completeness": 0.933,
+      "model_name": "gemini-3.6-flash",
+      "fields_data": [
+        {
+          "name": "patient_age",
+          "value": "84 years",
+          "confidence": 1.0,
+          "is_stated": true,
+          "source_document": "[form_icsr_fatal_outcome.pdf p.1]",
+          "source_page": null,
+          "source_quote": "84 years",
+          "quote_verified": true
+        },
+        {
+          "name": "patient_history",
+          "value": "Chronic kidney disease stage 4",
+          "confidence": 1.0,
+          "is_stated": true,
+          "source_document": "[form_icsr_fatal_outcome.pdf p.1]",
+          "source_page": null,
+          "source_quote": "Chronic kidney disease stage 4",
+          "quote_verified": true
+        },
+        {
+          "name": "patient_sex",
+          "value": "Male",
+          "confidence": 1.0,
+          "is_stated": true,
+          "source_document": "[form_icsr_fatal_outcome.pdf p.1]",
+          "source_page": null,
+          "source_quote": "Male",
+          "quote_verified": true
+        },
+        {
+          "name": "patient_weight",
+          "value": "Not stated",
+          "confidence": 0.0,
+          "is_stated": false,
+          "source_document": "",
+          "source_page": null,
+          "source_quote": "",
+          "quote_verified": false
+        },
+        {
+          "name": "product_dose",
+          "value": "10 mg daily",
+          "confidence": 1.0,
+          "is_stated": true,
+          "source_document": "[form_icsr_fatal_outcome.pdf p.1]",
+          "source_page": null,
+          "source_quote": "10 mg daily",
+          "quote_verified": true
+        },
+        {
+          "name": "product_name",
+          "value": "Renalix",
+          "confidence": 1.0,
+          "is_stated": true,
+          "source_document": "[form_icsr_fatal_outcome.pdf p.1]",
+          "source_page": null,
+          "source_quote": "Renalix",
+          "quote_verified": true
+        },
+        {
+          "name": "product_route",
+          "value": "Oral",
+          "confidence": 1.0,
+          "is_stated": true,
+          "source_document": "[form_icsr_fatal_outcome.pdf p.1]",
+          "source_page": null,
+          "source_quote": "Oral",
+          "quote_verified": true
+        },
+        {
+          "name": "product_start_date",
+          "value": "18 December 2025",
+          "confidence": 1.0,
+          "is_stated": true,
+          "source_document": "[form_icsr_fatal_outcome.pdf p.1]",
+          "source_page": null,
+          "source_quote": "18 December 2025",
+          "quote_verified": true
+        },
+        {
+          "name": "reaction",
+          "value": "Severe hyperkalaemia and cardiac arrhythmia",
+          "confidence": 1.0,
+          "is_stated": true,
+          "source_document": "[form_icsr_fatal_outcome.pdf p.1]",
+          "source_page": null,
+          "source_quote": "Severe hyperkalaemia and cardiac arrhythmia",
+          "quote_verified": true
+        },
+        {
+          "name": "reaction_onset",
+          "value": "05 January 2026",
+          "confidence": 1.0,
+          "is_stated": true,
+          "source_document": "[form_icsr_fatal_outcome.pdf p.1]",
+          "source_page": null,
+          "source_quote": "05 January 2026",
+          "quote_verified": true
+        },
+        {
+          "name": "reaction_outcome",
+          "value": "Fatal",
+          "confidence": 1.0,
+          "is_stated": true,
+          "source_document": "[form_icsr_fatal_outcome.pdf p.1]",
+          "source_page": null,
+          "source_quote": "Fatal",
+          "quote_verified": true
+        },
+        {
+          "name": "reporter_country",
+          "value": "Italy",
+          "confidence": 1.0,
+          "is_stated": true,
+          "source_document": "[form_icsr_fatal_outcome.pdf p.1]",
+          "source_page": null,
+          "source_quote": "Italy",
+          "quote_verified": true
+        },
+        {
+          "name": "reporter_name",
+          "value": "Dr Sofia Marchetti",
+          "confidence": 1.0,
+          "is_stated": true,
+          "source_document": "[form_icsr_fatal_outcome.pdf p.1]",
+          "source_page": null,
+          "source_quote": "Dr Sofia Marchetti",
+          "quote_verified": true
+        },
+        {
+          "name": "reporter_role",
+          "value": "Physician",
+          "confidence": 1.0,
+          "is_stated": true,
+          "source_document": "[form_icsr_fatal_outcome.pdf p.1]",
+          "source_page": null,
+          "source_quote": "Physician",
+          "quote_verified": true
+        },
+        {
+          "name": "seriousness",
+          "value": "Serious",
+          "confidence": 1.0,
+          "is_stated": true,
+          "source_document": "[form_icsr_fatal_outcome.pdf p.1]",
+          "source_page": null,
+          "source_quote": "Serious - death",
+          "quote_verified": true
+        }
+      ]
+    }
+  ],
+  "review_actions": [],
+  "audit_events": [
+    {
+      "event_type": "EXTRACT",
+      "model_name": "gemini-3.6-flash",
+      "is_stub": false,
+      "prompt_sha256": "",
+      "prompt_chars": 1979,
+      "latency_ms": 66805.6,
+      "succeeded": true,
+      "error": "",
+      "created_at": "2026-09-08T07:47:32.928668Z"
+    },
+    {
+      "event_type": "SUMMARY",
+      "model_name": "gemini-3.6-flash",
+      "is_stub": false,
+      "prompt_sha256": "",
+      "prompt_chars": 0,
+      "latency_ms": 38940.5,
+      "succeeded": true,
+      "error": "",
+      "created_at": "2026-09-08T07:47:32.928668Z"
+    },
+    {
+      "event_type": "CLASSIFY",
+      "model_name": "gemini-3.6-flash",
+      "is_stub": false,
+      "prompt_sha256": "c956c5cdf9941988d6bc62f7c666a4f9af6abcb3d0e933e00fd00e795e8f0756",
+      "prompt_chars": 1979,
+      "latency_ms": 4992.9,
+      "succeeded": true,
+      "error": "",
+      "created_at": "2026-09-08T07:47:32.928668Z"
+    }
+  ]
+}

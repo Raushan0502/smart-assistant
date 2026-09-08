@@ -1,0 +1,435 @@
+{
+  "id": 83,
+  "message_id": "178885269751.19284.2243078120672496336@clinevo-demo.example",
+  "subject": "Serious adverse event - Hepatrol - hospitalisation",
+  "sender": "Dr Liang Wei <l.wei@riverside-hospital.example>",
+  "recipient": "Pharmacovigilance Intake <pv-intake@clinevo-demo.example>",
+  "sent_at": "2026-03-16T15:00:00Z",
+  "received_at": "2026-09-08T07:47:17.283504Z",
+  "body_text": "To the Pharmacovigilance Department,\n\nI wish to report a serious adverse event.\n\nPatient: 67-year-old male, 81 kg, no significant prior liver disease.\nProduct: Hepatrol 500 mg, taken orally twice daily, started 12 January 2026.\n\nOn 02 February 2026 the patient presented with jaundice, dark urine and marked fatigue. Liver function tests were significantly deranged. He was admitted to Riverside Hospital on the same day and remained an inpatient for nine days. Hepatrol was withdrawn on admission.\n\nAt the time of writing the patient is recovering but liver enzymes have not yet returned to baseline. I consider this event serious on the grounds of hospitalisation.\n\nDr Liang Wei, Consultant Hepatologist\nRiverside Hospital, Singapore",
+  "language": "en",
+  "processing_status": "READY",
+  "review_status": "PENDING",
+  "processing_ms": 65047,
+  "error": "",
+  "warnings": [],
+  "headers": {
+    "Message-ID": "<178885269751.19284.2243078120672496336@clinevo-demo.example>",
+    "Date": "Mon, 16 Mar 2026 15:00:00 +0000",
+    "From": "Dr Liang Wei <l.wei@riverside-hospital.example>",
+    "To": "Pharmacovigilance Intake <pv-intake@clinevo-demo.example>",
+    "Subject": "Serious adverse event - Hepatrol - hospitalisation",
+    "X-Synthetic-Case-Id": "icsr_full_hepatic",
+    "raw_byte_size": "5999",
+    "attachment_count": "1"
+  },
+  "categories": [
+    "ICSR"
+  ],
+  "documents": [
+    {
+      "document_id": "178885269751.19284.2243078120672496336@clinevo-demo.example::body",
+      "file_name": "(email body)",
+      "media_type": "text/plain",
+      "flavour": "email_body",
+      "language": "en",
+      "page_count": 0,
+      "processed": true,
+      "extracted_text": "To the Pharmacovigilance Department,\n\nI wish to report a serious adverse event.\n\nPatient: 67-year-old male, 81 kg, no significant prior liver disease.\nProduct: Hepatrol 500 mg, taken orally twice daily, started 12 January 2026.\n\nOn 02 February 2026 the patient presented with jaundice, dark urine and marked fatigue. Liver function tests were significantly deranged. He was admitted to Riverside Hospital on the same day and remained an inpatient for nine days. Hepatrol was withdrawn on admission.\n\nAt the time of writing the patient is recovering but liver enzymes have not yet returned to baseline. I consider this event serious on the grounds of hospitalisation.\n\nDr Liang Wei, Consultant Hepatologist\nRiverside Hospital, Singapore",
+      "tables": [],
+      "images": [],
+      "doc_metadata": {
+        "char_count": "735"
+      },
+      "warnings": [],
+      "summary": "",
+      "looks_relevant": null,
+      "relevance_reason": "",
+      "summary_confidence": null,
+      "ocr_confidence": null
+    },
+    {
+      "document_id": "178885269751.19284.2243078120672496336@clinevo-demo.example::att0",
+      "file_name": "form_icsr_full_hepatic.pdf",
+      "media_type": "application/pdf",
+      "flavour": "digital",
+      "language": "en",
+      "page_count": 1,
+      "processed": true,
+      "extracted_text": "Adverse Event Report Form\nSYNTHETIC TEST DOCUMENT - no real patient data\n1. Patient details\n2. Reporter details\n3. Suspect product\n4. Reaction\n5. Relevant laboratory results\nForm SYN-AE-01 | Synthetic document generated for testing purposes only.",
+      "tables": [
+        {
+          "header": [
+            "Age",
+            "67 years"
+          ],
+          "rows": [
+            [
+              "Sex",
+              "Male"
+            ],
+            [
+              "Weight",
+              "81 kg"
+            ],
+            [
+              "Relevant medical history",
+              "No significant prior liver disease"
+            ]
+          ],
+          "page": 1
+        },
+        {
+          "header": [
+            "Reporter name",
+            "Dr Liang Wei"
+          ],
+          "rows": [
+            [
+              "Role / qualification",
+              "Physician (Consultant Hepatologist)"
+            ],
+            [
+              "Country",
+              "Singapore"
+            ]
+          ],
+          "page": 1
+        },
+        {
+          "header": [
+            "Product name",
+            "Hepatrol"
+          ],
+          "rows": [
+            [
+              "Dose",
+              "500 mg twice daily"
+            ],
+            [
+              "Route of administration",
+              "Oral"
+            ],
+            [
+              "Therapy start date",
+              "12 January 2026"
+            ]
+          ],
+          "page": 1
+        },
+        {
+          "header": [
+            "Description of reaction",
+            "Jaundice, dark urine, fatigue, deranged liver function tests"
+          ],
+          "rows": [
+            [
+              "Date of onset",
+              "02 February 2026"
+            ],
+            [
+              "Outcome",
+              "Recovering"
+            ],
+            [
+              "Seriousness",
+              "Serious - hospitalisation"
+            ]
+          ],
+          "page": 1
+        },
+        {
+          "header": [
+            "Test",
+            "Result",
+            "Unit",
+            "Reference range",
+            "Flag"
+          ],
+          "rows": [
+            [
+              "Alanine aminotransferase",
+              "512",
+              "U/L",
+              "10 - 40",
+              "HIGH"
+            ],
+            [
+              "Aspartate aminotransferase",
+              "388",
+              "U/L",
+              "10 - 35",
+              "HIGH"
+            ],
+            [
+              "Total bilirubin",
+              "78",
+              "umol/L",
+              "3 - 21",
+              "HIGH"
+            ],
+            [
+              "Alkaline phosphatase",
+              "142",
+              "U/L",
+              "30 - 130",
+              "HIGH"
+            ],
+            [
+              "Albumin",
+              "38",
+              "g/L",
+              "35 - 50",
+              "Normal"
+            ]
+          ],
+          "page": 1
+        }
+      ],
+      "images": [],
+      "doc_metadata": {
+        "Author": "Dr Liang Wei",
+        "CreationDate": "D:20260908130137+05'00'",
+        "Creator": "(unspecified)",
+        "ModDate": "D:20260908130137+05'00'",
+        "Producer": "ReportLab PDF Library - (opensource)",
+        "Subject": "Serious adverse event - Hepatrol - hospitalisation",
+        "Title": "Adverse Event Report Form",
+        "Trapped": "False",
+        "byte_size": "3305"
+      },
+      "warnings": [],
+      "summary": "This document is a synthetic Adverse Event Report Form (Form SYN-AE-01) generated for testing purposes. The reported patient is a 67-year-old male weighing 81 kg with no significant prior liver disease history. The reporter is Dr Liang Wei, a consultant hepatologist physician located in Singapore. The suspect product involved is Hepatrol, administered orally at a dose of 500 mg twice daily starting on 12 January 2026. On 02 February 2026, the patient experienced jaundice, dark urine, fatigue, and deranged liver function tests. The event outcome is documented as recovering. The report classifies the event seriousness as serious due to hospitalisation. Notable findings in the laboratory test table include elevated alanine aminotransferase at 512 U/L and elevated aspartate aminotransferase at 388 U/L. Total bilirubin is also marked high at 78 umol/L, while alkaline phosphatase is high at 142 U/L. Albumin is recorded as normal at 38 g/L. The document lacks information on concomitant medications taken by the patient. Details regarding dechallenge, rechallenge, or drug stop dates are not stated. Specific dates for when the laboratory tests were performed are omitted from the document. Patient identifiers such as initials or record numbers are also not stated.",
+      "looks_relevant": true,
+      "relevance_reason": "This document is an adverse event report detailing a serious adverse drug reaction associated with Hepatrol.",
+      "summary_confidence": 1.0,
+      "ocr_confidence": null
+    }
+  ],
+  "classifications": [
+    {
+      "category": "NOT_RELEVANT",
+      "applies": false,
+      "confidence": 1.0,
+      "reason": "The message is a valid adverse event report and is relevant for pharmacovigilance.",
+      "model_name": "gemini-3.6-flash"
+    },
+    {
+      "category": "ICSR",
+      "applies": true,
+      "confidence": 1.0,
+      "reason": "Identifiable patient (67-year-old male), reporter (Dr Liang Wei), product (Hepatrol 500 mg), and adverse event (jaundice, fatigue, deranged LFTs, hospitalisation) are all present.",
+      "model_name": "gemini-3.6-flash"
+    },
+    {
+      "category": "PQC",
+      "applies": false,
+      "confidence": 0.95,
+      "reason": "No product quality defects, contamination, or packaging issues are reported.",
+      "model_name": "gemini-3.6-flash"
+    },
+    {
+      "category": "MI",
+      "applies": false,
+      "confidence": 0.95,
+      "reason": "No medical information or product inquiry questions are asked.",
+      "model_name": "gemini-3.6-flash"
+    }
+  ],
+  "extractions": [
+    {
+      "category": "ICSR",
+      "narrative": "A 67-year-old male with no significant prior liver disease presented with jaundice, dark urine, fatigue, and deranged liver function tests on 02 February 2026, following the start of oral Hepatrol (500 mg twice daily) on 12 January 2026. The patient was admitted to Riverside Hospital for nine days, and Hepatrol was withdrawn. Reported by Dr Liang Wei in Singapore, the event is considered serious due to hospitalisation, and the patient is currently recovering.",
+      "completeness": 1.0,
+      "model_name": "gemini-3.6-flash",
+      "fields_data": [
+        {
+          "name": "patient_age",
+          "value": "67 years",
+          "confidence": 1.0,
+          "is_stated": true,
+          "source_document": "[form_icsr_full_hepatic.pdf p.1]",
+          "source_page": null,
+          "source_quote": "67 years",
+          "quote_verified": true
+        },
+        {
+          "name": "patient_history",
+          "value": "No significant prior liver disease",
+          "confidence": 1.0,
+          "is_stated": true,
+          "source_document": "[form_icsr_full_hepatic.pdf p.1]",
+          "source_page": null,
+          "source_quote": "No significant prior liver disease",
+          "quote_verified": true
+        },
+        {
+          "name": "patient_sex",
+          "value": "Male",
+          "confidence": 1.0,
+          "is_stated": true,
+          "source_document": "[form_icsr_full_hepatic.pdf p.1]",
+          "source_page": null,
+          "source_quote": "Male",
+          "quote_verified": true
+        },
+        {
+          "name": "patient_weight",
+          "value": "81 kg",
+          "confidence": 1.0,
+          "is_stated": true,
+          "source_document": "[form_icsr_full_hepatic.pdf p.1]",
+          "source_page": null,
+          "source_quote": "81 kg",
+          "quote_verified": true
+        },
+        {
+          "name": "product_dose",
+          "value": "500 mg twice daily",
+          "confidence": 1.0,
+          "is_stated": true,
+          "source_document": "[form_icsr_full_hepatic.pdf p.1]",
+          "source_page": null,
+          "source_quote": "500 mg twice daily",
+          "quote_verified": true
+        },
+        {
+          "name": "product_name",
+          "value": "Hepatrol",
+          "confidence": 1.0,
+          "is_stated": true,
+          "source_document": "[form_icsr_full_hepatic.pdf p.1]",
+          "source_page": null,
+          "source_quote": "Hepatrol",
+          "quote_verified": true
+        },
+        {
+          "name": "product_route",
+          "value": "Oral",
+          "confidence": 1.0,
+          "is_stated": true,
+          "source_document": "[form_icsr_full_hepatic.pdf p.1]",
+          "source_page": null,
+          "source_quote": "Oral",
+          "quote_verified": true
+        },
+        {
+          "name": "product_start_date",
+          "value": "12 January 2026",
+          "confidence": 1.0,
+          "is_stated": true,
+          "source_document": "[form_icsr_full_hepatic.pdf p.1]",
+          "source_page": null,
+          "source_quote": "12 January 2026",
+          "quote_verified": true
+        },
+        {
+          "name": "reaction",
+          "value": "Jaundice, dark urine, fatigue, deranged liver function tests",
+          "confidence": 1.0,
+          "is_stated": true,
+          "source_document": "[form_icsr_full_hepatic.pdf p.1]",
+          "source_page": null,
+          "source_quote": "Jaundice, dark urine, fatigue, deranged liver function tests",
+          "quote_verified": true
+        },
+        {
+          "name": "reaction_onset",
+          "value": "02 February 2026",
+          "confidence": 1.0,
+          "is_stated": true,
+          "source_document": "[form_icsr_full_hepatic.pdf p.1]",
+          "source_page": null,
+          "source_quote": "02 February 2026",
+          "quote_verified": true
+        },
+        {
+          "name": "reaction_outcome",
+          "value": "recovering",
+          "confidence": 1.0,
+          "is_stated": true,
+          "source_document": "[form_icsr_full_hepatic.pdf p.1]",
+          "source_page": null,
+          "source_quote": "Recovering",
+          "quote_verified": true
+        },
+        {
+          "name": "reporter_country",
+          "value": "Singapore",
+          "confidence": 1.0,
+          "is_stated": true,
+          "source_document": "[form_icsr_full_hepatic.pdf p.1]",
+          "source_page": null,
+          "source_quote": "Singapore",
+          "quote_verified": true
+        },
+        {
+          "name": "reporter_name",
+          "value": "Dr Liang Wei",
+          "confidence": 1.0,
+          "is_stated": true,
+          "source_document": "[form_icsr_full_hepatic.pdf p.1]",
+          "source_page": null,
+          "source_quote": "Dr Liang Wei",
+          "quote_verified": true
+        },
+        {
+          "name": "reporter_role",
+          "value": "Physician (Consultant Hepatologist)",
+          "confidence": 1.0,
+          "is_stated": true,
+          "source_document": "[form_icsr_full_hepatic.pdf p.1]",
+          "source_page": null,
+          "source_quote": "Physician (Consultant Hepatologist)",
+          "quote_verified": true
+        },
+        {
+          "name": "seriousness",
+          "value": "Serious",
+          "confidence": 1.0,
+          "is_stated": true,
+          "source_document": "[form_icsr_full_hepatic.pdf p.1]",
+          "source_page": null,
+          "source_quote": "Serious - hospitalisation",
+          "quote_verified": true
+        }
+      ]
+    }
+  ],
+  "review_actions": [],
+  "audit_events": [
+    {
+      "event_type": "SUMMARY",
+      "model_name": "gemini-3.6-flash",
+      "is_stub": false,
+      "prompt_sha256": "",
+      "prompt_chars": 0,
+      "latency_ms": 33085.5,
+      "succeeded": true,
+      "error": "",
+      "created_at": "2026-09-08T07:47:17.406316Z"
+    },
+    {
+      "event_type": "EXTRACT",
+      "model_name": "gemini-3.6-flash",
+      "is_stub": false,
+      "prompt_sha256": "",
+      "prompt_chars": 2368,
+      "latency_ms": 23016.5,
+      "succeeded": true,
+      "error": "",
+      "created_at": "2026-09-08T07:47:17.404314Z"
+    },
+    {
+      "event_type": "CLASSIFY",
+      "model_name": "gemini-3.6-flash",
+      "is_stub": false,
+      "prompt_sha256": "4ecee2bb017cd30c5dcd18a50f0aedb53f38e78fcb8c17f0935e790f4c4f005a",
+      "prompt_chars": 2368,
+      "latency_ms": 8889.6,
+      "succeeded": true,
+      "error": "",
+      "created_at": "2026-09-08T07:47:17.403314Z"
+    }
+  ]
+}

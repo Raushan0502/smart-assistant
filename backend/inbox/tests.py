@@ -272,6 +272,35 @@ class TestPersistence(TestCase):
         persist_analysis(payload)
         self.assertEqual(len(ExtractedField.objects.get(name="patient_age").value), 2000)
 
+    def test_unclassified_message_is_marked_failed_not_ready(self):
+        """A message the model never classified must not look processed.
+
+        Found on the first live run: a rate-limited classification returned no
+        verdicts, and the message was stored READY with no categories -- so a
+        safety report would have sat in the queue looking fine while being
+        entirely unclassified.
+        """
+        payload = analysis_fixture()
+        payload["classification"] = {"model": "", "verdicts": []}
+        payload["extractions"] = []
+        payload["audit_events"] = [
+            {"event_type": "CLASSIFY", "succeeded": False,
+             "error": "429 RESOURCE_EXHAUSTED", "model_name": "m"}
+        ]
+
+        message = persist_analysis(payload)
+
+        self.assertEqual(message.processing_status, ProcessingStatus.FAILED)
+        self.assertEqual(message.categories, [])
+        self.assertIn("unclassified", message.error)
+        self.assertIn("429", message.error)
+
+    def test_classified_message_is_ready(self):
+        self.assertEqual(
+            persist_analysis(analysis_fixture()).processing_status,
+            ProcessingStatus.READY,
+        )
+
     def test_failure_is_recorded_rather_than_dropped(self):
         # The mail arrived; a reviewer must know it exists even if unreadable.
         message = mark_failed("bad-1", "Broken message", "AI service unreachable")

@@ -171,6 +171,28 @@ def persist_analysis(analysis: dict) -> Message:
     """
     payload = analysis["message"]
     timings = analysis.get("timings", {})
+    warnings = list(analysis.get("warnings", []))
+
+    # A message with no verdicts was not classified -- the model call failed,
+    # most often on a rate limit. Storing it as READY would be the worst
+    # possible outcome: it would sit in the queue looking processed, with no
+    # categories, and a safety report would silently disappear. It is recorded
+    # as FAILED so it is visible and can be retried.
+    verdicts = analysis.get("classification", {}).get("verdicts", [])
+    failures = [
+        e.get("error", "")
+        for e in analysis.get("audit_events", [])
+        if not e.get("succeeded", True) and e.get("error")
+    ]
+    if verdicts:
+        status, error = ProcessingStatus.READY, ""
+    else:
+        status = ProcessingStatus.FAILED
+        error = (
+            "Classification produced no verdicts; the message is unclassified. "
+            + (failures[0] if failures else "No error was reported by the AI service.")
+        )
+        warnings.append(error)
 
     message, _ = Message.objects.update_or_create(
         message_id=payload["message_id"],
@@ -181,11 +203,11 @@ def persist_analysis(analysis: dict) -> Message:
             "sent_at": parse_sent_at(payload.get("sent_at", "")),
             "body_text": text_from(payload.get("body", {})),
             "language": payload.get("body", {}).get("language", "en"),
-            "processing_status": ProcessingStatus.READY,
+            "processing_status": status,
             "processing_ms": int(timings.get("total_ms", 0)),
-            "warnings": analysis.get("warnings", []),
+            "warnings": warnings,
             "headers": payload.get("metadata", {}),
-            "error": "",
+            "error": error[:4000],
         },
     )
 

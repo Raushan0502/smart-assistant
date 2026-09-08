@@ -36,8 +36,16 @@ from google.genai import types
 logger = logging.getLogger(__name__)
 
 STUB_MODEL_NAME = "offline-stub"
-MAX_ATTEMPTS = 3
+MAX_ATTEMPTS = 4
 BACKOFF_SECONDS = 2.0
+
+# Free-tier quotas are per *minute*, so the ordinary 2s/4s backoff retries
+# straight back into the same closed window and exhausts the budget in seconds.
+# A rate-limited call waits long enough for the window to roll over instead.
+# Measured: 17 of 34 calls failed this way on a first live run, and every one
+# of them left its message unclassified.
+RATE_LIMIT_BACKOFF_SECONDS = 30.0
+RATE_LIMIT_MARKERS = ("429", "RESOURCE_EXHAUSTED", "rate limit", "quota")
 
 
 @dataclass
@@ -321,10 +329,22 @@ class LLMClient:
                 )
             except Exception as exc:  # noqa: BLE001 -- retry, then report honestly
                 last_error = exc
+                rate_limited = any(
+                    marker.lower() in str(exc).lower() for marker in RATE_LIMIT_MARKERS
+                )
                 logger.warning(
-                    "Model call failed (attempt %d/%d): %s", attempt, MAX_ATTEMPTS, exc
+                    "Model call failed (attempt %d/%d)%s: %s",
+                    attempt,
+                    MAX_ATTEMPTS,
+                    " [rate limited]" if rate_limited else "",
+                    exc,
                 )
                 if attempt < MAX_ATTEMPTS:
-                    time.sleep(BACKOFF_SECONDS * attempt)
+                    delay = (
+                        RATE_LIMIT_BACKOFF_SECONDS
+                        if rate_limited
+                        else BACKOFF_SECONDS * attempt
+                    )
+                    time.sleep(delay)
 
         raise LLMError(f"Model call failed after {MAX_ATTEMPTS} attempts: {last_error}")

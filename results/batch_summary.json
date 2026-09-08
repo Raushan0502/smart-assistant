@@ -2,16 +2,16 @@
   "messages": 16,
   "timings": {
     "count": 16,
-    "mean_ms": 58,
-    "median_ms": 69.5,
-    "min_ms": 3,
-    "max_ms": 140,
-    "total_ms": 928
+    "mean_ms": 28860.9,
+    "median_ms": 18753.5,
+    "min_ms": 6926,
+    "max_ms": 110787,
+    "total_ms": 461775
   },
   "accuracy": {
     "scored": 16,
-    "exact_match": 0.812,
-    "any_overlap": 0.812,
+    "exact_match": 0.438,
+    "any_overlap": 0.438,
     "per_category": {
       "ICSR": {
         "precision": 1.0,
@@ -23,34 +23,34 @@
       },
       "PQC": {
         "precision": 1.0,
-        "recall": 1.0,
-        "f1": 1.0,
-        "tp": 3,
+        "recall": 0.333,
+        "f1": 0.5,
+        "tp": 1,
         "fp": 0,
-        "fn": 0
+        "fn": 2
       },
       "MI": {
-        "precision": 1.0,
-        "recall": 1.0,
-        "f1": 1.0,
-        "tp": 2,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "tp": 0,
         "fp": 0,
-        "fn": 0
+        "fn": 2
       },
       "NOT_RELEVANT": {
-        "precision": 0.4,
-        "recall": 1.0,
-        "f1": 0.571,
-        "tp": 2,
-        "fp": 3,
-        "fn": 0
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "tp": 0,
+        "fp": 0,
+        "fn": 2
       }
     }
   },
   "integrity": {
-    "fields": 121,
-    "stated": 0,
-    "not_stated": 121,
+    "fields": 60,
+    "stated": 51,
+    "not_stated": 9,
     "stated_unverified": 0
   }
 }
