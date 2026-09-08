@@ -41,6 +41,25 @@ app = FastAPI(
 # closed-client errors under load.
 _client: LLMClient | None = None
 
+# Uploads are bounded because both endpoints read the whole file into memory
+# before parsing. A pharmacovigilance attachment is a form or a paper, not a
+# dataset; anything past this is a mistake or an attack, and either way should
+# be refused rather than allowed to exhaust the process.
+MAX_UPLOAD_BYTES = 25 * 1024 * 1024
+
+
+def read_upload(file: UploadFile, description: str) -> bytes:
+    """Read an upload, rejecting empty or oversized files."""
+    data = file.file.read(MAX_UPLOAD_BYTES + 1)
+    if not data:
+        raise HTTPException(status_code=400, detail=f"Empty {description}")
+    if len(data) > MAX_UPLOAD_BYTES:
+        raise HTTPException(
+            status_code=413,
+            detail=f"{description} exceeds the {MAX_UPLOAD_BYTES // (1024 * 1024)}MB limit",
+        )
+    return data
+
 
 def get_client() -> LLMClient:
     """Return the shared model client, creating it on first use."""
@@ -81,11 +100,9 @@ def health() -> HealthResponse:
 
 
 @app.post("/process-message")
-async def process_message_endpoint(file: UploadFile = File(...)) -> dict:
+def process_message_endpoint(file: UploadFile = File(...)) -> dict:
     """Run the full pipeline over one uploaded ``.eml`` message."""
-    raw = await file.read()
-    if not raw:
-        raise HTTPException(status_code=400, detail="Empty message file")
+    raw = read_upload(file, "message file")
     try:
         return process_message(raw, client=get_client()).to_dict()
     except Exception as exc:  # noqa: BLE001 -- surface the reason, not a 500 page
@@ -94,15 +111,13 @@ async def process_message_endpoint(file: UploadFile = File(...)) -> dict:
 
 
 @app.post("/screen-article")
-async def screen_article_endpoint(file: UploadFile = File(...)) -> dict:
+def screen_article_endpoint(file: UploadFile = File(...)) -> dict:
     """Screen one uploaded article PDF for a reportable patient case.
 
     This is the bonus literature-screening path: articles arrive by direct
     upload rather than through the mailbox.
     """
-    data = await file.read()
-    if not data:
-        raise HTTPException(status_code=400, detail="Empty PDF")
+    data = read_upload(file, "PDF")
     try:
         document = extract_pdf_bytes(
             data, file_name=file.filename or "article.pdf", document_id="upload"
@@ -121,15 +136,13 @@ async def screen_article_endpoint(file: UploadFile = File(...)) -> dict:
 
 
 @app.post("/extract-pdf")
-async def extract_pdf_endpoint(file: UploadFile = File(...)) -> dict:
+def extract_pdf_endpoint(file: UploadFile = File(...)) -> dict:
     """Ingest a PDF and return its structure without calling any model.
 
     Useful for debugging flavour detection and table extraction in isolation --
     it is fully deterministic and costs nothing.
     """
-    data = await file.read()
-    if not data:
-        raise HTTPException(status_code=400, detail="Empty PDF")
+    data = read_upload(file, "PDF")
     document = extract_pdf_bytes(
         data, file_name=file.filename or "document.pdf", document_id="debug"
     )

@@ -11,6 +11,7 @@ from __future__ import annotations
 import os
 from pathlib import Path
 
+from django.core.exceptions import ImproperlyConfigured
 from dotenv import load_dotenv
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -19,10 +20,18 @@ REPO_ROOT = BASE_DIR.parent
 # One .env at the repository root, shared by every tier.
 load_dotenv(REPO_ROOT / ".env")
 
-SECRET_KEY = os.getenv(
-    "DJANGO_SECRET_KEY", "dev-only-insecure-key-change-for-any-real-deployment"
-)
 DEBUG = os.getenv("DJANGO_DEBUG", "true").lower() == "true"
+
+# A working default is fine for local development but must not be silently
+# usable in production, where a missing variable should fail loudly rather than
+# ship a key that is public in this repository.
+SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", "")
+if not SECRET_KEY:
+    if not DEBUG:
+        raise ImproperlyConfigured(
+            "DJANGO_SECRET_KEY must be set when DJANGO_DEBUG is false."
+        )
+    SECRET_KEY = "dev-only-insecure-key-never-use-outside-local-development"
 ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS", "localhost,127.0.0.1").split(",")
 
 INSTALLED_APPS = [
@@ -112,6 +121,12 @@ USE_TZ = True
 
 STATIC_URL = "static/"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+# Uploads are bounded: /api/screen-article/ reads the file into memory before
+# forwarding it. Matches MAX_UPLOAD_BYTES in the AI service so the two tiers
+# reject the same things.
+DATA_UPLOAD_MAX_MEMORY_SIZE = 25 * 1024 * 1024
+FILE_UPLOAD_MAX_MEMORY_SIZE = 25 * 1024 * 1024
 
 REST_FRAMEWORK = {
     "DEFAULT_RENDERER_CLASSES": ["rest_framework.renderers.JSONRenderer"],
