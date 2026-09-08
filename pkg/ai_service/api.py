@@ -20,7 +20,7 @@ import logging
 from fastapi import Body, FastAPI, File, HTTPException, UploadFile
 from pydantic import BaseModel
 
-from .llm import LLMClient
+from .llm import AllProvidersExhausted, LLMClient
 from .pdf import extract_pdf_bytes
 from .pipeline import process_message, screen_literature
 from .preprocess import preprocess_document
@@ -76,6 +76,7 @@ class HealthResponse(BaseModel):
     model: str
     is_stub: bool
     note: str
+    providers: list[str]
 
 
 @app.get("/health", response_model=HealthResponse)
@@ -89,6 +90,7 @@ def health() -> HealthResponse:
     return HealthResponse(
         status="ok",
         model=client.provider.name,
+        providers=[p.name for p in client.providers],
         is_stub=client.is_stub,
         note=(
             "No API key configured - running the offline stub. Output is "
@@ -105,6 +107,11 @@ def process_message_endpoint(file: UploadFile = File(...)) -> dict:
     raw = read_upload(file, "message file")
     try:
         return process_message(raw, client=get_client()).to_dict()
+    except AllProvidersExhausted as exc:
+        # 429, not 500: nothing is broken, the allowance is spent. The message
+        # is written for the reviewer who will see it on screen.
+        logger.error("All providers exhausted for %s", file.filename)
+        raise HTTPException(status_code=429, detail=str(exc)) from exc
     except Exception as exc:  # noqa: BLE001 -- surface the reason, not a 500 page
         logger.exception("Pipeline failed for %s", file.filename)
         raise HTTPException(status_code=500, detail=f"Pipeline failed: {exc}") from exc

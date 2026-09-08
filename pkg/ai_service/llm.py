@@ -109,6 +109,26 @@ class LLMError(RuntimeError):
     """Raised when a model call cannot be completed or parsed."""
 
 
+class AllProvidersExhausted(LLMError):
+    """Every configured provider refused the request.
+
+    Carries a message written for a reviewer looking at the screen, not for a
+    log file. The underlying provider errors are kept in ``details`` for the
+    audit trail, because the person debugging it needs both.
+    """
+
+    USER_MESSAGE = (
+        "AI usage limit reached. All configured providers have exhausted their "
+        "free-tier allowance. Wait for the quota to reset, add another provider "
+        "key, or upgrade to a paid plan to continue processing."
+    )
+
+    def __init__(self, details: dict[str, str]):
+        self.details = details
+        tried = ", ".join(f"{name} ({reason})" for name, reason in details.items())
+        super().__init__(f"{self.USER_MESSAGE} Tried: {tried}")
+
+
 def extract_json(text: str) -> dict[str, Any]:
     """Parse a JSON object from a model response.
 
@@ -321,6 +341,141 @@ class GeminiProvider:
         return extract_json(response.text or "")
 
 
+def build_provider_chain() -> list[Any]:
+    """Build the ordered provider chain from whichever keys are configured.
+
+    Order is deliberate. Gemini leads because it is the only one wired for
+    vision here, so scanned pages and images work on the primary path. Groq and
+    Mistral follow as text-only fallbacks: when Gemini's allowance is spent,
+    classification and extraction keep working even though OCR cannot.
+
+    A provider whose SDK or key is unusable is skipped with a warning rather
+    than failing construction -- one broken key must not disable the others.
+    The offline stub always terminates the chain, so the pipeline never has
+    nothing to call.
+    """
+    chain: list[Any] = []
+    candidates = [
+        ("Gemini", "GEMINI_API_KEY", GeminiProvider,
+         os.getenv("LLM_MODEL", "gemini-3.5-flash")),
+        ("Groq", "GROQ_API_KEY", GroqProvider,
+         os.getenv("GROQ_MODEL", "llama-3.3-70b-versatile")),
+        ("Mistral", "MISTRAL_API_KEY", MistralProvider,
+         os.getenv("MISTRAL_MODEL", "mistral-large-latest")),
+    ]
+
+    for label, env_var, factory, model in candidates:
+        api_key = os.getenv(env_var, "").strip()
+        if not api_key:
+            continue
+        try:
+            if factory is GeminiProvider:
+                chain.append(factory(
+                    api_key=api_key,
+                    model=model,
+                    vision_model=os.getenv("VISION_MODEL", model),
+                ))
+            else:
+                chain.append(factory(api_key=api_key, model=model))
+        except Exception as exc:  # noqa: BLE001 -- one bad key must not disable the rest
+            logger.error("%s unavailable, skipping it in the chain: %s", label, exc)
+
+    if not chain:
+        logger.warning(
+            "No usable model API key found - using the offline stub. Output will "
+            "be low-confidence placeholders, not real extraction."
+        )
+    # The stub always terminates the chain so there is always something to call.
+    chain.append(StubProvider())
+    return chain
+
+
+class GroqProvider:
+    """Groq, in JSON mode.
+
+    Text only in this pipeline. Groq does host vision models, but keeping the
+    fallback text-only means a scanned page fails over to a provider that
+    genuinely cannot read it -- better to surface that than to silently return
+    an empty transcription.
+    """
+
+    is_stub = False
+    supports_vision = False
+
+    def __init__(self, api_key: str, model: str):
+        """Create one reusable client for this process."""
+        from groq import Groq
+
+        self._client = Groq(api_key=api_key)
+        self.name = model
+
+    def generate_json(
+        self, prompt: str, schema: dict, images: list[bytes] | None = None
+    ) -> dict[str, Any]:
+        """Call the model in JSON mode and return the parsed object."""
+        if images:
+            raise LLMError("Groq fallback does not handle images in this pipeline")
+        response = self._client.chat.completions.create(
+            model=self.name,
+            messages=[
+                {
+                    "role": "system",
+                    "content": (
+                        "You return only JSON matching this schema, with no "
+                        f"commentary: {json.dumps(schema)}"
+                    ),
+                },
+                {"role": "user", "content": prompt},
+            ],
+            response_format={"type": "json_object"},
+            temperature=0.0,
+        )
+        return extract_json(response.choices[0].message.content or "")
+
+
+class MistralProvider:
+    """Mistral, in JSON mode. Text only, for the same reason as Groq."""
+
+    is_stub = False
+    supports_vision = False
+
+    def __init__(self, api_key: str, model: str):
+        """Create one reusable client for this process."""
+        # The SDK moved: in mistralai 2.x the top-level package is a namespace
+        # with no __init__, and the client lives in mistralai.client. Both
+        # spellings are tried so either version of the SDK works.
+        try:
+            from mistralai.client import Mistral
+        except ImportError:
+            from mistralai import Mistral
+
+        self._client = Mistral(api_key=api_key)
+        self.name = model
+
+    def generate_json(
+        self, prompt: str, schema: dict, images: list[bytes] | None = None
+    ) -> dict[str, Any]:
+        """Call the model in JSON mode and return the parsed object."""
+        if images:
+            raise LLMError("Mistral fallback does not handle images in this pipeline")
+        response = self._client.chat.complete(
+            model=self.name,
+            messages=[
+                {
+                    "role": "system",
+                    "content": (
+                        "You return only JSON matching this schema, with no "
+                        f"commentary: {json.dumps(schema)}"
+                    ),
+                },
+                {"role": "user", "content": prompt},
+            ],
+            response_format={"type": "json_object"},
+            temperature=0.0,
+        )
+        return extract_json(response.choices[0].message.content or "")
+
+
 class LLMClient:
     """The interface the rest of the service uses.
 
@@ -330,27 +485,10 @@ class LLMClient:
     """
 
     def __init__(self, provider: Any | None = None):
-        self.provider = provider or self._select_provider()
-
-    @staticmethod
-    def _select_provider() -> Any:
-        """Pick Gemini if configured, else fall back to the offline stub."""
-        api_key = os.getenv("GEMINI_API_KEY", "").strip()
-        if not api_key:
-            logger.warning(
-                "GEMINI_API_KEY is not set - using the offline stub. Output will "
-                "be low-confidence placeholders, not real extraction."
-            )
-            return StubProvider()
-        try:
-            return GeminiProvider(
-                api_key=api_key,
-                model=os.getenv("LLM_MODEL", "gemini-3.5-flash"),
-                vision_model=os.getenv("VISION_MODEL", "gemini-3.5-flash"),
-            )
-        except Exception as exc:  # noqa: BLE001 -- never let setup kill the run
-            logger.error("Gemini unavailable (%s); falling back to stub.", exc)
-            return StubProvider()
+        """Build the provider chain, or wrap a single provider for tests."""
+        self.providers = [provider] if provider else build_provider_chain()
+        # The provider currently in use. Callers read this for the audit trail.
+        self.provider = self.providers[0]
 
     @property
     def is_stub(self) -> bool:
@@ -360,37 +498,63 @@ class LLMClient:
     def generate_json(
         self, prompt: str, schema: dict, images: list[bytes] | None = None
     ) -> LLMResponse:
-        """Call the model, retrying transient failures with backoff."""
-        started = time.perf_counter()
-        last_error: Exception | None = None
+        """Call the model, retrying transient failures and failing over.
 
+        Two distinct recovery strategies, because the failures are different:
+
+        * **Throttled** -- a per-minute window. Wait the delay the provider
+          quotes and retry the *same* provider; the allowance is still there.
+        * **Exhausted, or persistently failing** -- move to the next provider.
+          Retrying a spent allowance cannot succeed however long it waits.
+
+        Only when every provider has refused does this raise, and the error it
+        raises carries a message written for the reviewer looking at the screen.
+        """
+        started = time.perf_counter()
+        failures: dict[str, str] = {}
+
+        for provider in self.providers:
+            if images and not getattr(provider, "supports_vision", True):
+                failures[provider.name] = "cannot read images"
+                continue
+
+            outcome = self._try_provider(provider, prompt, schema, images)
+            if isinstance(outcome, dict):
+                self.provider = provider
+                return LLMResponse(
+                    data=outcome,
+                    model=provider.name,
+                    latency_ms=(time.perf_counter() - started) * 1000,
+                    is_stub=bool(getattr(provider, "is_stub", False)),
+                )
+            failures[provider.name] = outcome
+            logger.warning("Provider %s unusable (%s); trying the next one.",
+                           provider.name, outcome)
+
+        raise AllProvidersExhausted(failures)
+
+    def _try_provider(
+        self, provider: Any, prompt: str, schema: dict, images: list[bytes] | None
+    ) -> dict[str, Any] | str:
+        """Attempt one provider, returning its data or why it could not serve."""
+        last_error = ""
         for attempt in range(1, MAX_ATTEMPTS + 1):
             try:
-                data = self.provider.generate_json(prompt, schema, images=images)
-                return LLMResponse(
-                    data=data,
-                    model=self.provider.name,
-                    latency_ms=(time.perf_counter() - started) * 1000,
-                    is_stub=self.is_stub,
-                )
-            except Exception as exc:  # noqa: BLE001 -- retry, then report honestly
-                last_error = exc
+                return provider.generate_json(prompt, schema, images=images)
+            except Exception as exc:  # noqa: BLE001 -- classify, then retry or move on
+                last_error = str(exc)[:200]
                 try:
-                    quota_delay = rate_limit_delay(str(exc))
+                    quota_delay = rate_limit_delay(last_error)
                 except QuotaExhausted as spent:
-                    # Not retryable. Fail immediately with a clear reason
-                    # rather than letting the caller time out on backoff.
-                    logger.error("Quota exhausted: %s", spent)
-                    raise LLMError(f"Provider quota exhausted: {spent}") from exc
+                    return f"quota exhausted: {spent}"
 
+                if attempt == MAX_ATTEMPTS:
+                    break
                 logger.warning(
-                    "Model call failed (attempt %d/%d)%s: %s",
-                    attempt,
-                    MAX_ATTEMPTS,
+                    "%s failed (attempt %d/%d)%s: %s",
+                    provider.name, attempt, MAX_ATTEMPTS,
                     f" [throttled, waiting {quota_delay:.0f}s]" if quota_delay else "",
-                    str(exc)[:300],
+                    last_error,
                 )
-                if attempt < MAX_ATTEMPTS:
-                    time.sleep(quota_delay or BACKOFF_SECONDS * attempt)
-
-        raise LLMError(f"Model call failed after {MAX_ATTEMPTS} attempts: {last_error}")
+                time.sleep(quota_delay or BACKOFF_SECONDS * attempt)
+        return f"failed after {MAX_ATTEMPTS} attempts: {last_error}"

@@ -27,7 +27,7 @@ from dataclasses import dataclass, field
 
 from .classify import classify_message
 from .extract import extract_all
-from .llm import LLMClient
+from .llm import AllProvidersExhausted, LLMClient
 from .mail import parse_message
 from .models import ExtractedDocument, IngestedMessage, PdfFlavour
 from .preprocess import preprocess_message
@@ -208,6 +208,11 @@ def process_message(
     try:
         classification = classify_message(message, client)
         succeeded, error = True, ""
+    except AllProvidersExhausted as exc:
+        logger.error("Classification unavailable: %s", exc)
+        classification = Classification(verdicts=[], model="")
+        succeeded, error = False, str(exc)
+        warnings.append(exc.USER_MESSAGE)
     except Exception as exc:  # noqa: BLE001
         logger.error("Classification failed: %s", exc)
         classification = Classification(verdicts=[], model="")

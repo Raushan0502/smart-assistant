@@ -55,6 +55,9 @@ export class App implements OnInit, OnDestroy {
   /** Local edits, keyed by field name, so the input is not bound to the model. */
   edits: Record<string, string> = {};
 
+  /** Set when a call failed because every provider is out of allowance. */
+  quotaMessage = signal('');
+
   screening = signal<ScreeningResult | null>(null);
   screeningBusy = signal(false);
 
@@ -121,7 +124,7 @@ export class App implements OnInit, OnDestroy {
       },
       error: (err) => {
         this.busy.set(false);
-        this.error.set(`Ingest failed: ${err.error?.detail ?? err.message ?? err}`);
+        this.report(err, 'Ingest failed');
       },
     });
   }
@@ -187,9 +190,24 @@ export class App implements OnInit, OnDestroy {
       },
       error: (err) => {
         this.screeningBusy.set(false);
-        this.error.set(`Screening failed: ${err.error?.detail ?? err.message ?? err}`);
+        this.report(err, 'Screening failed');
       },
     });
+  }
+
+  /** Route an error to the right banner.
+   *
+   * A spent AI allowance is not a fault: nothing is broken, and the message
+   * already says what to do. Showing it as a red error alongside genuine
+   * failures would train a reviewer to ignore both.
+   */
+  private report(err: any, context: string): void {
+    const detail = err?.error?.detail ?? err?.message ?? String(err);
+    if (err?.status === 429 || /usage limit reached/i.test(detail)) {
+      this.quotaMessage.set(detail);
+      return;
+    }
+    this.error.set(`${context}: ${detail}`);
   }
 
   // ---- display helpers -------------------------------------------------

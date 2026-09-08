@@ -34,6 +34,14 @@ class AIServiceError(RuntimeError):
     """The AI service could not be reached, or returned an error."""
 
 
+def readable_detail(response: requests.Response) -> str:
+    """Pull the human-facing message out of an error response."""
+    try:
+        return str(response.json().get("detail", response.text))[:500]
+    except ValueError:
+        return response.text[:500]
+
+
 def base_url() -> str:
     return settings.AI_SERVICE_URL.rstrip("/")
 
@@ -59,9 +67,14 @@ def process_message(raw: bytes, file_name: str = "message.eml") -> dict:
     except requests.RequestException as exc:
         raise AIServiceError(f"AI service call failed: {exc}") from exc
 
+    if response.status_code == 429:
+        # The AI service already phrased this for a reviewer; wrapping it in
+        # "AI service returned 429" would bury the part they can act on.
+        raise AIServiceError(readable_detail(response))
     if response.status_code != 200:
-        detail = response.text[:500]
-        raise AIServiceError(f"AI service returned {response.status_code}: {detail}")
+        raise AIServiceError(
+            f"AI service returned {response.status_code}: {readable_detail(response)}"
+        )
     return response.json()
 
 

@@ -40,6 +40,13 @@
   low-confidence placeholders, not real analysis.
 </div>
 
+<!-- Quota exhaustion is not a fault: nothing is broken and the message says
+     what to do about it, so it reads as a notice rather than an error. -->
+<div class="banner banner-warn" *ngIf="quotaMessage()">
+  <strong>AI usage limit reached.</strong>
+  {{ quotaMessage() }}
+</div>
+
 <div class="banner banner-bad" *ngIf="error()">
   {{ error() }}
   <button class="link" (click)="error.set('')">dismiss</button>

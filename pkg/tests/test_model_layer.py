@@ -14,10 +14,12 @@ from pathlib import Path
 from ai_service.classify import build_prompt, classify_message, parse_verdicts
 from ai_service.extract import extract_fields, parse_fields, verify_quote
 from ai_service.llm import (
+    AllProvidersExhausted,
     LLMClient,
     LLMError,
     QuotaExhausted,
     StubProvider,
+    build_provider_chain,
     extract_json,
     rate_limit_delay,
 )
@@ -315,14 +317,85 @@ class TestStubProvider(unittest.TestCase):
         applied = {v["category"] for v in payload["verdicts"] if v["applies"]}
         self.assertEqual(applied, {"ICSR", "PQC"})
 
-    def test_client_falls_back_to_stub_without_key(self):
-
-        saved = os.environ.pop("GEMINI_API_KEY", None)
+    def test_client_falls_back_to_stub_without_any_key(self):
+        """With no provider configured, the chain is the stub alone."""
+        keys = ["GEMINI_API_KEY", "GROQ_API_KEY", "MISTRAL_API_KEY"]
+        saved = {key: os.environ.pop(key, None) for key in keys}
         try:
-            self.assertTrue(LLMClient().is_stub)
+            client = LLMClient()
+            self.assertTrue(client.is_stub)
+            self.assertEqual(len(client.providers), 1)
         finally:
-            if saved:
-                os.environ["GEMINI_API_KEY"] = saved
+            for key, value in saved.items():
+                if value:
+                    os.environ[key] = value
+
+    def test_stub_always_terminates_the_chain(self):
+        """There must always be something left to call."""
+        self.assertTrue(build_provider_chain()[-1].is_stub)
+
+
+class TestProviderFailover(unittest.TestCase):
+    """An exhausted provider must hand off, not fail the request."""
+
+    class Exhausted:
+        """A provider whose allowance is spent."""
+
+        name = "exhausted"
+        is_stub = False
+        supports_vision = True
+
+        def generate_json(self, prompt, schema, images=None):
+            raise RuntimeError("429 RESOURCE_EXHAUSTED quota exceeded, limit: 20")
+
+    class Working:
+        """A provider that answers normally."""
+
+        name = "working"
+        is_stub = False
+        supports_vision = True
+
+        def generate_json(self, prompt, schema, images=None):
+            return {"ok": True}
+
+    class TextOnly:
+        """A provider that cannot read images."""
+
+        name = "text-only"
+        is_stub = False
+        supports_vision = False
+
+        def generate_json(self, prompt, schema, images=None):
+            return {"ok": True}
+
+    def client_with(self, *providers) -> LLMClient:
+        """Build a client over an explicit provider chain."""
+        client = LLMClient(StubProvider())
+        client.providers = list(providers)
+        client.provider = client.providers[0]
+        return client
+
+    def test_exhausted_provider_hands_off_to_the_next(self):
+        client = self.client_with(self.Exhausted(), self.Working())
+        response = client.generate_json("x", {"type": "object"})
+        self.assertEqual(response.data, {"ok": True})
+        self.assertEqual(response.model, "working")
+
+    def test_all_exhausted_raises_a_readable_error(self):
+        client = self.client_with(self.Exhausted(), self.Exhausted())
+        with self.assertRaises(AllProvidersExhausted) as ctx:
+            client.generate_json("x", {"type": "object"})
+        # This message reaches a reviewer's screen, so it must say what to do
+        # about it, not only what broke.
+        self.assertIn("AI usage limit reached", str(ctx.exception))
+        self.assertIn("upgrade to a paid plan", str(ctx.exception))
+
+    def test_text_only_provider_is_skipped_for_images(self):
+        # Failing a scanned page over to a provider that cannot see would
+        # return an empty transcription and look like a blank document.
+        client = self.client_with(self.TextOnly(), self.Working())
+        response = client.generate_json("x", {"type": "object"}, images=[b"png"])
+        self.assertEqual(response.model, "working")
 
 
 class TestPromptContent(unittest.TestCase):

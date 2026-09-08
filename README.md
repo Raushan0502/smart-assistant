@@ -63,7 +63,7 @@ workers drain the queue.
 | Backend API | **Django + DRF (Python)** | REST, orchestration, queue, persistence — *see deviation note below* |
 | AI services | Python (FastAPI), in `pkg/` | LLM and OCR work, a separate service behind REST |
 | Database | Oracle (PL/SQL) | As specified — messages, extracted records, audit log |
-| AI model | Gemini (vision-capable) | Scanned/handwritten pages and image description need vision; cheap with a usable free tier |
+| AI model | Gemini, then Groq, then Mistral | A chain, not one provider: when one runs out of free-tier allowance the next takes over. Only Gemini is wired for vision, so scanned pages need it |
 
 ### Deviation from the suggested stack: Django instead of Spring Boot
 
