@@ -127,9 +127,17 @@
     <div class="detail-head">
       <div>
         <h2>{{ m.subject || '(no subject)' }}</h2>
+        <!-- Each part is omitted when absent, rather than rendering an empty
+             separator. A failed message has no sender or timing, and
+             "· · ms · en" reads like a rendering bug rather than missing data. -->
         <p class="muted">
-          {{ m.sender }} &middot; {{ m.sent_at | date: 'medium' }} &middot;
-          {{ m.processing_ms }}ms &middot; {{ m.language }}
+          <span *ngIf="m.sender">{{ m.sender }}</span>
+          <span *ngIf="m.sent_at"> &middot; {{ m.sent_at | date: 'medium' }}</span>
+          <span *ngIf="m.processing_ms"> &middot; {{ m.processing_ms }}ms</span>
+          <span *ngIf="m.language"> &middot; {{ m.language }}</span>
+          <span *ngIf="!m.sender && !m.sent_at" class="small">
+            No headers recorded &mdash; this message failed before parsing completed.
+          </span>
         </p>
       </div>
       <button class="primary" (click)="accept()" [disabled]="busy()">

@@ -13,7 +13,14 @@ from pathlib import Path
 
 from ai_service.classify import build_prompt, classify_message, parse_verdicts
 from ai_service.extract import extract_fields, parse_fields, verify_quote
-from ai_service.llm import LLMClient, LLMError, StubProvider, extract_json
+from ai_service.llm import (
+    LLMClient,
+    LLMError,
+    QuotaExhausted,
+    StubProvider,
+    extract_json,
+    rate_limit_delay,
+)
 from ai_service.mail import parse_message_file
 from ai_service.schemas import (
     CLASSIFICATION_SCHEMA,
@@ -60,6 +67,28 @@ class TestJsonRecovery(unittest.TestCase):
         # "the document said nothing", which is the dangerous false negative.
         with self.assertRaises(LLMError):
             extract_json("I could not do that.")
+
+
+class TestRateLimitHandling(unittest.TestCase):
+    """Throttling and exhaustion are different conditions."""
+
+    def test_short_window_is_worth_waiting_for(self):
+        self.assertAlmostEqual(
+            rate_limit_delay("429 quota. Please retry in 2.24s"), 3.24
+        )
+
+    def test_exhausted_quota_raises_rather_than_waiting(self):
+        # Retrying a spent allowance burned the caller timeout and surfaced a
+        # clear "quota exhausted" in the UI as an opaque "read timed out".
+        with self.assertRaises(QuotaExhausted):
+            rate_limit_delay("429 RESOURCE_EXHAUSTED quota exceeded, limit: 20")
+
+    def test_implausibly_long_wait_is_treated_as_exhaustion(self):
+        with self.assertRaises(QuotaExhausted):
+            rate_limit_delay("429 quota. Please retry in 3600s")
+
+    def test_non_rate_limit_errors_are_not_treated_as_quota(self):
+        self.assertIsNone(rate_limit_delay("500 internal server error"))
 
 
 class TestClassificationParsing(unittest.TestCase):

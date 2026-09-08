@@ -47,26 +47,51 @@ BACKOFF_SECONDS = 2.0
 # The API usually states how long to wait ("Please retry in 2.24s"), which is
 # authoritative -- a fixed guess is either wasteful or too short. This is only
 # the fallback when no delay is given.
-RATE_LIMIT_BACKOFF_SECONDS = 30.0
 RATE_LIMIT_MARKERS = ("429", "RESOURCE_EXHAUSTED", "rate limit", "quota")
 RETRY_DELAY_PATTERN = re.compile(r"retry in ([\d.]+)\s*s", re.IGNORECASE)
-# Never sleep longer than this on one attempt, however large a delay is quoted.
-MAX_RATE_LIMIT_WAIT_SECONDS = 60.0
+
+# A per-minute window rolls over in seconds, so waiting is worth it. A quoted
+# delay longer than this means the window is not the problem -- the allowance
+# is spent -- and retrying just burns the caller's timeout for a result that
+# cannot arrive. Waiting is only sensible when there is something to wait for.
+MAX_USEFUL_WAIT_SECONDS = 20.0
+
+
+class QuotaExhausted(RuntimeError):
+    """The provider's allowance is spent; retrying cannot succeed."""
 
 
 def rate_limit_delay(error: str) -> float | None:
-    """Seconds to wait for a rate-limited call, or None if not rate limited.
+    """Seconds to wait before retrying a rate-limited call.
 
-    Prefers the delay the API itself quotes, since only the provider knows when
-    the window rolls over. Capped so a quoted delay of minutes does not stall
-    the whole batch behind one message.
+    Returns None when the error is not a rate limit at all. Raises
+    :class:`QuotaExhausted` when the provider signals an allowance that will
+    not refill in a useful timeframe -- which is a different condition from
+    being briefly throttled, and must not be retried.
+
+    This distinction is not academic. Retrying an exhausted daily quota three
+    times at 60s each consumed 180s per call, and with several calls per
+    message that reliably exceeded the caller's 300s timeout -- turning a clear
+    "quota spent" into an opaque "read timed out".
     """
     if not any(marker.lower() in error.lower() for marker in RATE_LIMIT_MARKERS):
         return None
+
     match = RETRY_DELAY_PATTERN.search(error)
-    if match:
-        return min(float(match.group(1)) + 1.0, MAX_RATE_LIMIT_WAIT_SECONDS)
-    return RATE_LIMIT_BACKOFF_SECONDS
+    if not match:
+        raise QuotaExhausted(
+            "Provider reported a quota limit with no retry delay; the "
+            "allowance appears to be spent."
+        )
+
+    delay = float(match.group(1)) + 1.0
+    if delay > MAX_USEFUL_WAIT_SECONDS:
+        raise QuotaExhausted(
+            f"Provider asked to retry in {delay:.0f}s, beyond the "
+            f"{MAX_USEFUL_WAIT_SECONDS:.0f}s worth waiting for; the allowance "
+            "appears to be spent."
+        )
+    return delay
 
 
 @dataclass
@@ -350,12 +375,19 @@ class LLMClient:
                 )
             except Exception as exc:  # noqa: BLE001 -- retry, then report honestly
                 last_error = exc
-                quota_delay = rate_limit_delay(str(exc))
+                try:
+                    quota_delay = rate_limit_delay(str(exc))
+                except QuotaExhausted as spent:
+                    # Not retryable. Fail immediately with a clear reason
+                    # rather than letting the caller time out on backoff.
+                    logger.error("Quota exhausted: %s", spent)
+                    raise LLMError(f"Provider quota exhausted: {spent}") from exc
+
                 logger.warning(
                     "Model call failed (attempt %d/%d)%s: %s",
                     attempt,
                     MAX_ATTEMPTS,
-                    f" [rate limited, waiting {quota_delay:.0f}s]" if quota_delay else "",
+                    f" [throttled, waiting {quota_delay:.0f}s]" if quota_delay else "",
                     str(exc)[:300],
                 )
                 if attempt < MAX_ATTEMPTS:

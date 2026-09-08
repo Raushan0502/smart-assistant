@@ -23,8 +23,10 @@ from django.conf import settings
 
 logger = logging.getLogger(__name__)
 
-# Long enough for OCR plus several model calls on a multi-page document.
-PROCESS_TIMEOUT_SECONDS = 300
+# Long enough for OCR plus several model calls on a multi-page document,
+# including short throttling waits. Quota exhaustion now fails fast rather
+# than backing off into this timeout, so this bounds real work only.
+PROCESS_TIMEOUT_SECONDS = 600
 HEALTH_TIMEOUT_SECONDS = 5
 
 
