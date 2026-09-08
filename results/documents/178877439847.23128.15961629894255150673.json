@@ -1,0 +1,221 @@
+{
+  "id": 64,
+  "message_id": "178877439847.23128.15961629894255150673@clinevo-demo.example",
+  "subject": "Glucostat tablets wrong colour - photo attached",
+  "sender": "Ana Beltran <ana.beltran@mailbox.example>",
+  "recipient": "Pharmacovigilance Intake <pv-intake@clinevo-demo.example>",
+  "sent_at": "2026-03-19T03:00:00Z",
+  "received_at": "2026-09-08T03:35:48.906923Z",
+  "body_text": "Hello,\n\nI opened a new box of Glucostat this morning, lot GS-9931-C, and the tablets are pale yellow. My previous boxes were always white. Some of them also look chipped.\n\nI have not taken any of them. I have attached a photograph so you can see the difference.\n\nAna Beltran, Valencia, Spain",
+  "language": "en",
+  "processing_status": "READY",
+  "review_status": "PENDING",
+  "processing_ms": 124,
+  "error": "",
+  "warnings": [
+    "scan_pqc_discoloured_photo.pdf p.1: nothing could be transcribed. Needs manual review.",
+    "Content was read from page images. Every field derived from this document requires human verification regardless of reported confidence."
+  ],
+  "headers": {
+    "Message-ID": "<178877439847.23128.15961629894255150673@clinevo-demo.example>",
+    "Date": "Thu, 19 Mar 2026 03:00:00 +0000",
+    "From": "Ana Beltran <ana.beltran@mailbox.example>",
+    "To": "Pharmacovigilance Intake <pv-intake@clinevo-demo.example>",
+    "Subject": "Glucostat tablets wrong colour - photo attached",
+    "X-Synthetic-Case-Id": "pqc_discoloured_photo",
+    "raw_byte_size": "126360",
+    "attachment_count": "1"
+  },
+  "categories": [
+    "PQC"
+  ],
+  "documents": [
+    {
+      "document_id": "178877439847.23128.15961629894255150673@clinevo-demo.example::att0",
+      "file_name": "scan_pqc_discoloured_photo.pdf",
+      "media_type": "application/pdf",
+      "flavour": "scanned",
+      "language": "en",
+      "page_count": 1,
+      "processed": true,
+      "extracted_text": "",
+      "tables": [],
+      "images": [
+        {
+          "width": 595,
+          "height": 841,
+          "description": "Not transcribed",
+          "needs_review": true,
+          "page": 1
+        }
+      ],
+      "doc_metadata": {
+        "Title": "scan_pqc_discoloured_photo",
+        "CreationDate": "D:20260907094638Z",
+        "ModDate": "D:20260907094638Z",
+        "byte_size": "92735",
+        "ocr_confidence": "0.000",
+        "ocr_pages": "1",
+        "source_is_pixels": "true"
+      },
+      "warnings": [
+        "No text layer: OCR or a vision model is required to read this document. Confidence should be reported for anything extracted.",
+        "scan_pqc_discoloured_photo.pdf p.1: nothing could be transcribed. Needs manual review.",
+        "Content was read from page images. Every field derived from this document requires human verification regardless of reported confidence."
+      ],
+      "summary": "[offline stub] No model was available, so this document has not been summarised. It requires manual review.",
+      "looks_relevant": true,
+      "relevance_reason": "[offline stub] Relevance not assessed.",
+      "summary_confidence": 0.1,
+      "ocr_confidence": 0.0
+    },
+    {
+      "document_id": "178877439847.23128.15961629894255150673@clinevo-demo.example::body",
+      "file_name": "(email body)",
+      "media_type": "text/plain",
+      "flavour": "email_body",
+      "language": "en",
+      "page_count": 0,
+      "processed": true,
+      "extracted_text": "Hello,\n\nI opened a new box of Glucostat this morning, lot GS-9931-C, and the tablets are pale yellow. My previous boxes were always white. Some of them also look chipped.\n\nI have not taken any of them. I have attached a photograph so you can see the difference.\n\nAna Beltran, Valencia, Spain",
+      "tables": [],
+      "images": [],
+      "doc_metadata": {
+        "char_count": "291"
+      },
+      "warnings": [],
+      "summary": "",
+      "looks_relevant": null,
+      "relevance_reason": "",
+      "summary_confidence": null,
+      "ocr_confidence": null
+    }
+  ],
+  "classifications": [
+    {
+      "category": "PQC",
+      "applies": true,
+      "confidence": 0.35,
+      "reason": "[offline stub] 4 keyword signal(s) matched.",
+      "model_name": "offline-stub"
+    },
+    {
+      "category": "ICSR",
+      "applies": false,
+      "confidence": 0.15,
+      "reason": "[offline stub] 0 keyword signal(s) matched.",
+      "model_name": "offline-stub"
+    },
+    {
+      "category": "MI",
+      "applies": false,
+      "confidence": 0.15,
+      "reason": "[offline stub] 0 keyword signal(s) matched.",
+      "model_name": "offline-stub"
+    },
+    {
+      "category": "NOT_RELEVANT",
+      "applies": false,
+      "confidence": 0.15,
+      "reason": "[offline stub] 0 keyword signal(s) matched.",
+      "model_name": "offline-stub"
+    }
+  ],
+  "extractions": [
+    {
+      "category": "PQC",
+      "narrative": "[offline stub] No model available; no narrative was generated.",
+      "completeness": 0.0,
+      "model_name": "offline-stub",
+      "fields_data": [
+        {
+          "name": "batch_number",
+          "value": "Not stated",
+          "confidence": 0.0,
+          "is_stated": false,
+          "source_document": "",
+          "source_page": null,
+          "source_quote": "",
+          "quote_verified": false
+        },
+        {
+          "name": "defect_description",
+          "value": "Not stated",
+          "confidence": 0.0,
+          "is_stated": false,
+          "source_document": "",
+          "source_page": null,
+          "source_quote": "",
+          "quote_verified": false
+        },
+        {
+          "name": "photo_mentioned",
+          "value": "Not stated",
+          "confidence": 0.0,
+          "is_stated": false,
+          "source_document": "",
+          "source_page": null,
+          "source_quote": "",
+          "quote_verified": false
+        },
+        {
+          "name": "product_name",
+          "value": "Not stated",
+          "confidence": 0.0,
+          "is_stated": false,
+          "source_document": "",
+          "source_page": null,
+          "source_quote": "",
+          "quote_verified": false
+        }
+      ]
+    }
+  ],
+  "review_actions": [],
+  "audit_events": [
+    {
+      "event_type": "SUMMARY",
+      "model_name": "offline-stub",
+      "is_stub": true,
+      "prompt_sha256": "",
+      "prompt_chars": 0,
+      "latency_ms": 0.0,
+      "succeeded": true,
+      "error": "",
+      "created_at": "2026-09-08T03:35:48.969088Z"
+    },
+    {
+      "event_type": "EXTRACT",
+      "model_name": "offline-stub",
+      "is_stub": true,
+      "prompt_sha256": "",
+      "prompt_chars": 565,
+      "latency_ms": 0.1,
+      "succeeded": true,
+      "error": "",
+      "created_at": "2026-09-08T03:35:48.966523Z"
+    },
+    {
+      "event_type": "CLASSIFY",
+      "model_name": "offline-stub",
+      "is_stub": true,
+      "prompt_sha256": "bd8a0dba4cd8ebdff68848494f7a1e5eb867e9203d2b91e0a75552b607ed59cc",
+      "prompt_chars": 565,
+      "latency_ms": 0.2,
+      "succeeded": true,
+      "error": "",
+      "created_at": "2026-09-08T03:35:48.965263Z"
+    },
+    {
+      "event_type": "OCR",
+      "model_name": "offline-stub",
+      "is_stub": true,
+      "prompt_sha256": "",
+      "prompt_chars": 0,
+      "latency_ms": 108.1,
+      "succeeded": false,
+      "error": "",
+      "created_at": "2026-09-08T03:35:48.964051Z"
+    }
+  ]
+}

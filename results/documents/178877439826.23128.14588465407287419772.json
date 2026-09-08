@@ -1,0 +1,157 @@
+{
+  "id": 63,
+  "message_id": "178877439826.23128.14588465407287419772@clinevo-demo.example",
+  "subject": "Damaged packaging - Cardiozan batch CZ-2208-A",
+  "sender": "Mark Delaney <m.delaney@pharmacy-brookfield.example>",
+  "recipient": "Pharmacovigilance Intake <pv-intake@clinevo-demo.example>",
+  "sent_at": "2026-03-18T21:00:00Z",
+  "received_at": "2026-09-08T03:35:48.736306Z",
+  "body_text": "Good morning,\n\nWe received a delivery of Cardiozan 20 mg tablets this week, batch CZ-2208-A, expiry 09/2027. Three of the twelve cartons had crushed corners and the tamper-evident seals were broken on two of them.\n\nNo product has been dispensed to any patient from these cartons and we have quarantined the stock. Please advise on return arrangements.\n\nMark Delaney MRPharmS\nBrookfield Pharmacy, Cork, Ireland",
+  "language": "en",
+  "processing_status": "READY",
+  "review_status": "PENDING",
+  "processing_ms": 3,
+  "error": "",
+  "warnings": [],
+  "headers": {
+    "Message-ID": "<178877439826.23128.14588465407287419772@clinevo-demo.example>",
+    "Date": "Wed, 18 Mar 2026 21:00:00 +0000",
+    "From": "Mark Delaney <m.delaney@pharmacy-brookfield.example>",
+    "To": "Pharmacovigilance Intake <pv-intake@clinevo-demo.example>",
+    "Subject": "Damaged packaging - Cardiozan batch CZ-2208-A",
+    "X-Synthetic-Case-Id": "pqc_broken_seal",
+    "raw_byte_size": "847",
+    "attachment_count": "0"
+  },
+  "categories": [
+    "PQC"
+  ],
+  "documents": [
+    {
+      "document_id": "178877439826.23128.14588465407287419772@clinevo-demo.example::body",
+      "file_name": "(email body)",
+      "media_type": "text/plain",
+      "flavour": "email_body",
+      "language": "en",
+      "page_count": 0,
+      "processed": true,
+      "extracted_text": "Good morning,\n\nWe received a delivery of Cardiozan 20 mg tablets this week, batch CZ-2208-A, expiry 09/2027. Three of the twelve cartons had crushed corners and the tamper-evident seals were broken on two of them.\n\nNo product has been dispensed to any patient from these cartons and we have quarantined the stock. Please advise on return arrangements.\n\nMark Delaney MRPharmS\nBrookfield Pharmacy, Cork, Ireland",
+      "tables": [],
+      "images": [],
+      "doc_metadata": {
+        "char_count": "409"
+      },
+      "warnings": [],
+      "summary": "",
+      "looks_relevant": null,
+      "relevance_reason": "",
+      "summary_confidence": null,
+      "ocr_confidence": null
+    }
+  ],
+  "classifications": [
+    {
+      "category": "PQC",
+      "applies": true,
+      "confidence": 0.35,
+      "reason": "[offline stub] 4 keyword signal(s) matched.",
+      "model_name": "offline-stub"
+    },
+    {
+      "category": "ICSR",
+      "applies": false,
+      "confidence": 0.15,
+      "reason": "[offline stub] 0 keyword signal(s) matched.",
+      "model_name": "offline-stub"
+    },
+    {
+      "category": "MI",
+      "applies": false,
+      "confidence": 0.15,
+      "reason": "[offline stub] 0 keyword signal(s) matched.",
+      "model_name": "offline-stub"
+    },
+    {
+      "category": "NOT_RELEVANT",
+      "applies": false,
+      "confidence": 0.15,
+      "reason": "[offline stub] 0 keyword signal(s) matched.",
+      "model_name": "offline-stub"
+    }
+  ],
+  "extractions": [
+    {
+      "category": "PQC",
+      "narrative": "[offline stub] No model available; no narrative was generated.",
+      "completeness": 0.0,
+      "model_name": "offline-stub",
+      "fields_data": [
+        {
+          "name": "batch_number",
+          "value": "Not stated",
+          "confidence": 0.0,
+          "is_stated": false,
+          "source_document": "",
+          "source_page": null,
+          "source_quote": "",
+          "quote_verified": false
+        },
+        {
+          "name": "defect_description",
+          "value": "Not stated",
+          "confidence": 0.0,
+          "is_stated": false,
+          "source_document": "",
+          "source_page": null,
+          "source_quote": "",
+          "quote_verified": false
+        },
+        {
+          "name": "photo_mentioned",
+          "value": "Not stated",
+          "confidence": 0.0,
+          "is_stated": false,
+          "source_document": "",
+          "source_page": null,
+          "source_quote": "",
+          "quote_verified": false
+        },
+        {
+          "name": "product_name",
+          "value": "Not stated",
+          "confidence": 0.0,
+          "is_stated": false,
+          "source_document": "",
+          "source_page": null,
+          "source_quote": "",
+          "quote_verified": false
+        }
+      ]
+    }
+  ],
+  "review_actions": [],
+  "audit_events": [
+    {
+      "event_type": "EXTRACT",
+      "model_name": "offline-stub",
+      "is_stub": true,
+      "prompt_sha256": "",
+      "prompt_chars": 571,
+      "latency_ms": 0.0,
+      "succeeded": true,
+      "error": "",
+      "created_at": "2026-09-08T03:35:48.793169Z"
+    },
+    {
+      "event_type": "CLASSIFY",
+      "model_name": "offline-stub",
+      "is_stub": true,
+      "prompt_sha256": "f049aa4cb2e8554d81b0c5ec2779495b6045c43288caba2a2a685e17a17ce0ca",
+      "prompt_chars": 571,
+      "latency_ms": 0.1,
+      "succeeded": true,
+      "error": "",
+      "created_at": "2026-09-08T03:35:48.791167Z"
+    }
+  ]
+}

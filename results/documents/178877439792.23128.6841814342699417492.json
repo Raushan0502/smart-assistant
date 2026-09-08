@@ -1,0 +1,458 @@
+{
+  "id": 53,
+  "message_id": "178877439792.23128.6841814342699417492@clinevo-demo.example",
+  "subject": "Adverse reaction report - Cardiozan - severe rash",
+  "sender": "Dr Amara Osei <a.osei@northgate-clinic.example>",
+  "recipient": "Pharmacovigilance Intake <pv-intake@clinevo-demo.example>",
+  "sent_at": "2026-03-16T09:00:00Z",
+  "received_at": "2026-09-08T03:35:37.875212Z",
+  "body_text": "Dear Safety Team,\n\nI am reporting an adverse event in one of my patients.\n\nThe patient is a 54-year-old female, weight 68 kg, with a history of hypertension and type 2 diabetes. She began taking Cardiozan 20 mg orally once daily on 03 March 2026 for blood pressure control.\n\nOn 11 March 2026, eight days after starting treatment, she developed a widespread erythematous rash across the trunk and upper arms, with associated pruritus. She attended our clinic the same day. Cardiozan was discontinued immediately and she was given oral antihistamines. The rash resolved over the following six days and she has now fully recovered.\n\nShe was not hospitalised and there were no other serious sequelae.\n\nPlease let me know if you require any further detail.\n\nKind regards,\nDr Amara Osei\nNorthgate Clinic, Manchester, United Kingdom",
+  "language": "en",
+  "processing_status": "READY",
+  "review_status": "PENDING",
+  "processing_ms": 83,
+  "error": "",
+  "warnings": [],
+  "headers": {
+    "Message-ID": "<178877439792.23128.6841814342699417492@clinevo-demo.example>",
+    "Date": "Mon, 16 Mar 2026 09:00:00 +0000",
+    "From": "Dr Amara Osei <a.osei@northgate-clinic.example>",
+    "To": "Pharmacovigilance Intake <pv-intake@clinevo-demo.example>",
+    "Subject": "Adverse reaction report - Cardiozan - severe rash",
+    "X-Synthetic-Case-Id": "icsr_full_rash",
+    "raw_byte_size": "6350",
+    "attachment_count": "2"
+  },
+  "categories": [
+    "ICSR"
+  ],
+  "documents": [
+    {
+      "document_id": "178877439792.23128.6841814342699417492@clinevo-demo.example::att1",
+      "file_name": "ward_roster.csv",
+      "media_type": "application/octet-stream",
+      "flavour": "unknown",
+      "language": "en",
+      "page_count": 0,
+      "processed": false,
+      "extracted_text": "",
+      "tables": [],
+      "images": [],
+      "doc_metadata": {
+        "byte_size": "74"
+      },
+      "warnings": [
+        "Attachment type 'application/octet-stream' is not processed; logged for audit only."
+      ],
+      "summary": "",
+      "looks_relevant": null,
+      "relevance_reason": "",
+      "summary_confidence": null,
+      "ocr_confidence": null
+    },
+    {
+      "document_id": "178877439792.23128.6841814342699417492@clinevo-demo.example::body",
+      "file_name": "(email body)",
+      "media_type": "text/plain",
+      "flavour": "email_body",
+      "language": "en",
+      "page_count": 0,
+      "processed": true,
+      "extracted_text": "Dear Safety Team,\n\nI am reporting an adverse event in one of my patients.\n\nThe patient is a 54-year-old female, weight 68 kg, with a history of hypertension and type 2 diabetes. She began taking Cardiozan 20 mg orally once daily on 03 March 2026 for blood pressure control.\n\nOn 11 March 2026, eight days after starting treatment, she developed a widespread erythematous rash across the trunk and upper arms, with associated pruritus. She attended our clinic the same day. Cardiozan was discontinued immediately and she was given oral antihistamines. The rash resolved over the following six days and she has now fully recovered.\n\nShe was not hospitalised and there were no other serious sequelae.\n\nPlease let me know if you require any further detail.\n\nKind regards,\nDr Amara Osei\nNorthgate Clinic, Manchester, United Kingdom",
+      "tables": [],
+      "images": [],
+      "doc_metadata": {
+        "char_count": "825"
+      },
+      "warnings": [],
+      "summary": "",
+      "looks_relevant": null,
+      "relevance_reason": "",
+      "summary_confidence": null,
+      "ocr_confidence": null
+    },
+    {
+      "document_id": "178877439792.23128.6841814342699417492@clinevo-demo.example::att0",
+      "file_name": "form_icsr_full_rash.pdf",
+      "media_type": "application/pdf",
+      "flavour": "digital",
+      "language": "en",
+      "page_count": 1,
+      "processed": true,
+      "extracted_text": "Adverse Event Report Form\nSYNTHETIC TEST DOCUMENT - no real patient data\n1. Patient details\n2. Reporter details\n3. Suspect product\n4. Reaction\n5. Relevant laboratory results\nForm SYN-AE-01 | Synthetic document generated for testing purposes only.",
+      "tables": [
+        {
+          "header": [
+            "Age",
+            "54 years"
+          ],
+          "rows": [
+            [
+              "Sex",
+              "Female"
+            ],
+            [
+              "Weight",
+              "68 kg"
+            ],
+            [
+              "Relevant medical history",
+              "Hypertension, type 2 diabetes"
+            ]
+          ],
+          "page": 1
+        },
+        {
+          "header": [
+            "Reporter name",
+            "Dr Amara Osei"
+          ],
+          "rows": [
+            [
+              "Role / qualification",
+              "Physician"
+            ],
+            [
+              "Country",
+              "United Kingdom"
+            ]
+          ],
+          "page": 1
+        },
+        {
+          "header": [
+            "Product name",
+            "Cardiozan"
+          ],
+          "rows": [
+            [
+              "Dose",
+              "20 mg once daily"
+            ],
+            [
+              "Route of administration",
+              "Oral"
+            ],
+            [
+              "Therapy start date",
+              "03 March 2026"
+            ]
+          ],
+          "page": 1
+        },
+        {
+          "header": [
+            "Description of reaction",
+            "Widespread erythematous rash with pruritus"
+          ],
+          "rows": [
+            [
+              "Date of onset",
+              "11 March 2026"
+            ],
+            [
+              "Outcome",
+              "Recovered"
+            ],
+            [
+              "Seriousness",
+              "Non-serious"
+            ]
+          ],
+          "page": 1
+        },
+        {
+          "header": [
+            "Test",
+            "Result",
+            "Unit",
+            "Reference range",
+            "Flag"
+          ],
+          "rows": [
+            [
+              "Haemoglobin",
+              "132",
+              "g/L",
+              "120 - 160",
+              "Normal"
+            ],
+            [
+              "White cell count",
+              "11.8",
+              "x10^9/L",
+              "4.0 - 11.0",
+              "HIGH"
+            ],
+            [
+              "Eosinophils",
+              "0.9",
+              "x10^9/L",
+              "0.0 - 0.4",
+              "HIGH"
+            ],
+            [
+              "C-reactive protein",
+              "24",
+              "mg/L",
+              "< 5",
+              "HIGH"
+            ],
+            [
+              "Platelets",
+              "268",
+              "x10^9/L",
+              "150 - 400",
+              "Normal"
+            ]
+          ],
+          "page": 1
+        }
+      ],
+      "images": [],
+      "doc_metadata": {
+        "Author": "Dr Amara Osei",
+        "CreationDate": "D:20260907151637+05'00'",
+        "Creator": "(unspecified)",
+        "ModDate": "D:20260907151637+05'00'",
+        "Producer": "ReportLab PDF Library - (opensource)",
+        "Subject": "Adverse reaction report - Cardiozan - severe rash",
+        "Title": "Adverse Event Report Form",
+        "Trapped": "False",
+        "byte_size": "3284"
+      },
+      "warnings": [],
+      "summary": "[offline stub] No model was available, so this document has not been summarised. It requires manual review.",
+      "looks_relevant": true,
+      "relevance_reason": "[offline stub] Relevance not assessed.",
+      "summary_confidence": 0.1,
+      "ocr_confidence": null
+    }
+  ],
+  "classifications": [
+    {
+      "category": "ICSR",
+      "applies": true,
+      "confidence": 0.35,
+      "reason": "[offline stub] 4 keyword signal(s) matched.",
+      "model_name": "offline-stub"
+    },
+    {
+      "category": "PQC",
+      "applies": false,
+      "confidence": 0.15,
+      "reason": "[offline stub] 0 keyword signal(s) matched.",
+      "model_name": "offline-stub"
+    },
+    {
+      "category": "MI",
+      "applies": false,
+      "confidence": 0.15,
+      "reason": "[offline stub] 0 keyword signal(s) matched.",
+      "model_name": "offline-stub"
+    },
+    {
+      "category": "NOT_RELEVANT",
+      "applies": false,
+      "confidence": 0.15,
+      "reason": "[offline stub] 0 keyword signal(s) matched.",
+      "model_name": "offline-stub"
+    }
+  ],
+  "extractions": [
+    {
+      "category": "ICSR",
+      "narrative": "[offline stub] No model available; no narrative was generated.",
+      "completeness": 0.0,
+      "model_name": "offline-stub",
+      "fields_data": [
+        {
+          "name": "patient_age",
+          "value": "Not stated",
+          "confidence": 0.0,
+          "is_stated": false,
+          "source_document": "",
+          "source_page": null,
+          "source_quote": "",
+          "quote_verified": false
+        },
+        {
+          "name": "patient_history",
+          "value": "Not stated",
+          "confidence": 0.0,
+          "is_stated": false,
+          "source_document": "",
+          "source_page": null,
+          "source_quote": "",
+          "quote_verified": false
+        },
+        {
+          "name": "patient_sex",
+          "value": "Not stated",
+          "confidence": 0.0,
+          "is_stated": false,
+          "source_document": "",
+          "source_page": null,
+          "source_quote": "",
+          "quote_verified": false
+        },
+        {
+          "name": "patient_weight",
+          "value": "Not stated",
+          "confidence": 0.0,
+          "is_stated": false,
+          "source_document": "",
+          "source_page": null,
+          "source_quote": "",
+          "quote_verified": false
+        },
+        {
+          "name": "product_dose",
+          "value": "Not stated",
+          "confidence": 0.0,
+          "is_stated": false,
+          "source_document": "",
+          "source_page": null,
+          "source_quote": "",
+          "quote_verified": false
+        },
+        {
+          "name": "product_name",
+          "value": "Not stated",
+          "confidence": 0.0,
+          "is_stated": false,
+          "source_document": "",
+          "source_page": null,
+          "source_quote": "",
+          "quote_verified": false
+        },
+        {
+          "name": "product_route",
+          "value": "Not stated",
+          "confidence": 0.0,
+          "is_stated": false,
+          "source_document": "",
+          "source_page": null,
+          "source_quote": "",
+          "quote_verified": false
+        },
+        {
+          "name": "product_start_date",
+          "value": "Not stated",
+          "confidence": 0.0,
+          "is_stated": false,
+          "source_document": "",
+          "source_page": null,
+          "source_quote": "",
+          "quote_verified": false
+        },
+        {
+          "name": "reaction",
+          "value": "Not stated",
+          "confidence": 0.0,
+          "is_stated": false,
+          "source_document": "",
+          "source_page": null,
+          "source_quote": "",
+          "quote_verified": false
+        },
+        {
+          "name": "reaction_onset",
+          "value": "Not stated",
+          "confidence": 0.0,
+          "is_stated": false,
+          "source_document": "",
+          "source_page": null,
+          "source_quote": "",
+          "quote_verified": false
+        },
+        {
+          "name": "reaction_outcome",
+          "value": "Not stated",
+          "confidence": 0.0,
+          "is_stated": false,
+          "source_document": "",
+          "source_page": null,
+          "source_quote": "",
+          "quote_verified": false
+        },
+        {
+          "name": "reporter_country",
+          "value": "Not stated",
+          "confidence": 0.0,
+          "is_stated": false,
+          "source_document": "",
+          "source_page": null,
+          "source_quote": "",
+          "quote_verified": false
+        },
+        {
+          "name": "reporter_name",
+          "value": "Not stated",
+          "confidence": 0.0,
+          "is_stated": false,
+          "source_document": "",
+          "source_page": null,
+          "source_quote": "",
+          "quote_verified": false
+        },
+        {
+          "name": "reporter_role",
+          "value": "Not stated",
+          "confidence": 0.0,
+          "is_stated": false,
+          "source_document": "",
+          "source_page": null,
+          "source_quote": "",
+          "quote_verified": false
+        },
+        {
+          "name": "seriousness",
+          "value": "Not stated",
+          "confidence": 0.0,
+          "is_stated": false,
+          "source_document": "",
+          "source_page": null,
+          "source_quote": "",
+          "quote_verified": false
+        }
+      ]
+    }
+  ],
+  "review_actions": [],
+  "audit_events": [
+    {
+      "event_type": "SUMMARY",
+      "model_name": "offline-stub",
+      "is_stub": true,
+      "prompt_sha256": "",
+      "prompt_chars": 0,
+      "latency_ms": 0.1,
+      "succeeded": true,
+      "error": "",
+      "created_at": "2026-09-08T03:35:38.007443Z"
+    },
+    {
+      "event_type": "EXTRACT",
+      "model_name": "offline-stub",
+      "is_stub": true,
+      "prompt_sha256": "",
+      "prompt_chars": 2366,
+      "latency_ms": 0.1,
+      "succeeded": true,
+      "error": "",
+      "created_at": "2026-09-08T03:35:38.005968Z"
+    },
+    {
+      "event_type": "CLASSIFY",
+      "model_name": "offline-stub",
+      "is_stub": true,
+      "prompt_sha256": "596e8e7c71fb68cd490074edc595905e37f2b82f6bb35e4e4008f6a7f2615b99",
+      "prompt_chars": 2366,
+      "latency_ms": 0.2,
+      "succeeded": true,
+      "error": "",
+      "created_at": "2026-09-08T03:35:38.004405Z"
+    }
+  ]
+}
