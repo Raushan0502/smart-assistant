@@ -291,8 +291,8 @@ class LLMClient:
         try:
             return GeminiProvider(
                 api_key=api_key,
-                model=os.getenv("LLM_MODEL", "gemini-2.0-flash"),
-                vision_model=os.getenv("VISION_MODEL", "gemini-2.0-flash"),
+                model=os.getenv("LLM_MODEL", "gemini-3.6-flash"),
+                vision_model=os.getenv("VISION_MODEL", "gemini-3.6-flash"),
             )
         except Exception as exc:  # noqa: BLE001 -- never let setup kill the run
             logger.error("Gemini unavailable (%s); falling back to stub.", exc)
