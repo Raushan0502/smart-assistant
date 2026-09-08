@@ -256,6 +256,34 @@ class TestStubProvider(unittest.TestCase):
         payload = StubProvider().generate_json("x", CLASSIFICATION_SCHEMA)
         self.assertTrue(all("[offline stub]" in v["reason"] for v in payload["verdicts"]))
 
+    def test_stub_scores_only_the_message_not_the_instructions(self):
+        """Regression: the stub must ignore the prompt's own wording.
+
+        The classification prompt names every signal word in its definitions
+        ("rash", "broken seal", "dosing"...). Scoring the whole prompt matched
+        all four categories on every message -- including obvious marketing.
+        """
+        from ai_service.classify import build_prompt
+        from ai_service.schemas import CLASSIFICATION_SCHEMA
+
+        message = parse_message_file(SAMPLES / "irrelevant_marketing.eml")
+        payload = StubProvider().generate_json(
+            build_prompt(message), CLASSIFICATION_SCHEMA
+        )
+        applied = [v["category"] for v in payload["verdicts"] if v["applies"]]
+        self.assertEqual(applied, ["NOT_RELEVANT"])
+
+    def test_stub_finds_dual_label_case(self):
+        from ai_service.classify import build_prompt
+        from ai_service.schemas import CLASSIFICATION_SCHEMA
+
+        message = parse_message_file(SAMPLES / "icsr_and_pqc_combined.eml")
+        payload = StubProvider().generate_json(
+            build_prompt(message), CLASSIFICATION_SCHEMA
+        )
+        applied = {v["category"] for v in payload["verdicts"] if v["applies"]}
+        self.assertEqual(applied, {"ICSR", "PQC"})
+
     def test_client_falls_back_to_stub_without_key(self):
         import os
 

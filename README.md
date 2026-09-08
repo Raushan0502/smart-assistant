@@ -16,11 +16,10 @@ Engineer** live project assignment.
 
 ## Status
 
-Phases 0–3 complete: corpus generator, ingestion + preprocessing,
-classification, field extraction, vision layer, and the Oracle schema with a
-PL/SQL audit package running in Docker. **92 tests pass offline** with no API
-key required. Next is the Django API, then Angular. See
-[Build plan](#build-plan).
+Phases 0–4 complete. The backend runs end to end: 16 sample messages ingest
+through Django → the AI service over HTTP → Oracle, producing 336 extracted
+fields and a full audit trail. **94 tests pass offline** with no API key
+required. Next is the Angular reviewer screen. See [Build plan](#build-plan).
 
 ## The problem
 
@@ -198,6 +197,50 @@ Schema is applied by migration and PL/SQL by a re-runnable script, rather than
 by container init scripts, which only execute on first boot — iterating on a
 package would otherwise mean destroying the database each time.
 
+## Running it
+
+Three processes. Each is independent — start them in any order.
+
+```bash
+docker compose up -d oracle                      # database
+
+cd backend && .venv/Scripts/python manage.py migrate
+python db/apply_plsql.py --verify                # PL/SQL package + queue view
+
+cd pkg     && .venv/Scripts/python -m uvicorn ai_service.api:app --port 8000
+cd backend && .venv/Scripts/python manage.py runserver 8080
+```
+
+Then load the sample corpus without needing a mailbox:
+
+```bash
+curl -X POST http://localhost:8080/api/ingest/   # with MAIL_OFFLINE_MODE=true
+curl http://localhost:8080/api/status/
+```
+
+### API
+
+| Endpoint | Purpose |
+|---|---|
+| `GET /api/messages/` | Review queue. Filters: `category`, `review_status`, `processing_status` |
+| `GET /api/messages/{id}/` | Full record: documents, tables, fields with provenance, audit trail |
+| `POST /api/messages/{id}/accept/` | Accept the AI output |
+| `POST /api/messages/{id}/override_field/` | Override one field, recording the original |
+| `POST /api/messages/{id}/override_category/` | Add or remove a category |
+| `GET /api/messages/{id}/audit/` | AI calls and human actions for one message |
+| `POST /api/ingest/` | Poll the mailbox and queue new mail. Returns immediately |
+| `POST /api/screen-article/` | Literature screening (bonus path) |
+| `GET /api/status/` | Queue depth, AI service health, message counts |
+
+The AI service is a **separate process behind HTTP** (`/health`,
+`/process-message`, `/screen-article`, `/extract-pdf`), not a library import —
+so a hung OCR call cannot take a web request thread with it, and the model tier
+can be restarted or scaled independently.
+
+Work is **queued, never synchronous**: `POST /api/ingest/` hands messages to an
+in-process worker pool and returns immediately, and the UI polls for status. A
+40-second OCR never occupies a request thread.
+
 ## Two design commitments
 
 These shape the data model rather than sitting on top of it, so they are
@@ -239,7 +282,7 @@ Full per-service run instructions land as each phase completes.
 - [x] **Phase 2b** — Model layer: classification + field extraction with quote verification
 - [x] **Phase 2c** — Vision: OCR for scans, image description, summaries, article screening
 - [x] **Phase 3** — Oracle schema (Django migrations) + PL/SQL audit package
-- [ ] **Phase 4** — Django: IMAP poller, queue, REST API
+- [x] **Phase 4** — Django: IMAP poller, queue, REST API, AI service over HTTP
 - [ ] **Phase 5** — Angular reviewer screen
 - [ ] **Phase 6** — Batch run, timings, accuracy against ground truth
 - [ ] **Phase 7** — Bonus: literature screening

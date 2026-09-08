@@ -160,9 +160,22 @@ class StubProvider:
             }
         raise LLMError("Stub provider does not recognise the requested schema")
 
+    # Prompts embed the message after a marker. The stub must score only the
+    # message: scoring the whole prompt matches the instructions themselves --
+    # which name every signal word - and labels every message with every
+    # category, including obvious marketing.
+    MESSAGE_MARKERS = ("MESSAGE\n=======", "ARTICLE\n=======", "DOCUMENT\n========")
+
+    def _message_body(self, prompt: str) -> str:
+        """Return just the embedded message, excluding the instructions."""
+        for marker in self.MESSAGE_MARKERS:
+            if marker in prompt:
+                return prompt.split(marker, 1)[1]
+        return prompt
+
     def _classify(self, prompt: str) -> dict[str, Any]:
         """Keyword-count classification, deliberately low confidence."""
-        lowered = prompt.lower()
+        lowered = self._message_body(prompt).lower()
         hits = {
             category: sum(1 for token in tokens if token in lowered)
             for category, tokens in self.SIGNALS.items()
