@@ -339,6 +339,36 @@ Extraction integrity: 121 fields, 100% honest `Not stated`, 0 unverified.
 
 Outputs land in `results/`: `batch_summary.json` plus per-document JSON.
 
+## Tests
+
+| Tier | Tests | Command |
+|---|---|---|
+| `pkg/` — ingestion, model layer, vision | **94** | `cd pkg && .venv/Scripts/python -m unittest discover -s tests -t .` |
+| `backend/` — persistence, queue, API, mailbox guard | **30** | `cd backend && USE_SQLITE=true .venv/Scripts/python manage.py test inbox` |
+| Oracle PL/SQL | verified VALID | `python db/apply_plsql.py --verify` |
+
+**124 tests, no network and no API key.** Backend tests run on SQLite so no
+container is needed — the models use no Oracle-specific column types. The two
+behaviours that *are* Oracle-specific (the PL/SQL package, and the NCLOB
+constraints that shaped the schema) are verified against the real database
+instead, because testing them on SQLite would prove nothing.
+
+The queue tests use `TransactionTestCase` rather than `TestCase`: the workers
+are real threads, and `TestCase` wraps each test in a transaction its own
+connection never commits — so a worker thread would never see the data it
+wrote.
+
+### What is *not* covered
+
+Named rather than left for a reviewer to discover:
+
+- **No frontend tests.** The Angular app was verified by hand in a browser, not
+  by a spec suite.
+- **The live IMAP round trip is unverified.** Connection and authentication are
+  confirmed against Gmail; fetching real delivered mail is not yet exercised.
+- **No accuracy figures from a real model.** Everything measured so far used
+  the offline stub.
+
 ## Two design commitments
 
 These shape the data model rather than sitting on top of it, so they are
