@@ -244,6 +244,74 @@ Work is **queued, never synchronous**: `POST /api/ingest/` hands messages to an
 in-process worker pool and returns immediately, and the UI polls for status. A
 40-second OCR never occupies a request thread.
 
+## Testing the real mail flow
+
+Offline mode reads `.eml` files from disk, which proves the parser works. It
+does **not** prove the mailbox connection, the MIME Gmail actually delivers, or
+that attachments survive the round trip. Those only get tested with real mail.
+
+**1. Create a throwaway Gmail** — nothing personal on it.
+
+**2. Enable 2-Step Verification.** Google Account → Security. App Passwords do
+not appear until this is on.
+
+**3. Generate an App Password.** Security → App passwords → app "Mail". You get
+16 characters; remove the spaces.
+
+**4. Put it in `.env`:**
+
+```bash
+IMAP_USER=your-test-account@gmail.com
+IMAP_PASSWORD=abcdefghijklmnop     # the App Password, not your account password
+MAIL_OFFLINE_MODE=false            # switch off the file-based source
+```
+
+**5. Verify the connection before anything else:**
+
+```bash
+cd backend && .venv/Scripts/python manage.py poll_mailbox --check
+```
+
+This logs in, counts what is in the folder, and reports exactly which of the
+three usual failures applies if it cannot.
+
+**6. Put realistic mail in the box.** Rather than composing 16 emails by hand,
+send the synthetic corpus to yourself over SMTP — attachments and all:
+
+```bash
+.venv/Scripts/python manage.py send_samples --dry-run   # check first
+.venv/Scripts/python manage.py send_samples             # 16 messages, 9 PDFs, 1 CSV
+```
+
+**7. Fetch them back through the real IMAP path:**
+
+```bash
+.venv/Scripts/python manage.py poll_mailbox --once --wait 300
+```
+
+Or leave it polling continuously (the default interval comes from
+`IMAP_POLL_SECONDS`):
+
+```bash
+.venv/Scripts/python manage.py poll_mailbox
+```
+
+### Why the round trip is the real test
+
+Gmail does not deliver what you sent. It rewrites headers, assigns its own
+`Message-ID`, may re-encode parts, and base64-encodes attachments that have to
+decode back to byte-identical PDFs. Sending and re-fetching exercises all of
+that — and it exercises the deduplication path, since polling twice must not
+create duplicate records.
+
+Polling is **read-only and idempotent**: messages are fetched with `BODY.PEEK`
+so they are never marked as seen, nothing is deleted, and each is keyed by its
+`Message-ID`.
+
+The poller runs as **its own process**, not a thread in the web server —
+Django's autoreloader would otherwise start two of them, and a poller tied to
+the request cycle stops when the server goes idle.
+
 ## Results
 
 One command processes the corpus and scores it against the ground-truth labels
