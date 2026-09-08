@@ -2,32 +2,32 @@
   "messages": 16,
   "timings": {
     "count": 16,
-    "mean_ms": 28860.9,
-    "median_ms": 18753.5,
-    "min_ms": 6926,
-    "max_ms": 110787,
-    "total_ms": 461775
+    "mean_ms": 154543,
+    "median_ms": 182743.5,
+    "min_ms": 91332,
+    "max_ms": 276471,
+    "total_ms": 2472688
   },
   "accuracy": {
     "scored": 16,
-    "exact_match": 0.438,
-    "any_overlap": 0.438,
+    "exact_match": 0.0,
+    "any_overlap": 0.0,
     "per_category": {
       "ICSR": {
-        "precision": 1.0,
-        "recall": 0.7,
-        "f1": 0.824,
-        "tp": 7,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "tp": 0,
         "fp": 0,
-        "fn": 3
+        "fn": 10
       },
       "PQC": {
-        "precision": 1.0,
-        "recall": 0.333,
-        "f1": 0.5,
-        "tp": 1,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "tp": 0,
         "fp": 0,
-        "fn": 2
+        "fn": 3
       },
       "MI": {
         "precision": 0.0,
@@ -48,9 +48,9 @@
     }
   },
   "integrity": {
-    "fields": 60,
-    "stated": 51,
-    "not_stated": 9,
+    "fields": 0,
+    "stated": 0,
+    "not_stated": 0,
     "stated_unverified": 0
   }
 }

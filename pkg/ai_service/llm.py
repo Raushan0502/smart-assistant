@@ -39,13 +39,34 @@ STUB_MODEL_NAME = "offline-stub"
 MAX_ATTEMPTS = 4
 BACKOFF_SECONDS = 2.0
 
-# Free-tier quotas are per *minute*, so the ordinary 2s/4s backoff retries
-# straight back into the same closed window and exhausts the budget in seconds.
-# A rate-limited call waits long enough for the window to roll over instead.
-# Measured: 17 of 34 calls failed this way on a first live run, and every one
-# of them left its message unclassified.
+# Free-tier quotas are windowed, so the ordinary 2s/4s backoff retries straight
+# back into the same closed window and exhausts the budget in seconds. Measured:
+# 17 of 34 calls failed this way on a first live run, and every one left its
+# message unclassified.
+#
+# The API usually states how long to wait ("Please retry in 2.24s"), which is
+# authoritative -- a fixed guess is either wasteful or too short. This is only
+# the fallback when no delay is given.
 RATE_LIMIT_BACKOFF_SECONDS = 30.0
 RATE_LIMIT_MARKERS = ("429", "RESOURCE_EXHAUSTED", "rate limit", "quota")
+RETRY_DELAY_PATTERN = re.compile(r"retry in ([\d.]+)\s*s", re.IGNORECASE)
+# Never sleep longer than this on one attempt, however large a delay is quoted.
+MAX_RATE_LIMIT_WAIT_SECONDS = 60.0
+
+
+def rate_limit_delay(error: str) -> float | None:
+    """Seconds to wait for a rate-limited call, or None if not rate limited.
+
+    Prefers the delay the API itself quotes, since only the provider knows when
+    the window rolls over. Capped so a quoted delay of minutes does not stall
+    the whole batch behind one message.
+    """
+    if not any(marker.lower() in error.lower() for marker in RATE_LIMIT_MARKERS):
+        return None
+    match = RETRY_DELAY_PATTERN.search(error)
+    if match:
+        return min(float(match.group(1)) + 1.0, MAX_RATE_LIMIT_WAIT_SECONDS)
+    return RATE_LIMIT_BACKOFF_SECONDS
 
 
 @dataclass
@@ -299,8 +320,8 @@ class LLMClient:
         try:
             return GeminiProvider(
                 api_key=api_key,
-                model=os.getenv("LLM_MODEL", "gemini-3.6-flash"),
-                vision_model=os.getenv("VISION_MODEL", "gemini-3.6-flash"),
+                model=os.getenv("LLM_MODEL", "gemini-3.5-flash"),
+                vision_model=os.getenv("VISION_MODEL", "gemini-3.5-flash"),
             )
         except Exception as exc:  # noqa: BLE001 -- never let setup kill the run
             logger.error("Gemini unavailable (%s); falling back to stub.", exc)
@@ -329,22 +350,15 @@ class LLMClient:
                 )
             except Exception as exc:  # noqa: BLE001 -- retry, then report honestly
                 last_error = exc
-                rate_limited = any(
-                    marker.lower() in str(exc).lower() for marker in RATE_LIMIT_MARKERS
-                )
+                quota_delay = rate_limit_delay(str(exc))
                 logger.warning(
                     "Model call failed (attempt %d/%d)%s: %s",
                     attempt,
                     MAX_ATTEMPTS,
-                    " [rate limited]" if rate_limited else "",
-                    exc,
+                    f" [rate limited, waiting {quota_delay:.0f}s]" if quota_delay else "",
+                    str(exc)[:300],
                 )
                 if attempt < MAX_ATTEMPTS:
-                    delay = (
-                        RATE_LIMIT_BACKOFF_SECONDS
-                        if rate_limited
-                        else BACKOFF_SECONDS * attempt
-                    )
-                    time.sleep(delay)
+                    time.sleep(quota_delay or BACKOFF_SECONDS * attempt)
 
         raise LLMError(f"Model call failed after {MAX_ATTEMPTS} attempts: {last_error}")

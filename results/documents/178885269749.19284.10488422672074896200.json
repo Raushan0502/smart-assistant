@@ -1,19 +1,21 @@
 {
-  "id": 85,
+  "id": 101,
   "message_id": "178885269749.19284.10488422672074896200@clinevo-demo.example",
   "subject": "Adverse reaction report - Cardiozan - severe rash",
   "sender": "Dr Amara Osei <a.osei@northgate-clinic.example>",
   "recipient": "Pharmacovigilance Intake <pv-intake@clinevo-demo.example>",
   "sent_at": "2026-03-16T09:00:00Z",
-  "received_at": "2026-09-08T07:47:52.868487Z",
+  "received_at": "2026-09-08T08:00:32.039301Z",
   "body_text": "Dear Safety Team,\n\nI am reporting an adverse event in one of my patients.\n\nThe patient is a 54-year-old female, weight 68 kg, with a history of hypertension and type 2 diabetes. She began taking Cardiozan 20 mg orally once daily on 03 March 2026 for blood pressure control.\n\nOn 11 March 2026, eight days after starting treatment, she developed a widespread erythematous rash across the trunk and upper arms, with associated pruritus. She attended our clinic the same day. Cardiozan was discontinued immediately and she was given oral antihistamines. The rash resolved over the following six days and she has now fully recovered.\n\nShe was not hospitalised and there were no other serious sequelae.\n\nPlease let me know if you require any further detail.\n\nKind regards,\nDr Amara Osei\nNorthgate Clinic, Manchester, United Kingdom",
   "language": "en",
-  "processing_status": "READY",
+  "processing_status": "FAILED",
   "review_status": "PENDING",
-  "processing_ms": 33272,
-  "error": "",
+  "processing_ms": 182834,
+  "error": "Classification produced no verdicts; the message is unclassified. Model call failed after 4 attempts: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-3.6-flash\\nPlease retry in 59.568956611s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-3.6-flash'}, 'quotaValue': '20'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '59s'}]}}",
   "warnings": [
-    "form_icsr_full_rash.pdf: summary failed (Model call failed after 3 attempts: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 5, model: gemini-3.6-flash\\nPlease retry in 7.392830441s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerMinutePerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-3.6-flash'}, 'quotaValue': '5'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '7s'}]}})."
+    "Classification failed: Model call failed after 4 attempts: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-3.6-flash\\nPlease retry in 59.568956611s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-3.6-flash'}, 'quotaValue': '20'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '59s'}]}}",
+    "form_icsr_full_rash.pdf: summary failed (Model call failed after 4 attempts: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-3.6-flash\\nPlease retry in 28.114016889s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-3.6-flash'}, 'quotaValue': '20'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '28s'}]}}).",
+    "Classification produced no verdicts; the message is unclassified. Model call failed after 4 attempts: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-3.6-flash\\nPlease retry in 59.568956611s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-3.6-flash'}, 'quotaValue': '20'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '59s'}]}}"
   ],
   "headers": {
     "Message-ID": "<178885269749.19284.10488422672074896200@clinevo-demo.example>",
@@ -25,9 +27,7 @@
     "raw_byte_size": "6351",
     "attachment_count": "2"
   },
-  "categories": [
-    "ICSR"
-  ],
+  "categories": [],
   "documents": [
     {
       "document_id": "178885269749.19284.10488422672074896200@clinevo-demo.example::body",
@@ -231,230 +231,31 @@
       "ocr_confidence": null
     }
   ],
-  "classifications": [
-    {
-      "category": "NOT_RELEVANT",
-      "applies": false,
-      "confidence": 0.98,
-      "reason": "The message is an adverse event report and is relevant to safety.",
-      "model_name": "gemini-3.6-flash"
-    },
-    {
-      "category": "ICSR",
-      "applies": true,
-      "confidence": 0.98,
-      "reason": "Identifiable reporter (Dr Amara Osei), patient (54-year-old female), product (Cardiozan), and adverse reaction (widespread erythematous rash).",
-      "model_name": "gemini-3.6-flash"
-    },
-    {
-      "category": "PQC",
-      "applies": false,
-      "confidence": 0.95,
-      "reason": "No physical product defect or quality issue is reported.",
-      "model_name": "gemini-3.6-flash"
-    },
-    {
-      "category": "MI",
-      "applies": false,
-      "confidence": 0.95,
-      "reason": "No medical information question about the product is asked.",
-      "model_name": "gemini-3.6-flash"
-    }
-  ],
-  "extractions": [
-    {
-      "category": "ICSR",
-      "narrative": "Dr Amara Osei reported a non-serious adverse event from the United Kingdom regarding a 54-year-old female patient (68 kg) with a history of hypertension and type 2 diabetes. On 03 March 2026, the patient started taking oral Cardiozan 20 mg once daily. On 11 March 2026, she developed a widespread erythematous rash with pruritus. Cardiozan was discontinued, oral antihistamines were administered, and the reaction resolved fully after six days without hospitalization.",
-      "completeness": 1.0,
-      "model_name": "gemini-3.6-flash",
-      "fields_data": [
-        {
-          "name": "patient_age",
-          "value": "54 years",
-          "confidence": 1.0,
-          "is_stated": true,
-          "source_document": "[form_icsr_full_rash.pdf p.1]",
-          "source_page": null,
-          "source_quote": "54 years",
-          "quote_verified": true
-        },
-        {
-          "name": "patient_history",
-          "value": "Hypertension, type 2 diabetes",
-          "confidence": 1.0,
-          "is_stated": true,
-          "source_document": "[form_icsr_full_rash.pdf p.1]",
-          "source_page": null,
-          "source_quote": "Hypertension, type 2 diabetes",
-          "quote_verified": true
-        },
-        {
-          "name": "patient_sex",
-          "value": "Female",
-          "confidence": 1.0,
-          "is_stated": true,
-          "source_document": "[form_icsr_full_rash.pdf p.1]",
-          "source_page": null,
-          "source_quote": "Female",
-          "quote_verified": true
-        },
-        {
-          "name": "patient_weight",
-          "value": "68 kg",
-          "confidence": 1.0,
-          "is_stated": true,
-          "source_document": "[form_icsr_full_rash.pdf p.1]",
-          "source_page": null,
-          "source_quote": "68 kg",
-          "quote_verified": true
-        },
-        {
-          "name": "product_dose",
-          "value": "20 mg once daily",
-          "confidence": 1.0,
-          "is_stated": true,
-          "source_document": "[form_icsr_full_rash.pdf p.1]",
-          "source_page": null,
-          "source_quote": "20 mg once daily",
-          "quote_verified": true
-        },
-        {
-          "name": "product_name",
-          "value": "Cardiozan",
-          "confidence": 1.0,
-          "is_stated": true,
-          "source_document": "[form_icsr_full_rash.pdf p.1]",
-          "source_page": null,
-          "source_quote": "Cardiozan",
-          "quote_verified": true
-        },
-        {
-          "name": "product_route",
-          "value": "Oral",
-          "confidence": 1.0,
-          "is_stated": true,
-          "source_document": "[form_icsr_full_rash.pdf p.1]",
-          "source_page": null,
-          "source_quote": "Oral",
-          "quote_verified": true
-        },
-        {
-          "name": "product_start_date",
-          "value": "03 March 2026",
-          "confidence": 1.0,
-          "is_stated": true,
-          "source_document": "[form_icsr_full_rash.pdf p.1]",
-          "source_page": null,
-          "source_quote": "03 March 2026",
-          "quote_verified": true
-        },
-        {
-          "name": "reaction",
-          "value": "Widespread erythematous rash with pruritus",
-          "confidence": 1.0,
-          "is_stated": true,
-          "source_document": "[form_icsr_full_rash.pdf p.1]",
-          "source_page": null,
-          "source_quote": "Widespread erythematous rash with pruritus",
-          "quote_verified": true
-        },
-        {
-          "name": "reaction_onset",
-          "value": "11 March 2026",
-          "confidence": 1.0,
-          "is_stated": true,
-          "source_document": "[form_icsr_full_rash.pdf p.1]",
-          "source_page": null,
-          "source_quote": "11 March 2026",
-          "quote_verified": true
-        },
-        {
-          "name": "reaction_outcome",
-          "value": "Recovered",
-          "confidence": 1.0,
-          "is_stated": true,
-          "source_document": "[form_icsr_full_rash.pdf p.1]",
-          "source_page": null,
-          "source_quote": "Recovered",
-          "quote_verified": true
-        },
-        {
-          "name": "reporter_country",
-          "value": "United Kingdom",
-          "confidence": 1.0,
-          "is_stated": true,
-          "source_document": "[form_icsr_full_rash.pdf p.1]",
-          "source_page": null,
-          "source_quote": "United Kingdom",
-          "quote_verified": true
-        },
-        {
-          "name": "reporter_name",
-          "value": "Dr Amara Osei",
-          "confidence": 1.0,
-          "is_stated": true,
-          "source_document": "[form_icsr_full_rash.pdf p.1]",
-          "source_page": null,
-          "source_quote": "Dr Amara Osei",
-          "quote_verified": true
-        },
-        {
-          "name": "reporter_role",
-          "value": "Physician",
-          "confidence": 1.0,
-          "is_stated": true,
-          "source_document": "[form_icsr_full_rash.pdf p.1]",
-          "source_page": null,
-          "source_quote": "Physician",
-          "quote_verified": true
-        },
-        {
-          "name": "seriousness",
-          "value": "Non-serious",
-          "confidence": 1.0,
-          "is_stated": true,
-          "source_document": "[form_icsr_full_rash.pdf p.1]",
-          "source_page": null,
-          "source_quote": "Non-serious",
-          "quote_verified": true
-        }
-      ]
-    }
-  ],
+  "classifications": [],
+  "extractions": [],
   "review_actions": [],
   "audit_events": [
-    {
-      "event_type": "SUMMARY",
-      "model_name": "gemini-3.6-flash",
-      "is_stub": false,
-      "prompt_sha256": "",
-      "prompt_chars": 0,
-      "latency_ms": 7068.2,
-      "succeeded": false,
-      "error": "Model call failed after 3 attempts: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 5, model: gemini-3.6-flash\\nPlease retry in 7.392830441s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerMinutePerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-3.6-flash'}, 'quotaValue': '5'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '7s'}]}}",
-      "created_at": "2026-09-08T07:47:53.017970Z"
-    },
-    {
-      "event_type": "EXTRACT",
-      "model_name": "gemini-3.6-flash",
-      "is_stub": false,
-      "prompt_sha256": "",
-      "prompt_chars": 2366,
-      "latency_ms": 14485.7,
-      "succeeded": true,
-      "error": "",
-      "created_at": "2026-09-08T07:47:53.016970Z"
-    },
     {
       "event_type": "CLASSIFY",
       "model_name": "gemini-3.6-flash",
       "is_stub": false,
       "prompt_sha256": "596e8e7c71fb68cd490074edc595905e37f2b82f6bb35e4e4008f6a7f2615b99",
       "prompt_chars": 2366,
-      "latency_ms": 11670.7,
-      "succeeded": true,
-      "error": "",
-      "created_at": "2026-09-08T07:47:53.015970Z"
+      "latency_ms": 91316.9,
+      "succeeded": false,
+      "error": "Model call failed after 4 attempts: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-3.6-flash\\nPlease retry in 59.568956611s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-3.6-flash'}, 'quotaValue': '20'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '59s'}]}}",
+      "created_at": "2026-09-08T08:00:32.069237Z"
+    },
+    {
+      "event_type": "SUMMARY",
+      "model_name": "gemini-3.6-flash",
+      "is_stub": false,
+      "prompt_sha256": "",
+      "prompt_chars": 0,
+      "latency_ms": 91465.7,
+      "succeeded": false,
+      "error": "Model call failed after 4 attempts: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-3.6-flash\\nPlease retry in 28.114016889s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-3.6-flash'}, 'quotaValue': '20'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '28s'}]}}",
+      "created_at": "2026-09-08T08:00:32.069237Z"
     }
   ]
 }
