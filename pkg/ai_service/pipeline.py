@@ -94,22 +94,14 @@ class ProcessedMessage:
         }
 
 
-class _Timer:
-    """Accumulate wall-clock time per named stage.
+def elapsed_ms(started: float) -> float:
+    """Milliseconds since a ``time.perf_counter()`` reading.
 
-    A class rather than a bare dict because ``record`` is called from eleven
-    places and each would otherwise repeat the same
-    ``(perf_counter() - started) * 1000`` arithmetic.
+    The assignment asks how long each document takes, and a per-stage breakdown
+    is what makes that answer useful: "12 seconds" is not actionable, "11 of
+    those 12 were OCR" is.
     """
-
-    def __init__(self) -> None:
-        """Start with no stages recorded."""
-        self.stages: dict[str, float] = {}
-
-    def record(self, name: str, started: float) -> None:
-        """Add the elapsed milliseconds since ``started`` to a named stage."""
-        elapsed_ms = (time.perf_counter() - started) * 1000
-        self.stages[name] = self.stages.get(name, 0.0) + elapsed_ms
+    return (time.perf_counter() - started) * 1000
 
 
 def _ocr_scanned_attachments(
@@ -189,7 +181,7 @@ def process_message(
     so callers normally do not pass it.
     """
     client = client or LLMClient()
-    timer = _Timer()
+    stage_ms: dict[str, float] = {}
     events: list[AuditEvent] = []
     warnings: list[str] = []
     overall_started = time.perf_counter()
@@ -198,16 +190,16 @@ def process_message(
     message = parse_message(raw)
     if attachment_bytes is None:
         attachment_bytes = _recover_attachment_bytes(raw)
-    timer.record("parse", started)
+    stage_ms["parse"] = elapsed_ms(started)
     warnings.extend(message.warnings)
 
     started = time.perf_counter()
     preprocess_message(message)
-    timer.record("preprocess", started)
+    stage_ms["preprocess"] = elapsed_ms(started)
 
     started = time.perf_counter()
     warnings.extend(_ocr_scanned_attachments(message, attachment_bytes, client, events))
-    timer.record("ocr", started)
+    stage_ms["ocr"] = elapsed_ms(started)
 
     started = time.perf_counter()
     prompt_len = len(message.to_prompt_text())
@@ -219,7 +211,7 @@ def process_message(
         classification = Classification(verdicts=[], model="")
         succeeded, error = False, str(exc)
         warnings.append(f"Classification failed: {exc}")
-    timer.record("classify", started)
+    stage_ms["classify"] = elapsed_ms(started)
     events.append(
         AuditEvent(
             event_type="CLASSIFY",
@@ -232,7 +224,7 @@ def process_message(
                 message.to_prompt_text().encode("utf-8", errors="replace")
             ).hexdigest(),
             prompt_chars=prompt_len,
-            latency_ms=timer.stages["classify"],
+            latency_ms=stage_ms["classify"],
             succeeded=succeeded,
             error=error,
         )
@@ -251,25 +243,25 @@ def process_message(
             logger.error("Extraction failed: %s", exc)
             succeeded, error = False, str(exc)
             warnings.append(f"Extraction failed: {exc}")
-        timer.record("extract", started)
+        stage_ms["extract"] = elapsed_ms(started)
         events.append(
             AuditEvent(
                 event_type="EXTRACT",
                 model_name=client.provider.name,
                 is_stub=client.is_stub,
                 prompt_chars=prompt_len,
-                latency_ms=timer.stages.get("extract", 0.0),
+                latency_ms=stage_ms.get("extract", 0.0),
                 succeeded=succeeded,
                 error=error,
             )
         )
     else:
-        timer.record("extract", started)
+        stage_ms["extract"] = elapsed_ms(started)
 
     started = time.perf_counter()
     summaries, summary_warnings = _summarise_attachments(message, client, events)
     warnings.extend(summary_warnings)
-    timer.record("summarise", started)
+    stage_ms["summarise"] = elapsed_ms(started)
 
     return ProcessedMessage(
         message=message,
@@ -278,7 +270,7 @@ def process_message(
         summaries=summaries,
         warnings=warnings,
         audit_events=events,
-        stage_ms=timer.stages,
+        stage_ms=stage_ms,
         total_ms=(time.perf_counter() - overall_started) * 1000,
     )
 
